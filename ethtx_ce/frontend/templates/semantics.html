@@ -1,0 +1,249 @@
+<!--
+  ~ Copyright 2021 DAI Foundation
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include './partials/headtags.html' %}
+    <title>Semantics editor</title>
+    <link href="/static/ethtx.new.css" rel="stylesheet">
+    <link href="/static/jsoneditor.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/jquery-ui.css" rel="stylesheet" type="text/css">
+    <script src="/static/jsoneditor.min.js"></script>
+    <script src="/static/jquery.min.js"></script>
+    <script src="/static/jquery-ui.js"></script>
+    <style>
+        button {
+            background-color: #AAA;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 10px;
+            margin-left: 5px;
+            padding: 5px 10px 5px 10px;
+        }
+
+        label,
+        input,
+        select {
+            display: block;
+        }
+
+        input.text {
+            margin-bottom: 12px;
+            width: 790px;
+            padding: .4em;
+        }
+
+        select {
+            margin-bottom: 12px;
+            width: 805px;
+            padding: .4em;
+        }
+
+        textarea {
+            width: 805px;
+            height: 360px;
+        }
+
+        fieldset {
+            padding: 0;
+            border: 0;
+            margin-top: 25px;
+        }
+
+        .ui-dialog {
+            padding: .3em;
+        }
+    </style>
+
+    <script>
+        $(function () {
+            var
+                dialog, form,
+                address = $("#address"),
+                network = $("#network"),
+                name = $("#name"),
+                abi = $("#abi");
+
+            function checkLength(o, min, max) {
+                return !(o.val().length > max || o.val().length < min);
+            }
+
+            function isJsonString(str) {
+                try {
+                    var json = JSON.parse(str);
+                    return (typeof json === 'object');
+                } catch (e) {
+                    return false;
+                }
+            }
+
+            function addABI() {
+                var valid = true;
+
+                valid = valid && checkLength(address, 42, 42);
+                valid = valid && checkLength(name, 2, 80);
+                valid = valid && abi.val().length > 0 && isJsonString(abi.val());
+
+                if (valid) {
+                    const poke = { address: address.val(), network: network.val(), name: name.val(), abi: abi.val() };
+                    $.ajax({
+                        url: "/poke",
+                        dataType: 'json',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(poke),
+                        type: 'POST',
+                        success: function (response) {
+                            if (response["result"] === 'ok') {
+                                alert("SUCCESS! ABI processed...");
+                            } else {
+                                alert("ERROR! ABI processing error");
+                            }
+                            location.reload();
+                        },
+                        error: function (error) {
+                            alert("ERROR! Processing error");
+                            location.reload();
+                        }
+                    });
+                    dialog.dialog("close");
+                } else {
+                    alert("Data is not correct!")
+                }
+                return valid;
+            }
+
+            dialog = $("#dialog-form").dialog({
+                autoOpen: false,
+                height: 720,
+                width: 850,
+                modal: true,
+                buttons: {
+                    "Decode ABI": addABI,
+                    Cancel: function () {
+                        dialog.dialog("close");
+                    }
+                },
+                close: function () {
+                    form[0].reset();
+                }
+            });
+
+            form = dialog.find("form").on("submit", function (event) {
+                event.preventDefault();
+                addABI();
+            });
+
+            $("#poke-abi").button().on("click", function () {
+                dialog.dialog("open");
+                return false;
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+
+<h3>Semantics for: {{address}}</h3>
+<div id="metadataJSONeditor" style="float: left; width: 49%; height: 320px; margin: 5px;"></div>
+<div id="transformationsJSONeditor" style="float: left; width: 49%; height: 320px; margin: 5px;"></div>
+<div id="eventsJSONeditor" style="float: left; width: 49%; height: 320px; margin: 5px;"></div>
+<div id="functionsJSONeditor" style="float: left; width: 49%; height: 320px; margin: 5px;"></div>
+
+<form>
+    <button id="save-semantics">Save semantics</button>
+    <button id="poke-abi">Poke ABI</button>
+</form>
+
+<div id="dialog-form" title="Poke ABI">
+    <form>
+        <fieldset>
+            <label for="address">Contract address</label>
+            <input type="text" name="address" id="address" class="text ui-widget-content ui-corner-all"
+                   value="{{ address }}">
+            <label for="network">Network</label>
+            <select name="network" id="network" selected="{{ network }}">
+                <option value="mainnet">Main Net</option>
+                <option value="kovan">Kovan</option>
+                <option value="ropsten">Ropsten</option>
+                <option value="optimism">Optimism</option>
+            </select>
+            <label for="name">Contract name</label>
+            <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all">
+            <label for="abi">Contract ABI</label>
+            <textarea name="abi" id="abi" class="textarea ui-widget-content ui-corner-all"></textarea>
+            <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+        </fieldset>
+    </form>
+</div>
+
+<script>
+    var metadataContainer = document.getElementById("metadataJSONeditor");
+    var transformationsContainer = document.getElementById("transformationsJSONeditor");
+    var eventsContainer = document.getElementById("eventsJSONeditor");
+    var functionsContainer = document.getElementById("functionsJSONeditor");
+
+    var options = {
+        modes: ['tree', 'code'],
+        enableSort: false,
+        enableTransform: false,
+        search: true,
+        indentation: 3,
+        statusBar: false
+    };
+
+    const metadata_editor = new JSONEditor(metadataContainer, { ...options, name: 'Metadata' }, {{ metadata | tojson }});
+    const transformations_editor = new JSONEditor(transformationsContainer, { ...options, name: 'Transformations' }, {{ transformations | tojson }});
+    const events_editor = new JSONEditor(eventsContainer, { ...options, name: 'Events' }, {{ events | tojson }});
+    const functions_editor = new JSONEditor(functionsContainer, { ...options, name: 'Functions' }, {{ functions | tojson }})
+
+    $("#save-semantics").button().on("click", function () {
+        saveSemantics();
+        {{ name }};
+        return false;
+    });
+
+    // save semantics
+    function saveSemantics() {
+        const semantics = {
+            address: '{{ address }}', network: '{{ network }}',
+            mapping: events_editor.get(),
+            abi: functions_editor.get(), formats: transformations_editor.get(),
+            storage: metadata_editor.get()
+        };
+        $.ajax({
+            url: "/save",
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(   semantics),
+            type: 'POST',
+            success: function (response) {
+                console.log(response);
+                location.reload();
+            },
+            error: function (error) {
+                console.log(error);
+                location.reload();
+            }
+        });
+
+    }
+</script>
+
+</body>
+
+</html>

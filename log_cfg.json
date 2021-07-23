@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "disable_existing_loggers": false,
+  "formatters": {
+    "extra": {
+      "format": "%(asctime)s.%(msecs)03d %(levelname)-8s [%(filename)s:%(lineno)d - %(funcName)s %(process)d/%(processName)s]     %(message)s",
+      "datefmt": "%Y-%m-%d %H:%M:%S"
+    }
+  },
+  "handlers": {
+    "console": {
+      "class": "logging.StreamHandler",
+      "level": "DEBUG",
+      "formatter": "extra",
+      "stream": "ext://sys.stdout"
+    },
+    "file_handler": {
+      "class": "logging.handlers.RotatingFileHandler",
+      "level": "INFO",
+      "formatter": "extra",
+      "filename": "ethtx_ce.log",
+      "maxBytes": 5242880,
+      "backupCount": 5,
+      "encoding": "utf8"
+    }
+  },
+  "root": {
+    "level": "INFO",
+    "handlers": [
+      "file_handler",
+      "console"
+    ]
+  }
+}

@@ -1,0 +1,80 @@
+on:
+  push:
+    branches:
+      - main
+
+name: Deploy to AWS Staging
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    env:
+      AWS_REGION: us-east-2
+      ECR_REPO_NAME: ethtx
+      SERVICE_NAME: ethtx-ce-staging
+      CLUSTER_NAME: ethtx-ce-staging
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Extract commit hash
+      id: vars
+      shell: bash
+      run: |
+        echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
+    - name: Build, tag, test and push image to Amazon ECR
+      id: build-image
+      env:
+        SHA_TAG: ${{ steps.vars.outputs.sha_short }}
+        LATEST_TAG: latest
+        ENVIRONMENT_TAG: staging
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+      run: |
+        # Build a docker container and
+        # push it to ECR so that it can
+        # be deployed to ECS.
+        echo "-----------------------"
+        echo "Build step 1/3: Building docker image"
+        echo "-----------------------"
+        docker build -t $ECR_REGISTRY/$ECR_REPO_NAME:$SHA_TAG \
+                     -t $ECR_REGISTRY/$ECR_REPO_NAME:$LATEST_TAG \
+                     -t $ECR_REGISTRY/$ECR_REPO_NAME:$ENVIRONMENT_TAG \
+                     .
+        echo "-----------------------"
+        echo "Build step 2/3: Testing builded image"
+        echo "-----------------------"
+        docker run  $ECR_REGISTRY/$ECR_REPO_NAME:$SHA_TAG make test
+        echo "-----------------------"
+        echo "Build step 3/3: Pushing builded image to $ECR_REPO_NAME"
+        echo "-----------------------"
+        docker push $ECR_REGISTRY/$ECR_REPO_NAME --all-tags
+        echo "-----------------------"
+
+    - name: Update ECS service with latest Docker image
+      id: service-update
+      run: |
+        aws ecs update-service --cluster $CLUSTER_NAME --service ${{ env.SERVICE_NAME }} --force-new-deployment --region $AWS_REGION
+
+    - name: Wait for all services to become stable
+      uses: oryanmoshe/ecs-wait-action@v1.3
+      with:
+        ecs-cluster: ${{ env.CLUSTER_NAME }}
+        ecs-services: '["${{ env.SERVICE_NAME }}"]'
+
+    - name: Invalidate CloudFront
+      run: aws cloudfront create-invalidation --distribution-id ${{ secrets.STAGING_AWS_CF_ID }} --paths "/*"

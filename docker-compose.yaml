@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+  ethtx_ce:
+    image: ethtx_ce
+    ports:
+      - "5000:5000"
+    env_file:
+      - .docker_env
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    environment:
+      - MONGO_INITDB_DATABASE=${MONGODB_DB}
+    ports:
+      - "27017:27017"
+  mongo-seed:
+    build: ./local-database-seed
+    links:
+      - mongo
+  mongo-express:
+    image: mongo-express
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN=false
+      - ME_CONFIG_MONGODB_AUTH_DATABASE=${MONGODB_DB}
+      - ME_CONFIG_BASICAUTH_USERNAME=${MONGOEXPRESS_LOGIN}
+      - ME_CONFIG_BASICAUTH_PASSWORD=${MONGOEXPRESS_PASSWORD}
+    depends_on:
+      - mongo
+    ports:
+      - "8081:8081"

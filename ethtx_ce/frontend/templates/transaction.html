@@ -1,0 +1,325 @@
+{% macro address_link(address, label, badge="") %}
+    {%- if address and address != '0x0000000000000000000000000000000000000000' -%}
+        <!--
+  ~ Copyright 2021 DAI Foundation
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<a href="https://etherscan.io/address/{{ address }}" target="_blank">
+           {%- if badge -%}
+              <span class="badge badge-info">[{{ badge }}] </span>
+           {%- endif -%}
+              {{- label -}}
+        </a>
+    {%- else -%}
+        {{- label -}}
+    {%- endif -%}
+{% endmacro %}
+
+{% macro nft_link(address, label) %}
+    {%- if address and address != '0x0000000000000000000000000000000000000000' -%}
+        <a href="https://etherscan.io/token/{{ address }}" target="_blank">
+            {{- label -}}
+        </a>
+    {%- else -%}
+        {{- label -}}
+    {%- endif -%}
+{% endmacro %}
+
+{% macro print_event_arguments(arguments) %}
+    {% for argument in arguments %}
+        {% if argument.type != "ignore" %}
+            {% if loop.index > 1 %}, {% endif %}
+            {%- if argument.name == "[no ABI]" -%}
+                <span class="badge badge-danger">no_ABI</span>
+            {%- else -%}
+                {%- if argument.name -%}
+                    <span style='color: darkred'>{{ argument.name }}=</span>
+                {%- endif -%}
+                {%- if argument.type == "tuple" -%}
+                    ({{- print_event_arguments(argument.value) -}})
+                {%- elif argument.type == "tuple[]" -%}
+                    [
+                    {%- for sub_arg in argument.value -%}
+                        {{- print_event_arguments(sub_arg) -}}
+                    {%- endfor -%}
+                    ]
+                {%- elif argument.type == "address" -%}
+                    {{- address_link(argument.value.address, argument.value.name, argument.value.badge) -}}
+                {%- elif argument.type == "nft" -%}
+                        {{- nft_link(argument.value.address, argument.value.name) -}}
+                {%- elif argument.type == "call" -%}
+                    {{- address_link(argument.value.address, argument.value.name, argument.value.badge) -}}.
+                    {{- argument.value.function_name -}}({{ print_event_arguments(argument.value.arguments) }})
+                {%- else -%}
+                    {{- argument.value -}}
+                {%- endif -%}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+{% macro print_call_arguments(arguments) %}
+    {% if arguments is not none %}
+        {%- for argument in arguments -%}
+            {% if argument.type != "ignore" %}
+                {%- if loop.index > 1 -%}, {% endif %}
+                    {%- if argument.name == "[no ABI]" -%}
+                        <span class="badge badge-danger">no_ABI</span>
+                    {%- else -%}
+                    {%- if argument.name %}<span style='color: darkred'>{{- argument.name -}}=</span>{%- endif -%}
+                    {%- if argument.type == "tuple" -%}
+                        ({{- print_call_arguments(argument.value) -}})
+                    {%- elif argument.type == "tuple[]" -%}
+                        [
+                        {%- for sub_arg in argument.value -%}
+                            {%- if loop.index > 1 -%}, {% endif %}
+                            ({{- print_call_arguments(sub_arg) -}})
+                        {%- endfor -%}
+                        ]
+                    {%- elif argument.type == "address" -%}
+                        {{- address_link(argument.value.address, argument.value.name, argument.value.badge) -}}
+                    {%- elif argument.type == "nft" -%}
+                        {{- nft_link(argument.value.address, argument.value.name) -}}
+                    {% elif argument.type == "call" %}
+                        {{- address_link(argument.value.address, argument.value.name, argument.value.badge) -}}.<span style="color: darkgreen">{{- argument.value.function_name -}}</span>({{- print_event_arguments(argument.value.arguments) -}})
+                    {%- else -%}
+                        {{- argument.value -}}
+                    {%- endif -%}
+                {%- endif -%}
+            {%- endif -%}
+        {%- endfor -%}
+    {% endif %}
+{% endmacro %}
+
+
+{%- macro print_call_line(call) -%}
+    <li id="{{ call.id }}"
+        class="indent-{{ call.indent }} {% if call.indent < 6 %}expanded{% endif %}">
+        <p>
+
+
+            <span style="color: slategray">[{{- call.gas_used if call.gas_used != None else "N/A" -}}]: </span>
+            {% if call.error %}
+                <span style='color: red'>({{ call.error }})</span>
+            {% endif %}
+            {% if call.call_type == "delegatecall" %}
+                <span style='color: darkorange'>(delegate)</span>
+            {% endif %}
+            {% if call.value and call.call_type != "selfdestruct" %}
+                <span style='color: blue'>ETH {{ call.value -}}</span>
+            {% endif %}
+            {%- if call.call_type == "selfdestruct" -%}
+                {{-address_link(call.from_address.address, call.from_address.name, call.from_address.badge) -}}
+                <span style='color: darkgreen'>.{{ call.call_type }}({% if call.value > 0 %}
+                    <span style='color: blue'>ETH {{ call.value }}</span> =>
+                    {{ address_link(call.to_address.address, call.to_address.name, call.to_address.badge) -}}{% endif %}
+                    )</span>
+            {%- elif call.call_type == "create" -%}
+                {{- address_link(call.to_address.address, call.to_address.name, call.to_address.badge) -}}.<span style='color: darkgreen'>New()</span>
+            {%- else -%}
+
+                {%- if call.call_type == "delegatecall" -%}
+                    {{- address_link(call.from_address.address, call.from_address.name, call.from_address.badge) -}}
+                {%- else -%}
+                    {{- address_link(call.to_address.address, call.to_address.name, call.to_address.badge) -}}
+                {%- endif -%}
+
+                {%- if call.call_type == "delegatecall" -%}
+                    <span style='color: darkgreen'>[
+                    <span class='delegate'>{{- address_link(call.to_address.address, call.to_address.name, call.to_address.badge) -}}</span>
+                {%- endif -%}
+                {%- if call.function_name != "0x" -%}
+                    <span style='color: darkgreen'>.{{- call.function_name -}}</span>
+                {%- else -%}
+                    <span style='color: darkgreen'>.fallback</span>
+                {%- endif -%}
+                {%- if call.call_type == "delegatecall" -%}
+                    ]
+                {%- endif -%}
+
+                <span>({{- print_call_arguments(call.arguments) -}}) => ({{- print_call_arguments(call.outputs) -}})</span>
+            {%- endif -%}
+        <ul>
+            {% for sub_call in call.sub_calls %}
+                {{- print_call_line(sub_call) -}}
+            {% endfor %}
+        </ul>
+        </p>
+    </li>
+{%- endmacro -%}
+
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+        {% include './partials/headtags.html' %}
+        <title>Ethtx.info Analysis {{ transaction.tx_hash }}</title>
+
+        <link href="//cdn.jsdelivr.net/npm/jquery.fancytree@2.27/dist/skin-win8/ui.fancytree.min.css" rel="stylesheet">
+        <script src="/static/jquery.min.js"></script>
+        <script src="/static/jquery.fancytree-all-deps.min.js"></script>
+        <link href="/static/ethtx.new.css" rel="stylesheet">
+    </head>
+
+    <body>
+
+        <div class="analysis">
+
+            <div class="with-back-button">
+                <h3>Analysis for: <span class="transaction-hash">{{ transaction.tx_hash }} / {{ transaction.chain_id }}</span></h3>
+                <div class="back-button-container">
+                    <a href="https://tokenflow.live"> <img src="/static/images/hosted_by.png" /> </a>
+                </div>
+            </div>
+
+            <div class="transaction-info">
+                <div>
+                    Block number: <span style='color: darkred'>{{ transaction.block_number }}</span>
+                    {% if transaction.timestamp %}
+                        at <span style='color: darkred'>{{ transaction.timestamp }}</span> UTC
+                    {% endif %}
+                </div>
+                <div>
+                    Tx cost: <span style='color: darkred'>{{ (transaction.gas_used * transaction.gas_price / 10 ** 18) }}</span> ETH {% if transaction.eth_price %}/ <span style='color: darkred'>{{ "{:,.2f}".format(transaction.gas_used * transaction.gas_price * transaction.eth_price / 10 ** 18) }}{% endif %}</span> USD
+                </div>
+                <div>
+                    Gas used: <span style='color: darkred'>{{ "{:,}".format(transaction.gas_used) }}</span> / <span style='color: darkred'>{{ "{:,.2f}".format(transaction.gas_price / 10 ** 9) }}</span> Gwei
+                </div>
+            </div>
+
+            {% if events %}
+                <div class="events">
+                    <h3>Emitted events:</h3>
+                    <table class="table table-striped">
+                        {% for event in events %}
+                            <tr>
+                                <td>
+                                    <span style="color: slategray">[{{- event.index -}}] </span>{{ address_link(event.contract.address, event.contract.name, event.contract.badge) }}.<span style='color: darkgreen'>{{ event.event_name }}</span>({{ print_event_arguments(event.parameters) }})
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% endif %}
+
+            {% if balances %}
+                <div class="account-balances">
+                    <h3>Account balances:</h3>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">Address</th>
+                                <th scope="col">Token</th>
+                                <th scope="col">Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for balance in balances %}
+                                <tr>
+                                    <td rowspan="{{- balance.tokens|length -}}">
+                                        {{- address_link(balance.holder.address, balance.holder.name, balance.holder.badge) -}}
+                                    </td>
+                                    {% for token in balance.tokens %}
+                                        {% if loop.index > 1 %}<tr>{% endif %}
+                                            {% if token.token_standard == 'ERC721' %}
+                                                <td class="">{{- nft_link(token.token_address, token.token_symbol) -}}</td>
+                                            {% else %}
+                                                <td class="">{{- address_link(token.token_address, token.token_symbol) -}}</td>
+                                            {% endif %}
+                                            <td style="text-align: right">
+                                                {% if token.balance[0] == '-' %}
+                                                    <span style="color: darkred">{{- token.balance -}}</span>
+                                                {% else %}
+                                                    {{- token.balance -}}
+                                                {% endif %}
+                                            </td>
+                                        {% if loop.index > 1 %}</tr>{% endif %}
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+
+            {% if transfers %}
+                <div class="transfers">
+                    <h3>Token transfers: </h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Sender</th>
+                                <th scope="col">Token</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Receiver</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for transfer in transfers %}
+                                <tr>
+                                    <td>{{- address_link(transfer.from_address.address, transfer.from_address.name, transfer.from_address.badge) -}}</td>
+                                    {% if transfer.token_standard == 'ERC721' %}
+                                        <td class="">{{- nft_link(transfer.token_address, transfer.token_symbol) -}}</td>
+                                    {% else %}
+                                        <td>{{- address_link(transfer.token_address, transfer.token_symbol) -}}</td>
+                                    {% endif %}
+                                    <td style="text-align: right">
+                                        {{- transfer.value -}}
+                                    </td>
+                                    <td>{{- address_link(transfer.to_address.address, transfer.to_address.name, transfer.to_address.badge) -}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+
+            {% if call %}
+                <div class="calls">
+                    <h3>Execution trace:</h3>
+                    <div id="tree">
+                        <ul class="tree">
+                            <li>
+                                <p>
+                                    <span style="color: slategray">[{{- transaction.gas_used -}}]: </span>
+                                    {{- address_link(call.from_address.address, call.from_address.name, call.from_address.badge) -}}
+                                </p>
+                                <ul>
+                                    {{- print_call_line(call) -}}
+                                </ul>
+                        </ul>
+                    </div>
+                </div>
+            {% else %}
+                <h3>Trace decoding error...</h3>
+            {% endif %}
+
+        </div>
+        {% include './partials/footer.html' %}
+        <script>
+            $(document).ready(() => {
+                $("#tree").fancytree({
+                    minExpandLevel: 2,
+                    toggleEffect: false,
+                });
+                $("#tx_tree").fancytree({
+                    minExpandLevel: 2,
+                    toggleEffect: false,
+                });
+            });
+        </script>
+
+    </body>
+
+</html>

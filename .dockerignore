@@ -1,0 +1,9 @@
+.git
+.github
+.gitignore
+.pre-commit*
+.env
+.docker_env
+docker-compose.yaml
+#tests/
+local-database-seed/
