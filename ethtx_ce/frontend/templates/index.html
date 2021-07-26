@@ -1,22 +1,8 @@
-<!--
-  ~ Copyright 2021 DAI Foundation
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+
     {% include './partials/headtags.html' %}
     <title>EthDecoder</title>
     <style>
@@ -29,6 +15,8 @@
         .container {
             max-width: 840px;
             margin: 0 auto;
+            position: relative;
+            top: 1.5rem;
         }
 
         .main-title {
@@ -86,12 +74,6 @@
             margin: 0;
         }
 
-        .hosted-by {
-            text-align: right;
-            margin-top: 35px;
-            margin-bottom: 25px;
-        }
-
         .input {
             font-size: 18px;
             width: 100%;
@@ -110,6 +92,10 @@
             background: url(/static/images/chevron_down.png) no-repeat right 13px center;
         }
 
+        #tx_submit:hover {
+
+        }
+
         .link {
             color: var(--link);
             text-decoration: none;
@@ -125,63 +111,85 @@
                 font-size: 16px;
             }
         }
+
+        .beta-banner {
+            width: 100%;
+            background-color: #fff7e0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            text-align: center;
+            padding-top: 0.44rem;
+            padding-bottom: 0.44rem;
+        }
+
+        body {
+            margin-top: 50px;
+        }
+
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div style="display: flex; justify-content: space-between;">
-            <div class="main-title">EthTx Transaction Decoder</div>
-            <div class="hosted-by">
-                <a href="https://tokenflow.live"> <img src="/static/images/hosted_by.png" /> </a>
-            </div>
-        </div>
-        <form action="/" method="GET"
-        onsubmit="this.action = '/' + this.net.options[this.net.selectedIndex].value + '/' + this.tx.value;">
-            <div>
-                <label for="net">Network</label>
-                <select class="input select" id="net">
-                    <option value="mainnet">ETH Mainnet</option>
-                    <option value="kovan">ETH Kovan</option>
-                    <option value="ropsten">ETH Ropsten</option>
-                </select>
-            </div>
-            <div>
-                <label for="tx">Tx Address</label>
-                <input class="input" size="66" type="text" id="tx"  onkeyup="handleValueChange(this)">
-            </div>
-            <div>
-                <input id="tx_submit" type="submit" value="Decode now" disabled="disabled">
-            </div>
-        </form>
-        <div class="panels">
-            <div class="panel-container">
-                <h2>About EthTx</h2>
-                <p>EthTx is an open source decoder of blockchain transactions that is made freely available to the Ethereum Community.</p>
-                <p>Everybody is invited to contribute to the codebase (<a href="https://github.com/EthTx/ethtx_ce" class="link">GitHub</a>) via Pull Request or Issues and anyone can launch their own instances of EthTx.</p>
-            </div>
-            <div class="panel-container">
-                <h2>About this implementation</h2>
-                <p>This instance of EthTx is hosted by <a href="https://tokenflow.live" class="link">Token Flow Insights</a>, the team that developed EthTx and the current maintainer of the open source repository.</p>
-                <p>Use of this implementation is under the <a href="terms" class="link">Terms of Service</a> and <a href="privacy" class="link">Privacy Policy</a></p>
-            </div>
-        </div>
 
+<div class="beta-banner">This is a Beta version of the new EthTx Community Edition and may experience instability.<br>
+    In case of issues please use the previous deployment at <a href="https://old.ethtx.info">old.ethtx.info</a></div>
+
+<div class="container">
+    <div style="display: flex; justify-content: space-between;">
+        <div class="main-title">EthTx Transaction Decoder</div>
     </div>
-    {% include './partials/footer.html' %}
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            function trackDecode() {
-                fathom.trackGoal('PR1BHWAQ')
-            }
-
-            document.getElementById('tx_submit').addEventListener('click', trackDecode)
-        });
-    </script>
-    <script type="text/javascript">
-        function handleValueChange() {
-            document.getElementById('tx_submit').disabled = document.getElementById("tx").value.trim() === "";
+    <form action="/" method="GET"
+          onsubmit="this.action = '/' + this.net.options[this.net.selectedIndex].value + '/' + this.tx.value;">
+        <div>
+            <label for="net">Network</label>
+            <select class="input select" id="net">
+                <option value="mainnet">ETH Mainnet</option>
+            </select>
+        </div>
+        <div>
+            <label for="tx">Tx Hash</label>
+            <input class="input" size="66" type="text" id="tx"
+                   oninput="handleValueChange(this.value)"
+                   onchange="handleValueChange(this.value)">
+        </div>
+        <div>
+            <input id="tx_submit" type="submit" value="Decode now" disabled="disabled">
+        </div>
+    </form>
+    <div class="panels">
+        <div class="panel-container">
+            <h2>About EthTx</h2>
+            <p>EthTx is an open source decoder of blockchain transactions that is made freely available to the Ethereum
+                Community as a Python library in public PyPi index (<a href="https://pypi.org/project/EthTx/"
+                                                                            class="link">project page</a>).</p>
+            <p>Everybody is invited to contribute to the codebase (<a href="https://github.com/EthTx/ethtx"
+                                                                      class="link">GitHub</a>) via Pull Request or
+                Issues and anyone can launch their own instances of EthTx.</p>
+        </div>
+        <div class="panel-container">
+            <h2>About this implementation</h2>
+            <p>Source code of this Community Edition of EthTx is also free and open source
+                (<a href="https://github.com/EthTx/ethtx_ce" class="link">GitHub</a>).</p>
+            <p>Use of this implementation is under the <a href="terms" class="link">Terms of Service</a> and <a
+                    href="privacy" class="link">Privacy Policy</a></p>
+        </div>
+    </div>
+</div>
+{% include './partials/footer.html' %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        function trackDecode() {
+            // fathom.trackGoal('PR1BHWAQ')
         }
-    </script>
+
+        document.getElementById('tx_submit').addEventListener('click', trackDecode)
+    });
+</script>
+<script type="text/javascript">
+    function handleValueChange(value) {
+        document.getElementById('tx_submit').disabled = value.trim() === "";
+    }
+</script>
 </body>
 </html>

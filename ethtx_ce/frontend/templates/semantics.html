@@ -1,17 +1,3 @@
-<!--
-  ~ Copyright 2021 DAI Foundation
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -159,10 +145,10 @@
 <body>
 
 <h3>Semantics for: {{address}}</h3>
-<div id="metadataJSONeditor" style="float: left; width: 49%; height: 320px; margin: 5px;"></div>
-<div id="transformationsJSONeditor" style="float: left; width: 49%; height: 320px; margin: 5px;"></div>
-<div id="eventsJSONeditor" style="float: left; width: 49%; height: 320px; margin: 5px;"></div>
-<div id="functionsJSONeditor" style="float: left; width: 49%; height: 320px; margin: 5px;"></div>
+<div id="metadataJSONeditor" style="float: left; width: 55%; height: 320px; margin: 5px;"></div>
+<div id="transformationsJSONeditor" style="float: left; width: 43%; height: 320px; margin: 5px;"></div>
+<div id="eventsJSONeditor" style="float: left; width: 55%; height: 320px; margin: 5px;"></div>
+<div id="functionsJSONeditor" style="float: left; width: 43%; height: 320px; margin: 5px;"></div>
 
 <form>
     <button id="save-semantics">Save semantics</button>
@@ -178,9 +164,6 @@
             <label for="network">Network</label>
             <select name="network" id="network" selected="{{ network }}">
                 <option value="mainnet">Main Net</option>
-                <option value="kovan">Kovan</option>
-                <option value="ropsten">Ropsten</option>
-                <option value="optimism">Optimism</option>
             </select>
             <label for="name">Contract name</label>
             <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all">
@@ -220,10 +203,11 @@
     // save semantics
     function saveSemantics() {
         const semantics = {
-            address: '{{ address }}', network: '{{ network }}',
-            mapping: events_editor.get(),
-            abi: functions_editor.get(), formats: transformations_editor.get(),
-            storage: metadata_editor.get()
+            address: '{{ address }}',
+            metadata: metadata_editor.get(),
+            transformations: transformations_editor.get(),
+            events: events_editor.get(),
+            functions: functions_editor.get()
         };
         $.ajax({
             url: "/save",

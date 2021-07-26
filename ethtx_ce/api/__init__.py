@@ -11,44 +11,48 @@
 #  limitations under the License.
 
 from functools import wraps
-from typing import Callable, Dict, Optional, Union, Type
+from typing import Dict, Type, Callable, Union, Optional
 
 from ethtx import EthTx
-from flask import Blueprint, Flask
+from flask import Blueprint
+from flask import Flask
 
 from ethtx_ce import factory
+from .decorators import auth_required
 
 
 def create_app(
     engine: EthTx, settings_override: Optional[Union[Dict, Type]] = None
 ) -> Flask:
-    """Returns Frontend app instance."""
-    app = factory.create_app(
-        __name__,
-        __path__,
-        settings_override,
-        template_folder="frontend/templates",
-        static_folder="frontend/static",
-    )
+    """Returns API application instance."""
 
-    app.jinja_env.trim_blocks = True
-    app.jinja_env.lstrip_blocks = True
-
+    app = factory.create_app(__name__, __path__, settings_override)
     app.ethtx = engine  # init ethtx engine
 
     return app
 
 
-def frontend_route(bp: Blueprint, *args, **kwargs):
-    """Route in blueprint context."""
+def api_route(bp: Blueprint, *args, **kwargs):
+    kwargs.setdefault("strict_slashes", False)
 
     def decorator(f: Callable):
         @bp.route(*args, **kwargs)
+        @auth_required
         @wraps(f)
         def wrapper(*args, **kwargs):
-            return f(*args, **kwargs)
+            sc = 200
+            rv = f(*args, **kwargs)
+            if isinstance(rv, tuple):
+                sc = rv[1]
+                rv = rv[0]
+            return rv, sc
 
         f.__name__ = str(id(f)) + f.__name__
         return f
 
     return decorator
+
+
+# avoid circular
+from .endpoints import *
+from .exceptions import exceptions_bp

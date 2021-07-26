@@ -2,55 +2,8 @@ from typing import Dict
 
 from hexbytes import HexBytes
 
-from ethtx_ce.backend.models.w3_model import W3Log, W3Transaction, W3Receipt, W3Block
+from ethtx_ce.engine.models.w3_model import W3Log, W3Transaction, W3Receipt, W3Block
 from ethtx_ce.helpers import AttrDict
-
-
-class MockMongoConnection:
-    def get_semantics(self, chain_id, address):
-        return {"name": "test", "events": "test"}
-
-    def insert_contract(self, contract, update_if_exist=False):
-        contract_with_id = {"_id": contract["chash"], **contract}
-
-        if update_if_exist:
-            self._contracts.replace_one(
-                {"_id": contract_with_id["_id"]}, contract_with_id, upsert=True
-            )
-        else:
-            self._contracts.insert_one(contract_with_id)
-
-    def insert_address(self, address, update_if_exist=False):
-        address_with_id = {
-            "_id": f"{address['network']}-{address['address']}",
-            **address,
-        }
-
-        if update_if_exist:
-            self._addresses.replace_one(
-                {"_id": address_with_id["_id"]}, address_with_id, upsert=True
-            )
-        else:
-            self._addresses.insert_one(address_with_id)
-
-    def insert_signature(self, signature, update_if_exist=False):
-        signature_with_id = {"_id": signature["hash"], **signature}
-
-        if update_if_exist:
-            self._signatures.replace_one(
-                {"_id": signature_with_id["_id"]}, signature_with_id, upsert=True
-            )
-        else:
-            self._signatures.insert_one(signature_with_id)
-
-    def get_contract(self, contract_code_hash):
-        return []
-
-    def get_address(self, network, address):
-        return []
-
-    def get_signature(self, signature_hash):
-        return []
 
 
 class MockWeb3Provider:
@@ -142,20 +95,6 @@ class MockWeb3Provider:
 
     def get_block(self, block_number: int) -> W3Block:
         return W3Block(**self.blocks[block_number])
-
-
-class MockSemanticsRepository:
-    def get_event_abi(self, a, b, c):
-        return ""
-
-    def get_anonymous_event_abi(self, a, b):
-        return ""
-
-    def contract_name(self, a, b):
-        return ""
-
-    def contract_label(self, chain_id, contract):
-        return ""
 
 
 class Mocks:

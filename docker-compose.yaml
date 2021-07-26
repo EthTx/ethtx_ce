@@ -15,10 +15,6 @@ services:
       - MONGO_INITDB_DATABASE=${MONGODB_DB}
     ports:
       - "27017:27017"
-  mongo-seed:
-    build: ./local-database-seed
-    links:
-      - mongo
   mongo-express:
     image: mongo-express
     environment:

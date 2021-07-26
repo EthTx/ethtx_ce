@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 web3 = "*"
-pymongo = {extras = ["srv"], version = "*"}
+pymongo = {extras = ["srv"],version = "*"}
 python-dotenv = "*"
 pytest = "*"
 flask = "*"
@@ -16,6 +16,11 @@ marshmallow = "*"
 jsonpickle = "*"
 hexbytes = "*"
 ethereum = "*"
+pre-commit = "*"
+mongoengine = "*"
+mongomock = "*"
+flask-httpauth = "*"
+ethtx = "==0.1.4"
 
 [dev-packages]
 black = "==19.3b0"

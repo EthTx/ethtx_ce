@@ -9,18 +9,22 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
+from typing import Optional
 
-from flask_httpauth import HTTPBasicAuth
+from flask import Blueprint, current_app
 
-from ethtx_ce.config import Config
+from .. import api_route
+from ..decorators import response
 
-auth = HTTPBasicAuth()
+semantics_bp = Blueprint("api_semantics", __name__)
 
 
-@auth.verify_password
-def verify_password(username: str, password: str) -> bool:
-    """Verify user, return bool."""
-    return (
-        username == Config.ETHTX_ADMIN_USERNAME
-        and password == Config.ETHTX_ADMIN_PASSWORD
+@api_route(semantics_bp, "/semantics/<string:address>")
+@api_route(semantics_bp, "/semantics/<string:chain_id>/<string:address>")
+@response(200)
+def read_raw_semantic(address: str, chain_id: Optional[str] = None):
+    """Get raw semantic."""
+    raw_semantics = current_app.ethtx.semantics.get_raw_semantics(
+        chain_id=chain_id, address=address
     )
+    return raw_semantics

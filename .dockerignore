@@ -4,6 +4,7 @@
 .pre-commit*
 .env
 .docker_env
+.env_sample
 docker-compose.yaml
 #tests/
 local-database-seed/

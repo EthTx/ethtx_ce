@@ -16,13 +16,7 @@
     <img src="https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=github" alt="OpenSource">
 </a>
 <a target="_blank">
-    <img src="https://img.shields.io/github/license/Naereen/StrapDown.js.svg" alt="Mit">
-</a>
-<a href="https://github.com/EthTx/ethtx_ce/actions/workflows/aws-staging.yml" target="_blank">
-    <img src="https://github.com/EthTx/ethtx_ce/actions/workflows/aws-staging.yml/badge.svg?branch=dev" alt="AWS Staging deployment status">
-</a>
-<a href="https://github.com/EthTx/ethtx_ce/actions/workflows/aws-prod.yml" target="_blank">
-    <img src="https://github.com/EthTx/ethtx_ce/actions/workflows/aws-prod.yml/badge.svg?branch=main" alt="AWS Production deployment status">
+    <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="Apache">
 </a>
 </p>
 
@@ -66,10 +60,10 @@ support `GET` requests.
       ```shell
       /api/transactions/CHAIN_ID/TX_HASH
       ```
-    * **Method**  
+    * **Method**
       `GET`
     * **Authorization**
-        * Required:  
+        * Required:
           header: `x-api-key=[string]` **OR** query parameter: `api_key=[string]`
     * **URL Params**
         * Required: `chain_id=[string]`,`tx_hash=[string]`
@@ -88,10 +82,10 @@ support `GET` requests.
       ```shell
       /api/semantics/CHAIN_ID/ADDRESS
       ```
-    * **Method**  
+    * **Method**
       `GET`
     * **Authorization**
-        * Required:  
+        * Required:
           header: `x-api-key=[string]` **OR** query parameter: `api_key=[string]`
     * **URL Params**
         * Required:`chain_id=[string]`,`address=[string]`
@@ -100,7 +94,3 @@ support `GET` requests.
       curl --location --request GET 'http://0.0.0.0:5000/api/semantics/dsad/asd' \
       --header 'x-api-key: 05a2212d-9985-48d2-b54f-0fbc5ba28766'
       ```
-
-# New Semantics & Extensions
-
-:point_right: [Development](DEVELOPMENT.md)

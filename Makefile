@@ -9,9 +9,6 @@ build-image:  ## Build all docker images
 run-database:  ## Run only a local database required for local development
 	docker-compose up -d mongo mongo-express
 
-populate-db: run-database ## Populate a local database with semantics specified in backup json files
-	docker-compose build mongo-seed && docker-compose up mongo-seed && docker-compose rm mongo-seed
-
 run-local:
 	FLASK_APP=run.py FLASK_DEBUG=1 pipenv run flask run --host=0.0.0.0 --port 5000
 
@@ -27,4 +24,11 @@ run-test-docker:
 	docker run -it ethtx_ce make test
 
 test:
-	PYTHONPATH=. pipenv run python -m pytest --ignore=tests/providers .
+	PYTHONPATH=. pipenv run python -m pytest tests
+
+test-all:
+	PYTHONPATH=. pipenv run python -m pytest .
+
+setup:
+	pipenv install --dev
+	pipenv run pre-commit install

@@ -20,14 +20,14 @@ load_dotenv(find_dotenv(filename="../.env"))
 
 
 class SwaggerConfig:
-    """ Swagger ui basic config. """
+    """Swagger ui basic config."""
 
     SWAGGER_UI_REQUEST_DURATION = True
     SWAGGER_SUPPORTED_SUBMIT_METHODS = ["get", "post"]
 
 
 class EthConfig:
-    """ EthTx useful parameters. """
+    """EthTx useful parameters."""
 
     NODES_WITH_URLS = {
         "mainnet": os.getenv("MAINNET_NODE_URL", ""),
@@ -40,7 +40,7 @@ class EthConfig:
 
 
 class Config(SwaggerConfig):
-    """ Base Config. """
+    """Base Config."""
 
     LOGGING_CONFIG = os.environ.get(
         "LOGGING_CONFIG", os.path.join(BASE_DIR, "../log_cfg.json")
@@ -53,7 +53,10 @@ class Config(SwaggerConfig):
     API_KEY = os.getenv("API_KEY", "")
     MAX_CONTENT_LENGTH = 10 * 1024 * 1024
 
+    MONGO_CONNECTION_STRING = os.getenv("MONGO_CONNECTION_STRING", "")
     MONGODB_DB = os.getenv("MONGODB_DB", "")
+
+    # to be deleted mongo parameters
     MONGODB_HOST = os.getenv("MONGODB_HOST", "")
     MONGODB_PORT = int(os.getenv("MONGODB_PORT", 27017))
     MONGODB_USERNAME = os.getenv("MONGODB_USERNAME", "")
@@ -64,7 +67,7 @@ class Config(SwaggerConfig):
 
 
 class ProductionConfig(Config):
-    """ Production Config. """
+    """Production Config."""
 
     ENV = "production"
     DEBUG = False
@@ -73,7 +76,7 @@ class ProductionConfig(Config):
 
 
 class StagingConfig(Config):
-    """ Staging Config. """
+    """Staging Config."""
 
     ENV = "staging"
     DEBUG = True
@@ -82,7 +85,7 @@ class StagingConfig(Config):
 
 
 class DevelopmentConfig(Config):
-    """ Development Config. """
+    """Development Config."""
 
     ENV = "development"
     DEBUG = True

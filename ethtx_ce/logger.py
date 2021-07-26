@@ -19,7 +19,7 @@ from flask import Flask
 
 
 def setup_logging(app: Flask):
-    """ Setup logging """
+    """Setup logging"""
     with open(app.config["LOGGING_CONFIG"], "r") as f:
         config = json.load(f)
 
@@ -36,7 +36,5 @@ def setup_logging(app: Flask):
 
 
 def setup_external_logging() -> None:
-    """ Setup and override external libs loggers. """
-    logging.getLogger("web3.providers.HTTPProvider").setLevel(
-        logging.INFO
-    )  # web3 logger
+    """Setup and override external libs loggers."""
+    logging.getLogger("web3").setLevel(logging.INFO)  # web3 logger

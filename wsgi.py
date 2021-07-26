@@ -10,13 +10,39 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
+import os
+
+from ethtx import EthTx, EthTxConfig
 from flask import Flask
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
 
-from ethtx_ce import frontend, backend
+from ethtx_ce import frontend, api
 
 app = Flask(__name__)
 
-app.wsgi_app = DispatcherMiddleware(
-    frontend.create_app(), {"/api": backend.create_app()}
+ethtx_config = EthTxConfig(
+    mongo_connection_string=os.getenv("MONGO_CONNECTION_STRING", ""),
+    mongo_database=os.getenv("MONGODB_DB", ""),
+    etherscan_api_key=os.getenv("ETHERSCAN_KEY", ""),
+    web3nodes={
+        "mainnet": os.getenv("MAINNET_NODE_URL", ""),
+        "kovan": os.getenv("KOVAN_NODE_URL", ""),
+        "ropsten": os.getenv("ROPSTEN_NODE_URL", ""),
+    },
+    default_chain="mainnet",
+    etherscan_urls={
+        "mainnet": "https://api.etherscan.io/api",
+        "kovan": "https://api-kovan.etherscan.io/api",
+        "ropsten": "https://api-ropsten.etherscan.io/api",
+    },
 )
+
+ethtx = EthTx.initialize(ethtx_config)
+
+app.wsgi_app = DispatcherMiddleware(
+    frontend.create_app(engine=ethtx, settings_override=EthTxConfig),
+    {"/api": api.create_app(engine=ethtx, settings_override=EthTxConfig)},
+)
+
+if __name__ == "__main__":
+    app.run()

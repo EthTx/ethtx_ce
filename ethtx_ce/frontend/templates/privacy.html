@@ -1,24 +1,57 @@
-<!--
-  ~ Copyright 2021 DAI Foundation
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
 <html lang="en">
 <head>
-    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
     {% include 'partials/headtags.html' %}
-    <title>Document</title>
+    <title>Privacy policy</title>
+    <style>
+        body {
+            font-family: "Hind", sans-serif;
+            font-size: 16px;
+            background-color: var(--background);
+        }
+
+        .container {
+            max-width: 840px;
+            margin: 0 auto;
+        }
+
+        .panels {
+            display: grid;
+            margin-top: 30px;
+            margin-bottom: 32px;
+            grid-gap: 32px;
+        }
+
+        .panel-container {
+            background-color: var(--background-muted);
+            border-radius: 8px;
+            padding: 24px 34px 8px 34px;
+            font-size: 18px;
+            color: var(--text-alt);
+        }
+
+        .panel-container h1 {
+            font-size: 30px;
+            font-weight: 800;
+            color: var(--text);
+            margin: 0;
+        }
+
+        @media screen and (max-width: 568px) {
+            .panel-container {
+                padding: 32px 20px;
+                font-size: 16px;
+            }
+        }
+    </style>
 </head>
 <body>
-  privacy
+    <div class="container">
+        <div class="panels">
+            <div class="panel-container">
+                <h1>Privacy policy</h1>
+                <p>This application does not collect any personal information.</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

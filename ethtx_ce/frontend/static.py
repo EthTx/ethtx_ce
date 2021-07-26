@@ -10,17 +10,26 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-from flask_httpauth import HTTPBasicAuth
+from flask import render_template, Blueprint
 
-from ethtx_ce.config import Config
+from . import frontend_route
 
-auth = HTTPBasicAuth()
+bp = Blueprint("static", __name__)
 
 
-@auth.verify_password
-def verify_password(username: str, password: str) -> bool:
-    """Verify user, return bool."""
-    return (
-        username == Config.ETHTX_ADMIN_USERNAME
-        and password == Config.ETHTX_ADMIN_PASSWORD
-    )
+@frontend_route(bp, "/")
+def search_page() -> render_template:
+    """Render search page - index."""
+    return render_template("index.html"), 200
+
+
+@frontend_route(bp, "/terms")
+def terms_page() -> render_template:
+    """Render terms page - terms."""
+    return render_template("terms.html"), 200
+
+
+@frontend_route(bp, "/privacy")
+def privacy_page() -> render_template:
+    """Render privacy page - privacy."""
+    return render_template("privacy.html"), 200
