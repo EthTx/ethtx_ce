@@ -18,8 +18,11 @@
 <a target="_blank">
     <img src="https://img.shields.io/github/license/Naereen/StrapDown.js.svg" alt="Mit">
 </a>
-<a target="_blank">
-    <img src="https://github.com/EthTx/ethtx_ce/actions/workflows/deploy.yml/badge.svg" alt="Staging pipeline">
+<a href="https://github.com/EthTx/ethtx_ce/actions/workflows/aws-staging.yml" target="_blank">
+    <img src="https://github.com/EthTx/ethtx_ce/actions/workflows/aws-staging.yml/badge.svg?branch=dev" alt="AWS Staging deployment status">
+</a>
+<a href="https://github.com/EthTx/ethtx_ce/actions/workflows/aws-prod.yml" target="_blank">
+    <img src="https://github.com/EthTx/ethtx_ce/actions/workflows/aws-prod.yml/badge.svg?branch=main" alt="AWS Production deployment status">
 </a>
 </p>
 
@@ -100,4 +103,4 @@ support `GET` requests.
 
 # New Semantics & Extensions
 
-:point_right: ![Development](DEVELOPMENT.md)
+:point_right: [Development](DEVELOPMENT.md)
