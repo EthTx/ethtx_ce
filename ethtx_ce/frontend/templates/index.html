@@ -6,17 +6,18 @@
     {% include './partials/headtags.html' %}
     <title>EthDecoder</title>
     <style>
-        body {
+        html, body {
             font-family: "Hind", sans-serif;
             font-size: 16px;
             background-color: var(--background);
+            margin: 0;
+            padding: 0;
+            height: 100%;
         }
 
         .container {
             max-width: 840px;
             margin: 0 auto;
-            position: relative;
-            top: 1.5rem;
         }
 
         .main-title {
@@ -115,16 +116,10 @@
         .beta-banner {
             width: 100%;
             background-color: #fff7e0;
-            position: absolute;
-            top: 0;
-            left: 0;
+            font-size: 14px;
             text-align: center;
             padding-top: 0.44rem;
             padding-bottom: 0.44rem;
-        }
-
-        body {
-            margin-top: 50px;
         }
 
     </style>
@@ -162,7 +157,7 @@
             <h2>About EthTx</h2>
             <p>EthTx is an open source decoder of blockchain transactions that is made freely available to the Ethereum
                 Community as a Python library in public PyPi index (<a href="https://pypi.org/project/EthTx/"
-                                                                            class="link">project page</a>).</p>
+                                                                       class="link">project page</a>).</p>
             <p>Everybody is invited to contribute to the codebase (<a href="https://github.com/EthTx/ethtx"
                                                                       class="link">GitHub</a>) via Pull Request or
                 Issues and anyone can launch their own instances of EthTx.</p>
