@@ -20,7 +20,7 @@ pre-commit = "*"
 mongoengine = "*"
 mongomock = "*"
 flask-httpauth = "*"
-ethtx = "==0.1.4"
+ethtx = "==0.1.5"
 
 [dev-packages]
 black = "==19.3b0"
