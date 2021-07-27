@@ -21,9 +21,9 @@ from ethtx_ce import frontend, api
 app = Flask(__name__)
 
 ethtx_config = EthTxConfig(
-    mongo_connection_string=os.getenv("MONGO_CONNECTION_STRING", ""),
-    mongo_database=os.getenv("MONGODB_DB", ""),
-    etherscan_api_key=os.getenv("ETHERSCAN_KEY", ""),
+    mongo_connection_string=os.getenv("MONGO_CONNECTION_STRING"),
+    mongo_database=os.getenv("MONGODB_DB"),
+    etherscan_api_key=os.getenv("ETHERSCAN_KEY"),
     web3nodes={
         "mainnet": os.getenv("MAINNET_NODE_URL", ""),
         "kovan": os.getenv("KOVAN_NODE_URL", ""),

@@ -19,27 +19,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 load_dotenv(find_dotenv(filename="../.env"))
 
 
-class SwaggerConfig:
-    """Swagger ui basic config."""
-
-    SWAGGER_UI_REQUEST_DURATION = True
-    SWAGGER_SUPPORTED_SUBMIT_METHODS = ["get", "post"]
-
-
-class EthConfig:
-    """EthTx useful parameters."""
-
-    NODES_WITH_URLS = {
-        "mainnet": os.getenv("MAINNET_NODE_URL", ""),
-        "kovan": os.getenv("KOVAN_NODE_URL", ""),
-        "ropsten": os.getenv("ROPSTEN_NODE_URL", ""),
-        "optimism": os.getenv("OPTIMISM_NODE_URL", ""),
-    }
-    DEFAULT_CHAIN = "mainnet"
-    ETHERSCAN_KEY = os.getenv("ETHERSCAN_KEY", "")
-
-
-class Config(SwaggerConfig):
+class Config:
     """Base Config."""
 
     LOGGING_CONFIG = os.environ.get(
@@ -52,15 +32,6 @@ class Config(SwaggerConfig):
     SECRET_KEY = os.getenv("SECRET_KEY", secrets.token_hex(16))
     API_KEY = os.getenv("API_KEY", "")
     MAX_CONTENT_LENGTH = 10 * 1024 * 1024
-
-    MONGO_CONNECTION_STRING = os.getenv("MONGO_CONNECTION_STRING", "")
-    MONGODB_DB = os.getenv("MONGODB_DB", "")
-
-    # to be deleted mongo parameters
-    MONGODB_HOST = os.getenv("MONGODB_HOST", "")
-    MONGODB_PORT = int(os.getenv("MONGODB_PORT", 27017))
-    MONGODB_USERNAME = os.getenv("MONGODB_USERNAME", "")
-    MONGODB_PASSWORD = os.getenv("MONGODB_PASSWORD", "")
 
     ETHTX_ADMIN_USERNAME = os.getenv("ETHTX_ADMIN_USERNAME")
     ETHTX_ADMIN_PASSWORD = os.getenv("ETHTX_ADMIN_PASSWORD")
