@@ -140,3 +140,4 @@ dmypy.json
 
 # env
 .env
+.docker_env
