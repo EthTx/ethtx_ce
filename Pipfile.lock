@@ -314,11 +314,11 @@
         },
         "ethtx": {
             "hashes": [
-                "sha256:8356460b2de338fd5e2cc946e032dc7913442326cc1ce5ee4c04cb858f514378",
-                "sha256:ac524932d5a30ca6f47ec61d0ec3ab9b196d2d4b92e770a58bc96d8342aa80d2"
+                "sha256:99bddd2fa6a29608e26400352fe6ee85d8919114336f6f103fe6a5f2648b065c",
+                "sha256:cc658606aafbd6bee47c9b69974446fbfbaa25f8aa87e779ef7115f03b8cd113"
             ],
             "index": "pypi",
-            "version": "==0.1.5"
+            "version": "==0.1.6"
         },
         "filelock": {
             "hashes": [
