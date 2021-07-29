@@ -62,7 +62,9 @@
                 address = $("#address"),
                 network = $("#network"),
                 name = $("#name"),
-                abi = $("#abi");
+                abi = $("#abi"),
+                chash = '{{ metadata.contract.code_hash }}',
+                standard = '{{ metadata.contract.standard | tojson }}';
 
             function checkLength(o, min, max) {
                 return !(o.val().length > max || o.val().length < min);
@@ -85,7 +87,7 @@
                 valid = valid && abi.val().length > 0 && isJsonString(abi.val());
 
                 if (valid) {
-                    const poke = { address: address.val(), network: network.val(), name: name.val(), abi: abi.val() };
+                    const poke = { address: address.val(), network: network.val(), name: name.val(), abi: abi.val(),  chash: chash, standard: standard };
                     $.ajax({
                         url: "/poke",
                         dataType: 'json',
