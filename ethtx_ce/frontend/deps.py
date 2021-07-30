@@ -42,7 +42,7 @@ def read_ethtx_versions() -> None:
     try:
         ethtx_ce_version = _get_version_from_git()
     except Exception:
-        ethtx_ce_version = ""
+        ethtx_ce_version = os.getenv("ETHTX_CE_VERSION", "")
 
     current_app.config["ethtx_version"] = ethtx_version
     current_app.config["repo_version"] = ethtx_ce_version
