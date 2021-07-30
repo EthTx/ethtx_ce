@@ -13,39 +13,43 @@
   -->
 
 <style>
-  .footer-container {
-    font-family: "Hind", sans-serif;
-    max-width: 840px;
-    margin: 0 auto;
-    padding: 40px 0;
-    display: flex;
-    gap: 130px;
-    align-items: flex-start;
-    font-size: 14px;
-  }
-
-  .footer-container a {
-    color: #000;
-    text-decoration: none;
-  }
-
-  .footer-container a:hover {
-    text-decoration: underline;
-  }
-
-  @media screen and (max-width: 568px) {
-    .footer-container {
-      gap: 30px;
+    .footer {
+        margin: auto 0;
     }
-  }
+
+    .footer-container {
+        font-family: "Hind", sans-serif;
+        max-width: 840px;
+        margin: 0 auto;
+        padding: 40px 0;
+        display: flex;
+        gap: 130px;
+        align-items: flex-start;
+        font-size: 14px;
+    }
+
+    .footer-container a {
+        color: #000;
+        text-decoration: none;
+    }
+
+    .footer-container a:hover {
+        text-decoration: underline;
+    }
+
+    @media screen and (max-width: 568px) {
+        .footer-container {
+            gap: 30px;
+        }
+    }
 </style>
 
-<footer>
-  <div class="footer-container">
-      <a href="/terms">Terms of Service</a>
-      <a href="/privacy">Privacy Policy</a>
-      <a href="https://pypi.org/project/EthTx/">PyPi</a>
-      <a href="https://github.com/EthTx/ethtx_ce">GitHub</a>
-      <a href="https://twitter.com/eth_tx">Twitter</a>
-  </div>
+<footer class="footer">
+    <div class="footer-container">
+        <a href="/terms">Terms of Service</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="https://pypi.org/project/EthTx/">PyPi</a>
+        <a href="https://github.com/EthTx/ethtx_ce">GitHub</a>
+        <a href="https://twitter.com/eth_tx">Twitter</a>
+    </div>
 </footer>
