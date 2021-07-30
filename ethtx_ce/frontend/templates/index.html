@@ -131,6 +131,11 @@
             padding-bottom: 0.44rem;
         }
 
+        .version {
+            font-size: 12px;
+            text-align: right;
+        }
+
     </style>
 </head>
 
@@ -170,6 +175,7 @@
             <p>Everybody is invited to contribute to the codebase (<a href="https://github.com/EthTx/ethtx"
                                                                       class="link">GitHub</a>) via Pull Request or
                 Issues and anyone can launch their own instances of EthTx.</p>
+            <p class="version">Version: {{ ethtx_version }}</p>
         </div>
         <div class="panel-container">
             <h2>About this implementation</h2>
@@ -177,6 +183,7 @@
                 (<a href="https://github.com/EthTx/ethtx_ce" class="link">GitHub</a>).</p>
             <p>Use of this implementation is under the <a href="terms" class="link">Terms of Service</a> and <a
                     href="privacy" class="link">Privacy Policy</a></p>
+            <p class="version">Version: <a class="link" href={{ repo_version }}> ethtx_ce</a></p>
         </div>
     </div>
     {% include './partials/footer.html' %}
