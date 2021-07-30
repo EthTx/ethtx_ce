@@ -7,8 +7,13 @@ WORKDIR /app
 ADD . /app
 COPY Pip* /app/
 
-RUN chmod +x scripts/git_version_for_docker.sh
-CMD ["bash", "scripts/git_version_for_docker.sh"]
+
+ARG GIT_URL
+ENV GIT_URL=$GIT_URL
+
+ARG GIT_SHA
+ENV GIT_SHA=$GIT_SHA
+
 
 ARG CI=1
 RUN pip install --upgrade pip && \

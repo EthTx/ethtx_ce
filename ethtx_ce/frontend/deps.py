@@ -11,6 +11,7 @@
 #  limitations under the License.
 
 import os
+from typing import Tuple
 
 import pkg_resources
 from flask import current_app, Blueprint
@@ -29,9 +30,10 @@ def read_ethtx_versions() -> None:
     ethtx_version = pkg_resources.get_distribution("ethtx").version
 
     try:
-        ethtx_ce_version = _get_version_from_git()
+        remote_url, sha = _get_version_from_git()
     except Exception:
-        ethtx_ce_version = os.getenv("ETHTX_CE_VERSION", "")
+        remote_url, sha = _get_version_from_env()
+    ethtx_ce_version = f"{remote_url}/tree/{sha}"
 
     current_app.config["ethtx_version"] = ethtx_version
     current_app.config["repo_version"] = ethtx_ce_version
@@ -46,14 +48,17 @@ def verify_password(username: str, password: str) -> bool:
     )
 
 
-def _get_version_from_git() -> str:
-    """Get EthTx Ce version from .git"""
+def _get_version_from_git() -> Tuple[str, str]:
+    """Get EthTx CE version from .git"""
     root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
     repo = Repo(root, search_parent_directories=True)
 
     remote_url = repo.remote("origin").url.replace(".git", "")
     sha = repo.head.object.hexsha
 
-    url = f"{remote_url}/tree/{sha}"
+    return remote_url, sha
 
-    return url
+
+def _get_version_from_env() -> Tuple[str, str]:
+    """Get EthTx CE version from env."""
+    return os.getenv("GIT_URL", ""), os.getenv("GIT_SHA", "")
