@@ -24,7 +24,7 @@ def search_page() -> render_template:
         render_template(
             "index.html",
             ethtx_version=current_app.config["ethtx_version"],
-            repo_version=current_app.config["repo_version"],
+            ethtx_ce_version=current_app.config["ethtx_ce_version"],
         ),
         200,
     )

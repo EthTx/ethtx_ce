@@ -48,7 +48,7 @@ def read_ethtx_versions(app: Flask) -> None:
     log.info("EthTx version: %s. EthTx CE version: %s", ethtx_version, ethtx_ce_version)
 
     app.config["ethtx_version"] = ethtx_version
-    app.config["repo_version"] = ethtx_ce_version
+    app.config["ethtx_ce_version"] = ethtx_ce_version
 
 
 def _get_version_from_git() -> Tuple[str, str]:

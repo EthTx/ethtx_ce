@@ -139,11 +139,10 @@
     </style>
 </head>
 
-<body onload="hideNullVersions()">
+<body>
 
 <div class="beta-banner">This is a Beta version of the new EthTx Community Edition and may experience instability.<br>
     In case of issues please use the previous deployment at <a href="https://old.ethtx.info">old.ethtx.info</a></div>
-
 <div class="container">
     <div style="display: flex; justify-content: space-between;">
         <div class="main-title">EthTx Transaction Decoder</div>
@@ -175,7 +174,9 @@
             <p>Everybody is invited to contribute to the codebase (<a href="https://github.com/EthTx/ethtx"
                                                                       class="link">GitHub</a>) via Pull Request or
                 Issues and anyone can launch their own instances of EthTx.</p>
-            <p id="ethtx_version" class="version">Version: {{ ethtx_version }}</p>
+            {% if ethtx_version %}
+                <p id="ethtx_version" class="version">Version: {{ ethtx_version }}</p>
+            {%- endif -%}
         </div>
         <div class="panel-container">
             <h2>About this implementation</h2>
@@ -183,7 +184,12 @@
                 (<a href="https://github.com/EthTx/ethtx_ce" class="link">GitHub</a>).</p>
             <p>Use of this implementation is under the <a href="terms" class="link">Terms of Service</a> and <a
                     href="privacy" class="link">Privacy Policy</a></p>
-            <p id="ethtx_ce_version" class="version">Version: <a class="link" href={{ repo_version }}> ethtx_ce</a></p>
+            {% if ethtx_ce_version %}
+                <p id="ethtx_ce_version" class="version">
+                    Version:
+                    <a class="link" href={{ ethtx_ce_version }}> ethtx_ce</a>
+                </p>
+            {%- endif -%}
         </div>
     </div>
     {% include './partials/footer.html' %}
@@ -202,19 +208,6 @@
         document.getElementById('tx_submit').disabled = value.trim() === "";
     }
 
-    function hideNullVersions() {
-        const version = "Version: "
-        const ethtx_content = document.getElementById('ethtx_version').textContent.replace(version, "").trim();
-        const ethtx_ce_content = document.getElementById('ethtx_ce_version').textContent.replace(version, "").trim();
-
-        if (!ethtx_content) {
-            document.getElementById('ethtx_version').style.visibility = "hidden";
-        }
-
-        if (!ethtx_ce_content) {
-            document.getElementById('ethtx_ce_version').style.visibility = "hidden";
-        }
-    }
 </script>
 </body>
 </html>
