@@ -32,7 +32,7 @@ def read_ethtx_versions() -> None:
     try:
         remote_url, sha = _get_version_from_git()
     except Exception:
-        remote_url, sha = _get_version_from_env()
+        remote_url, sha = _get_version_from_docker()
     ethtx_ce_version = f"{remote_url}/tree/{sha}"
 
     current_app.config["ethtx_version"] = ethtx_version
@@ -59,6 +59,13 @@ def _get_version_from_git() -> Tuple[str, str]:
     return remote_url, sha
 
 
-def _get_version_from_env() -> Tuple[str, str]:
-    """Get EthTx CE version from env."""
-    return os.getenv("GIT_URL", ""), os.getenv("GIT_SHA", "")
+def _get_version_from_docker() -> Tuple[str, str]:
+    """Get EthTx CE version from file."""
+    try:
+        with open("/app/get_version") as f:
+            url_sha = f.readline().split(",")
+    except OSError:
+        url_sha = ["", ""]
+
+    if url_sha:
+        return url_sha[0], url_sha[1]

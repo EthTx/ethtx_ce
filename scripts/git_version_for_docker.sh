@@ -1,11 +1,15 @@
-#! /usr/bin/env sh
+#!/bin/bash
 
+# Exit in case of error
 set -e
+
 
 remote_url_git=$(git config --get remote.origin.url)
 remote_url=${remote_url_git::-4}
-
 sha=$(git rev-parse HEAD)
-url="${remote_url}/tree/${sha}"
 
-export ETHTX_CE_VERSION=$url
+# url, sha
+url_sha="${remote_url}, ${sha}"
+
+# return
+echo "$url_sha"
