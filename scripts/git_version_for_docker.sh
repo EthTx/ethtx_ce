@@ -9,7 +9,7 @@ remote_url=${remote_url_git::-4}
 sha=$(git rev-parse HEAD)
 
 # url, sha
-url_sha="${remote_url}, ${sha}"
+url_sha="${remote_url},${sha}"
 
 # return
 echo "$url_sha"
