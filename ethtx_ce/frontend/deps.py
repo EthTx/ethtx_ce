@@ -54,7 +54,7 @@ def verify_password(username: str, password: str) -> bool:
 def _get_version_from_git() -> Tuple[str, str]:
     """Get EthTx CE version from .git"""
     root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-    repo = Repo(root, search_parent_directories=True)
+    repo = Repo(root)
 
     remote_url = repo.remote("origin").url.replace(".git", "")
     sha = repo.head.object.hexsha
