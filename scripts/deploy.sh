@@ -1,4 +1,4 @@
-#! /usr/bin/env sh
+#!/bin/bash
 
 # Exit in case of error
 # make sure that you are in `scripts` dir
