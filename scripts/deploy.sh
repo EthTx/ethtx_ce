@@ -9,4 +9,6 @@ chmod +x ./git_version_for_docker.sh
 
 cd ..
 
-make run-prod
+make build-image
+make run-database
+makre run-docker
