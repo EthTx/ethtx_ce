@@ -11,4 +11,4 @@ cd ..
 
 make build-image
 make run-database
-makre run-docker
+make run-docker
