@@ -1,6 +1,7 @@
 #! /usr/bin/env sh
 
 # Exit in case of error
+# make sure that you are in `scripts` dir
 set -e
 
 dest_dir=../tmp/git_version
