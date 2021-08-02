@@ -26,22 +26,6 @@ log = logging.getLogger(__name__)
 auth = HTTPBasicAuth()
 
 
-def read_ethtx_versions(app: Flask) -> None:
-    """Read ethtx and ethtx_ce versions."""
-    ethtx_version = pkg_resources.get_distribution("ethtx").version
-
-    try:
-        remote_url, sha = _get_version_from_git()
-    except Exception:
-        remote_url, sha = _get_version_from_docker()
-    ethtx_ce_version = f"{remote_url}/tree/{sha}"
-
-    log.info("EthTx version: %s. EthTx CE version: %s", ethtx_version, ethtx_ce_version)
-
-    app.config["ethtx_version"] = ethtx_version
-    app.config["repo_version"] = ethtx_ce_version
-
-
 @auth.verify_password
 def verify_password(username: str, password: str) -> bool:
     """Verify user, return bool."""
@@ -51,12 +35,28 @@ def verify_password(username: str, password: str) -> bool:
     )
 
 
+def read_ethtx_versions(app: Flask) -> None:
+    """Read ethtx and ethtx_ce versions."""
+    ethtx_version = pkg_resources.get_distribution("ethtx").version
+
+    try:
+        remote_url, sha = _get_version_from_git()
+    except Exception:
+        remote_url, sha = _get_version_from_docker()
+    ethtx_ce_version = _clean_up_git_link(f"{remote_url}/tree/{sha}")
+
+    log.info("EthTx version: %s. EthTx CE version: %s", ethtx_version, ethtx_ce_version)
+
+    app.config["ethtx_version"] = ethtx_version
+    app.config["repo_version"] = ethtx_ce_version
+
+
 def _get_version_from_git() -> Tuple[str, str]:
     """Get EthTx CE version from .git"""
     root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
     repo = Repo(root)
 
-    remote_url = repo.remote("origin").url.replace(".git", "")
+    remote_url = repo.remote("origin").url
     sha = repo.head.object.hexsha
 
     return remote_url, sha
@@ -74,3 +74,14 @@ def _get_version_from_docker(
 
     if url_sha:
         return url_sha[0], url_sha[1]
+
+
+def _clean_up_git_link(git_link: str) -> str:
+    """Clean up git link, delete .git extension, make https url."""
+    if "@" in git_link:
+        git_link = git_link.replace("git@github.com:", "https://github.com/")
+
+    if ".git" in git_link:
+        git_link = git_link.replace(".git", "")
+
+    return git_link
