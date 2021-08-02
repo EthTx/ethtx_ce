@@ -62,7 +62,7 @@ def _get_version_from_git() -> Tuple[str, str]:
 def _get_version_from_docker() -> Tuple[str, str]:
     """Get EthTx CE version from file."""
     try:
-        with open("/home/karol/projects/ethtx_ce_forked/tmp/git_version") as f:
+        with open("/app/git_version") as f:
             url_sha = f.readline().strip().split(",")
     except OSError:
         url_sha = ["", ""]
