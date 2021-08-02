@@ -15,20 +15,18 @@ import os
 from typing import Tuple, Optional
 
 import pkg_resources
-from flask import current_app, Blueprint
+from flask import Flask
 from flask_httpauth import HTTPBasicAuth
 from git import Repo
 
 from ethtx_ce.config import Config
 
 log = logging.getLogger(__name__)
-bp = Blueprint("deps", __name__)
 
 auth = HTTPBasicAuth()
 
 
-@bp.before_app_first_request
-def read_ethtx_versions() -> None:
+def read_ethtx_versions(app: Flask) -> None:
     """Read ethtx and ethtx_ce versions."""
     ethtx_version = pkg_resources.get_distribution("ethtx").version
 
@@ -40,8 +38,8 @@ def read_ethtx_versions() -> None:
 
     log.info("EthTx version: %s. EthTx CE version: %s", ethtx_version, ethtx_ce_version)
 
-    current_app.config["ethtx_version"] = ethtx_version
-    current_app.config["repo_version"] = ethtx_ce_version
+    app.config["ethtx_version"] = ethtx_version
+    app.config["repo_version"] = ethtx_ce_version
 
 
 @auth.verify_password

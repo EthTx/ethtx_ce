@@ -16,7 +16,8 @@ from typing import Callable, Dict, Optional, Union, Type
 from ethtx import EthTx
 from flask import Blueprint, Flask
 
-from ethtx_ce import factory
+from .deps import read_ethtx_versions
+from .. import factory
 
 
 def create_app(
@@ -35,6 +36,7 @@ def create_app(
     app.jinja_env.lstrip_blocks = True
 
     app.ethtx = engine  # init ethtx engine
+    read_ethtx_versions(app)
 
     return app
 
