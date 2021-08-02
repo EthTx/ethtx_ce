@@ -10,6 +10,7 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
+import logging
 import os
 from typing import Tuple
 
@@ -20,7 +21,9 @@ from git import Repo
 
 from ethtx_ce.config import Config
 
+log = logging.getLogger(__name__)
 bp = Blueprint("deps", __name__)
+
 auth = HTTPBasicAuth()
 
 
@@ -34,6 +37,8 @@ def read_ethtx_versions() -> None:
     except Exception:
         remote_url, sha = _get_version_from_docker()
     ethtx_ce_version = f"{remote_url}/tree/{sha}"
+
+    log.info("EthTx version: %s. EthTx CE version: %s", ethtx_version, ethtx_ce_version)
 
     current_app.config["ethtx_version"] = ethtx_version
     current_app.config["repo_version"] = ethtx_ce_version
