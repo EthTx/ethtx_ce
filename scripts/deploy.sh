@@ -4,9 +4,16 @@
 # make sure that you are in `scripts` dir
 set -e
 
-dest_dir=../tmp/git_version
+path=../tmp
+file=git_version
+dest_dir="${path}/${file}"
+if [ ! -d $path ] ; then
+  mkdir $path
+  echo "${path} path created."
+fi
+
 chmod +x ./git_version_for_docker.sh
-./git_version_for_docker.sh > "$dest_dir"
+./git_version_for_docker.sh > $dest_dir
 
 cd ..
 
