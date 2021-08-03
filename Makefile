@@ -6,8 +6,7 @@ help:
 build-image:  ## Build all docker images
 	docker build -t ethtx_ce .
 
-get-git-version: ## Get git version and save it to file
-	chmod +x ./scripts/git_version_for_docker.sh
+get-git-version: ## Get git version
 	./scripts/git_version_for_docker.sh
 
 run-database:  ## Run only a local database required for local development
