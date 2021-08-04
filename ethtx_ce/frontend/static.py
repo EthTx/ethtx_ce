@@ -10,7 +10,7 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-from flask import render_template, Blueprint
+from flask import render_template, Blueprint, current_app
 
 from . import frontend_route
 
@@ -20,7 +20,14 @@ bp = Blueprint("static", __name__)
 @frontend_route(bp, "/")
 def search_page() -> render_template:
     """Render search page - index."""
-    return render_template("index.html"), 200
+    return (
+        render_template(
+            "index.html",
+            ethtx_version=current_app.config["ethtx_version"],
+            ethtx_ce_version=current_app.config["ethtx_ce_version"],
+        ),
+        200,
+    )
 
 
 @frontend_route(bp, "/terms")
