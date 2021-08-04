@@ -8,4 +8,3 @@
 docker-compose.yaml
 #tests/
 local-database-seed/
-tmp/
