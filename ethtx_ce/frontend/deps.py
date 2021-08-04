@@ -62,17 +62,9 @@ def _get_version_from_git() -> Tuple[str, str]:
     return remote_url, sha
 
 
-def _get_version_from_docker(
-    path: Optional[str] = "/app/git_version"
-) -> Tuple[str, str]:
-    """Get EthTx CE version from file."""
-    if path and os.path.isfile(path):
-        with open(path) as f:
-            url_sha = f.readline().strip().split(",")
-    else:
-        url_sha = ["", ""]
-
-    return url_sha[0], url_sha[1]
+def _get_version_from_docker() -> Tuple[str, str]:
+    """Get EthTx CE version from env."""
+    return os.getenv("GIT_URL", ""), os.getenv("GIT_SHA", "")
 
 
 def _clean_up_git_link(git_link: str) -> str:

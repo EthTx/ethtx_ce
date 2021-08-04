@@ -61,12 +61,12 @@ jobs:
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
-        mkdir -p tmp
-        make get-git-version > tmp/git_version
         echo "-----------------------"
         echo "Build step 1/3: Building docker image"
         echo "-----------------------"
-        docker build -t $ECR_REGISTRY/$ECR_REPO_NAME:$SHA_TAG \
+        docker build --build-arg GIT_SHA=$SHA_TAG
+                     --build-arg GIT_URL=$(git config --get remote.origin.url)
+                     -t $ECR_REGISTRY/$ECR_REPO_NAME:$SHA_TAG \
                      -t $ECR_REGISTRY/$ECR_REPO_NAME:$LATEST_TAG \
                      -t $ECR_REGISTRY/$ECR_REPO_NAME:$ENVIRONMENT_TAG \
                      .
