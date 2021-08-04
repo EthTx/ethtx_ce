@@ -6,18 +6,27 @@
     {% include './partials/headtags.html' %}
     <title>EthDecoder</title>
     <style>
-        html, body {
+        html {
+            height: 100vh;
+        }
+
+        body {
             font-family: "Hind", sans-serif;
             font-size: 16px;
             background-color: var(--background);
             margin: 0;
             padding: 0;
-            height: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         .container {
             max-width: 840px;
             margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
 
         .main-title {
@@ -112,6 +121,13 @@
                 font-size: 16px;
             }
         }
+
+
+        .version {
+            font-size: 12px;
+            text-align: right;
+        }
+
     </style>
 </head>
 
@@ -148,6 +164,9 @@
             <p>Everybody is invited to contribute to the codebase (<a href="https://github.com/EthTx/ethtx"
                                                                       class="link">GitHub</a>) via Pull Request or
                 Issues and anyone can launch their own instances of EthTx.</p>
+            {% if ethtx_version %}
+                <p id="ethtx_version" class="version">Version: {{ ethtx_version }}</p>
+            {%- endif -%}
         </div>
         <div class="panel-container">
             <h2>About this implementation</h2>
@@ -155,11 +174,18 @@
                 (<a href="https://github.com/EthTx/ethtx_ce" class="link">GitHub</a>).</p>
             <p>Use of this implementation is under the <a href="terms" class="link">Terms of Service</a> and <a
                     href="privacy" class="link">Privacy Policy</a></p>
+            {% if ethtx_ce_version %}
+                <p id="ethtx_ce_version" class="version">
+                    Version:
+                    <a class="link" href={{ ethtx_ce_version }}> ethtx_ce</a>
+                </p>
+            {%- endif -%}
         </div>
     </div>
+    {% include './partials/footer.html' %}
 </div>
-{% include './partials/footer.html' %}
-<script>
+
+<script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function () {
         function trackDecode() {
             // fathom.trackGoal('PR1BHWAQ')
@@ -167,11 +193,11 @@
 
         document.getElementById('tx_submit').addEventListener('click', trackDecode)
     });
-</script>
-<script type="text/javascript">
+
     function handleValueChange(value) {
         document.getElementById('tx_submit').disabled = value.trim() === "";
     }
+
 </script>
 </body>
 </html>
