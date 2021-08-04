@@ -7,7 +7,11 @@ WORKDIR /app
 ADD . /app
 COPY Pip* /app/
 
-COPY tmp/git_version /app/git_version
+ARG GIT_URL
+ENV GIT_URL=$GIT_URL
+
+ARG GIT_SHA
+ENV GIT_SHA=$GIT_SHA
 
 ARG CI=1
 RUN pip install --upgrade pip && \
