@@ -72,8 +72,7 @@ def _get_version_from_docker(
     else:
         url_sha = ["", ""]
 
-    if url_sha:
-        return url_sha[0], url_sha[1]
+    return url_sha[0], url_sha[1]
 
 
 def _clean_up_git_link(git_link: str) -> str:
