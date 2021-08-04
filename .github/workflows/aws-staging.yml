@@ -48,8 +48,6 @@ jobs:
       id: vars
       shell: bash
       run: |
-        [ -d tmp ] || mkdir tmp
-        make get-git-version > tmp/git_version
         echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
     - name: Build, tag, test and push image to Amazon ECR
@@ -63,7 +61,8 @@ jobs:
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
-
+        mkdir -p tmp
+        make get-git-version > tmp/git_version
         echo "-----------------------"
         echo "Build step 1/3: Building docker image"
         echo "-----------------------"
