@@ -41,7 +41,8 @@ def read_ethtx_versions(app: Flask) -> None:
 
     try:
         remote_url, sha = _get_version_from_git()
-    except Exception:
+    except Exception as e:
+        print(e)
         remote_url, sha = _get_version_from_docker()
     ethtx_ce_version = _clean_up_git_link(f"{remote_url}/tree/{sha}")
 
@@ -53,8 +54,7 @@ def read_ethtx_versions(app: Flask) -> None:
 
 def _get_version_from_git() -> Tuple[str, str]:
     """Get EthTx CE version from .git"""
-    root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-    repo = Repo(root)
+    repo = Repo(__file__, search_parent_directories=True)
 
     remote_url = repo.remote("origin").url
     sha = repo.head.object.hexsha
