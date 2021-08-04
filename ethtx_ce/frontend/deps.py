@@ -41,10 +41,10 @@ def read_ethtx_versions(app: Flask) -> None:
 
     try:
         remote_url, sha = _get_version_from_git()
-    except Exception as e:
-        print(e)
+    except Exception:
         remote_url, sha = _get_version_from_docker()
-    ethtx_ce_version = _clean_up_git_link(f"{remote_url}/tree/{sha}")
+
+    ethtx_ce_version = f"{_clean_up_git_link(remote_url)}/tree/{sha}"
 
     log.info("EthTx version: %s. EthTx CE version: %s", ethtx_version, ethtx_ce_version)
 
@@ -79,9 +79,9 @@ def _get_version_from_docker(
 def _clean_up_git_link(git_link: str) -> str:
     """Clean up git link, delete .git extension, make https url."""
     if "@" in git_link:
-        git_link = git_link.replace("git@github.com:", "https://github.com/")
+        git_link.replace(":", "/").replace("git@", "https://")
 
-    if ".git" in git_link:
-        git_link = git_link.replace(".git", "")
+    if git_link.endswith(".git"):
+        git_link = f"{git_link[:-4]}"
 
     return git_link

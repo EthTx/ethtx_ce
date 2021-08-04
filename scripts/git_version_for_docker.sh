@@ -4,8 +4,7 @@
 # Exit in case of error
 set -e
 
-remote_url_git=$(git config --get remote.origin.url)
-remote_url=${remote_url_git::-4}
+remote_url=$(git config --get remote.origin.url)
 sha=$(git rev-parse HEAD)
 
 # url, sha
