@@ -7,7 +7,7 @@ WORKDIR /app
 ADD . /app
 COPY Pip* /app/
 
-COPY /tmp/git_version /app/git_version
+COPY tmp/git_version /app/git_version
 
 ARG CI=1
 RUN pip install --upgrade pip && \
