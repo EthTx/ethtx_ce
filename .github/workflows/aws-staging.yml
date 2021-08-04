@@ -49,8 +49,8 @@ jobs:
       shell: bash
       run: |
         [-d tmp] || mkdir tmp
+        make get-git-version > tmp/git_version
         echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
-        git rev-parse --short HEAD > tmp/git_version
 
     - name: Build, tag, test and push image to Amazon ECR
       id: build-image
