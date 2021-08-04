@@ -57,9 +57,10 @@ def _get_version_from_git() -> Tuple[str, str]:
     repo = Repo(__file__, search_parent_directories=True)
 
     remote_url = repo.remote("origin").url
-    sha = repo.head.object.hexsha
+    sha = repo.head.commit.hexsha
+    short_sha = repo.git.rev_parse(sha, short=7)
 
-    return remote_url, sha
+    return remote_url, short_sha
 
 
 def _get_version_from_docker() -> Tuple[str, str]:
