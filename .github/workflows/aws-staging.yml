@@ -48,7 +48,7 @@ jobs:
       id: vars
       shell: bash
       run: |
-        [-d tmp] || mkdir tmp
+        [ -d tmp ] || mkdir tmp
         make get-git-version > tmp/git_version
         echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
