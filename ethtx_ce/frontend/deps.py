@@ -81,6 +81,6 @@ def _clean_up_git_link(git_link: str) -> str:
         git_link.replace(":", "/").replace("git@", "https://")
 
     if git_link.endswith(".git"):
-        git_link = f"{git_link[:-4]}"
+        git_link = git_link[:-4]
 
     return git_link
