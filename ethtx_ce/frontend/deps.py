@@ -58,7 +58,7 @@ def _get_version_from_git() -> Tuple[str, str]:
 
     remote_url = repo.remote("origin").url
     sha = repo.head.commit.hexsha
-    short_sha = repo.git.rev_parse(sha, short=7)
+    short_sha = repo.git.rev_parse(sha, short=True)
 
     return remote_url, short_sha
 
