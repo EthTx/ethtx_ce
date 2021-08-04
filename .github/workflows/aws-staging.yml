@@ -61,7 +61,7 @@ jobs:
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
-        mkdir tmp
+        [-d tmp] || mkdir tmp
         echo $SHA_TAG > tmp/git_version
 
         echo "-----------------------"
