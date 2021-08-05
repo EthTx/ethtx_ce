@@ -165,7 +165,10 @@
                                                                       class="link">GitHub</a>) via Pull Request or
                 Issues and anyone can launch their own instances of EthTx.</p>
             {% if ethtx_version %}
-                <p id="ethtx_version" class="version">Version: {{ ethtx_version }}</p>
+                <p id="ethtx_version" class="version">
+                    Version:
+                    <a class="link" href=https://pypi.org/project/EthTx/{{ ethtx_version }}/>{{ ethtx_version }}</a>
+                </p>
             {%- endif -%}
         </div>
         <div class="panel-container">
