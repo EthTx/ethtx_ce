@@ -170,7 +170,10 @@
                     {% endif %}
                 </div>
                 <div>
-                    Tx cost: <span style='color: darkred'>{{ (transaction.gas_used * transaction.gas_price / 10 ** 9) }}</span> ETH {% if transaction.eth_price %}/ <span style='color: darkred'>{{ "{:,.2f}".format(transaction.gas_used * transaction.gas_price * transaction.eth_price / 10 ** 9) }}{% endif %}</span> USD
+                    Tx cost: <span style='color: darkred'>{{ (transaction.gas_used * transaction.gas_price / 10 ** 9) }}</span> ETH
+                    {% if transaction.chain_id == 'mainnet' and transaction.eth_price %}
+                        / <span style='color: darkred'>{{ "{:,.2f}".format(transaction.gas_used * transaction.gas_price * transaction.eth_price / 10 ** 9) }}</span> USD
+                    {% endif %}
                 </div>
                 <div>
                     Gas used: <span style='color: darkred'>{{ "{:,}".format(transaction.gas_used) }}</span> / <span style='color: darkred'>{{ "{:,.2f}".format(transaction.gas_price ) }}</span> Gwei

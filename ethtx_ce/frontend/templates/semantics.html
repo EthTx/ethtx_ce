@@ -146,7 +146,7 @@
 
 <body>
 
-<h3>Semantics for: {{address}}</h3>
+<h3>Semantics for: {{address}} / {{ metadata.chain }}</h3>
 <div id="metadataJSONeditor" style="float: left; width: 55%; height: 320px; margin: 5px;"></div>
 <div id="transformationsJSONeditor" style="float: left; width: 43%; height: 320px; margin: 5px;"></div>
 <div id="eventsJSONeditor" style="float: left; width: 55%; height: 320px; margin: 5px;"></div>
@@ -164,8 +164,9 @@
             <input type="text" name="address" id="address" class="text ui-widget-content ui-corner-all"
                    value="{{ address }}">
             <label for="network">Network</label>
-            <select name="network" id="network" selected="{{ network }}">
-                <option value="mainnet">Main Net</option>
+            <select name="network" id="network">
+                <option {% if metadata.chain == 'mainnet' %} selected {% endif %} value="mainnet">ETH mainnet</option>
+                <option {% if metadata.chain == 'goerli' %} selected {% endif %} value="goerli">Goerli testnet</option>
             </select>
             <label for="name">Contract name</label>
             <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all">
