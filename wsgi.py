@@ -25,15 +25,13 @@ ethtx_config = EthTxConfig(
     mongo_database=os.getenv("MONGODB_DB"),
     etherscan_api_key=os.getenv("ETHERSCAN_KEY"),
     web3nodes={
-        "mainnet": os.getenv("MAINNET_NODE_URL", ""),
-        "kovan": os.getenv("KOVAN_NODE_URL", ""),
-        "ropsten": os.getenv("ROPSTEN_NODE_URL", ""),
+        "mainnet": dict(hook=os.getenv("MAINNET_NODE_URL", ""), poa=False),
+        "goerli": dict(hook=os.getenv("GOERLI_NODE_URL", ""), poa=True),
     },
     default_chain="mainnet",
     etherscan_urls={
         "mainnet": "https://api.etherscan.io/api",
-        "kovan": "https://api-kovan.etherscan.io/api",
-        "ropsten": "https://api-ropsten.etherscan.io/api",
+        "goerli": "https://api-goerli.etherscan.io/api",
     },
 )
 
