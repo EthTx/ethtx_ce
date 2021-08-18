@@ -11,8 +11,10 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
+<link rel="preload stylesheet" type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <style>
+
     .footer {
         margin: auto 0;
     }
@@ -31,10 +33,26 @@
     .footer-container a {
         color: #000;
         text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
     }
 
     .footer-container a:hover {
-        text-decoration: underline;
+        color: var(--link);
+        text-decoration: none;
+    }
+
+    .footer-container i {
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding-bottom: 5px;
+        font-size: 1.2em;
+        text-decoration: none;
     }
 
     @media screen and (max-width: 568px) {
@@ -46,10 +64,10 @@
 
 <footer class="footer">
     <div class="footer-container">
-        <a href="/terms">Terms of Service</a>
-        <a href="/privacy">Privacy Policy</a>
-        <a href="https://pypi.org/project/EthTx/">PyPi</a>
-        <a href="https://github.com/EthTx/ethtx_ce">GitHub</a>
-        <a href="https://twitter.com/eth_tx">Twitter</a>
+        <a href="/terms"><i class="far fa-file-alt"></i> Terms of Service</a>
+        <a href="/privacy"><i class="fas fa-shield-alt"></i> Privacy Policy</a>
+        <a href="https://pypi.org/project/EthTx/"><i class="fab fa-python"></i> PyPi</a>
+        <a href="https://github.com/EthTx/ethtx_ce"> <i class="fab fa-github"></i> GitHub</a>
+        <a href="https://twitter.com/eth_tx"><i class="fas fa-hashtag"></i> Twitter</a>
     </div>
 </footer>
