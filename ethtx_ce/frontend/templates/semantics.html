@@ -167,6 +167,7 @@
             <select name="network" id="network">
                 <option {% if metadata.chain == 'mainnet' %} selected {% endif %} value="mainnet">ETH mainnet</option>
                 <option {% if metadata.chain == 'goerli' %} selected {% endif %} value="goerli">Goerli testnet</option>
+                <option {% if metadata.chain == 'rinkeby' %} selected {% endif %} value="rinkeby">Rinkeby testnet</option>
             </select>
             <label for="name">Contract name</label>
             <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all">
