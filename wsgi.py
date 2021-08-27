@@ -25,15 +25,19 @@ ethtx_config = EthTxConfig(
     mongo_database=os.getenv("MONGODB_DB"),
     etherscan_api_key=os.getenv("ETHERSCAN_KEY"),
     web3nodes={
-        "mainnet": dict(hook=os.getenv("MAINNET_NODE_URL", ""), poa=False),
-        "goerli": dict(hook=os.getenv("GOERLI_NODE_URL", ""), poa=True),
-        "rinkeby": dict(hook=os.getenv("RINKEBY_NODE_URL", ""), poa=True),
+        "mainnet": dict(hook=os.getenv("MAINNET_NODE_URL"), poa=False),
+        "goerli": dict(hook=os.getenv("GOERLI_NODE_URL"), poa=True),
+        "rinkeby": dict(hook=os.getenv("RINKEBY_NODE_URL"), poa=True),
+        "bsc": dict(hook=os.getenv("BSC_NODE_URL"), poa=True),
+        "polygon": dict(hook=os.getenv("POLYGON_NODE_URL"), poa=True),
     },
     default_chain="mainnet",
     etherscan_urls={
         "mainnet": "https://api.etherscan.io/api",
         "goerli": "https://api-goerli.etherscan.io/api",
         "rinkeby": "https://api-rinkeby.etherscan.io/api",
+        "bsc": "https://api.bscscan.com/api?apikey=",
+        "polygon": "https://api.polygonscan.com/api?apikey=",
     },
 )
 
@@ -44,5 +48,7 @@ app.wsgi_app = DispatcherMiddleware(
     {"/api": api.create_app(engine=ethtx, settings_override=EthTxConfig)},
 )
 
+
 if __name__ == "__main__":
+
     app.run()

@@ -28,7 +28,17 @@ class Config:
     LOGGING_LOG_PATH = os.environ.get(
         "LOGGING_CONFIG", os.path.join(BASE_DIR, "../tmp")
     )
-
+    CHAINID_NATIVECOIN = {
+        "bsc": "BNB",
+        "polygon": "MATIC"
+    }
+    CHAINID_EXPLORERURL = {
+        "mainnet": "https://etherscan.io",
+        "goerli": "https://goerli.etherscan.io",
+        "rinkeby": "https://rinkeby.etherscan.io",
+        "bsc": "https://bscscan.com",
+        "polygon": "https://polygonscan.com",
+    }
     SECRET_KEY = os.getenv("SECRET_KEY", secrets.token_hex(16))
     API_KEY = os.getenv("API_KEY", "")
     MAX_CONTENT_LENGTH = 10 * 1024 * 1024

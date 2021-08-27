@@ -140,8 +140,5 @@ dmypy.json
 .vscode
 
 
-# env
-.env
-.docker_env
-
+# tmp folder
 tmp/

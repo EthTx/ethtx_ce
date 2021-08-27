@@ -1,6 +1,9 @@
 <h1 align='center' style="border-bottom: none">
   EthTx Community Edition
 </h1>
+<h3 align='center' style="border-bottom: none">
+  Supports BSC and Polygon
+</h3>
 <br/>
 <p align="center">
     <em>Community version of EthTx transaction decoder</em>
@@ -27,8 +30,7 @@
 For local instance, you need few things:
 
 0. Depending on your distribution, install: docker, docker-compose, python3-pip, pipenv
-1. mongoDB - to set it up for the first time, execute this command: `make populate-db`. This will init db with seed
-   provided in repository. After this, if mongo is not running you can raise it with `make run-database`
+1. mongoDB - to set it up for the first time, execute this command: `make run-database`
 2. pipenv - to create virtual env run command `pipenv install`, this should create venv for this project with all python
    dependencies.
 
@@ -39,13 +41,20 @@ To run flask server localy, use `make run-local` command, this will setup new se
 # .env file
 
 For proper functioning, `.env` file is required containing all database and 3rd party providers configuration.
-`.env.sample` file is provided in repository with default values and should be good to use if nothing else was changed.
+`.env` file is provided in repository with default values and should be good to use if nothing else was changed.
 
 Parameters `[CHAIN_ID]_NODE_URL` should hold valid urls to ethereum nodes; Parameter `ETHERSCAN_KEY` should be equal to
 Etherscan API key assigned to user.
 
-For docker container, values should be placed in `.env_docker` file since urls for database are differrent than normal
-instance
+Fill in the values in the `.env` file and leave `ETHERSCAN_KEY`/`MAINNET_NODE_URL`/`GOERLI_NODE_URL`/`RINKEBY_NODE_URL` empty if you do not need to support the ethereum main and test networks.
+
+`BSC_NODE_URL` and `POLYGON_NODE_URL` value fill in the `apikey url` of the `getblock.io` , example: `https://bsc.getblock.io/mainnet/?api_key=xxx`
+
+# .docker_env file
+The content of file `.docker_env` is the same as that of file `.env`, but file `.docker_env` is used for docker container, so the `MONGO_CONNECTION_STRING` value may need to be modified, and can not be connected to `127.0.0.1`, but to the internal IP of MongoDB
+
+# wsgi.py file
+Modify the key/value pairs in the `etherscan_urls` dict, apply the `APIKey` in `bscscan.com` and `Polygonscan.com` respectively, then concatenate the `APIKey` into the `API URL`, then fill the full URL into the `BSC key` and `Polygon key`
 
 # API
 
