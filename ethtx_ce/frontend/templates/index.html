@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-
     {% include './partials/headtags.html' %}
+
     <title>EthDecoder</title>
     <style>
         html {
@@ -167,10 +167,10 @@
                                                                       class="link">GitHub</a>) via Pull Request or
                 Issues and anyone can launch their own instances of EthTx.</p>
             {% if ethtx_version %}
-                <p id="ethtx_version" class="version">
-                    Version:
-                    <a class="link" href=https://pypi.org/project/EthTx/{{ ethtx_version }}/>{{ ethtx_version }}</a>
-                </p>
+            <p id="ethtx_version" class="version">
+                Version:
+                <a class="link" href=https://pypi.org/project/EthTx/{{ ethtx_version }}/>{{ ethtx_version }}</a>
+            </p>
             {%- endif -%}
         </div>
         <div class="panel-container">
@@ -180,10 +180,10 @@
             <p>Use of this implementation is under the <a href="terms" class="link">Terms of Service</a> and <a
                     href="privacy" class="link">Privacy Policy</a></p>
             {% if ethtx_ce_version %}
-                <p id="ethtx_ce_version" class="version">
-                    Version:
-                    <a class="link" href={{ ethtx_ce_version }}> ethtx_ce</a>
-                </p>
+            <p id="ethtx_ce_version" class="version">
+                Version:
+                <a class="link" href={{ ethtx_ce_version }}> ethtx_ce</a>
+            </p>
             {%- endif -%}
         </div>
     </div>
