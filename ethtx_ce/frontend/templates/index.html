@@ -59,7 +59,8 @@
             cursor: pointer;
             border: none;
             line-height: 1.65;
-            margin: 0
+            margin: 0;
+            word-wrap: break-word;
         }
 
         .panels {
@@ -154,7 +155,9 @@
                    onchange="handleValueChange(this.value)">
         </div>
         <div>
-            <input id="tx_submit" type="submit" value="Decode now" disabled="disabled">
+            <input onclick="handleSubmit()" id="tx_submit" type="submit"
+                   value="Decode now"
+                   disabled="disabled">
         </div>
     </form>
     <div class="panels">
@@ -198,6 +201,11 @@
 
         document.getElementById('tx_submit').addEventListener('click', trackDecode)
     });
+
+    function handleSubmit() {
+        document.getElementById('tx_submit').value = "Decoding, please wait"
+
+    }
 
     function handleValueChange(value) {
         document.getElementById('tx_submit').disabled = value.trim() === "";
