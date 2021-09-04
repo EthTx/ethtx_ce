@@ -103,8 +103,11 @@
             background: url(/static/images/chevron_down.png) no-repeat right 13px center;
         }
 
-        #tx_submit:hover {
+        .tx-submit {
+            margin-top: 0.625rem;
+        }
 
+        #tx_submit:hover {
         }
 
         .link {
@@ -133,6 +136,7 @@
             color: #cc0000;
             font-size: 12px;
             margin-top: 5px;
+            position: absolute;
         }
 
     </style>
@@ -158,7 +162,7 @@
                    onchange="handleValueChange(this.value)">
             <div class="errorMsg" id="error_hash"></div>
         </div>
-        <div>
+        <div class="tx-submit">
             <input id="tx_submit" type="submit" value="Decode now" disabled="disabled">
         </div>
     </form>
