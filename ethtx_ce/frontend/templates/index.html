@@ -107,7 +107,8 @@
             margin-top: 0.625rem;
         }
 
-        #tx_submit:hover {
+        .tx-submit input {
+            width: 14.375rem;
         }
 
         .link {
@@ -132,7 +133,7 @@
             text-align: right;
         }
 
-        .errorMsg {
+        .error-msg {
             color: #cc0000;
             font-size: 12px;
             margin-top: 5px;
@@ -160,7 +161,7 @@
             <input class="input" size="66" type="text" id="tx"
                    oninput="handleValueChange(this.value)"
                    onchange="handleValueChange(this.value)">
-            <div class="errorMsg" id="error_hash"></div>
+            <div class="error-msg" id="error_hash"></div>
         </div>
         <div class="tx-submit">
             <input id="tx_submit" type="submit" value="Decode now" disabled="disabled">
@@ -214,7 +215,7 @@
             printError("error_hash", "Please, provide the correct transaction hash.")
             return false;
         } else {
-            document.getElementById('tx_submit').value = "Decoding, please wait"
+            document.getElementById('tx_submit').value = "Decoding..."
             e.action = '/' + e.net.options[e.net.selectedIndex].value + '/' + e.tx.value;
         }
     }
