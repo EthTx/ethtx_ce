@@ -204,7 +204,7 @@
             // fathom.trackGoal('PR1BHWAQ')
         }
 
-        document.getElementById('tx_submit').addEventListener('click', trackDecode)
+        document.getElementById("tx_submit").addEventListener("click", trackDecode)
     });
 
     function onSubmit(e) {
@@ -213,13 +213,14 @@
             printError("error_hash", "Please, provide the correct transaction hash.")
             return false;
         } else {
-            document.getElementById('tx_submit').value = "Decoding..."
+            document.getElementById("tx_submit").value = "Decoding..."
             e.action = '/' + e.net.options[e.net.selectedIndex].value + '/' + e.tx.value;
         }
     }
 
     function handleValueChange(value) {
-        document.getElementById('tx_submit').disabled = value.trim() === "";
+        document.getElementById("tx_submit").disabled = value.trim() === "";
+        hideError("error_hash")
     }
 
     function checkTxHash(tx) {
@@ -229,6 +230,13 @@
 
     function printError(elemId, hintMsg) {
         document.getElementById(elemId).innerHTML = hintMsg;
+    }
+
+    function hideError(elemId) {
+        const element = document.getElementById(elemId);
+        if (element) {
+            element.innerHTML = "";
+        }
     }
 
 </script>
