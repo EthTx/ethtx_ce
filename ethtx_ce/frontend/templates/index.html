@@ -129,17 +129,20 @@
             text-align: right;
         }
 
+        .errorMsg {
+            color: #cc0000;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
     </style>
 </head>
 
 <body>
 
 <div class="container">
-    <div style="display: flex; justify-content: space-between;">
-        <div class="main-title">EthTx Transaction Decoder</div>
-    </div>
-    <form action="/" method="GET"
-          onsubmit="this.action = '/' + this.net.options[this.net.selectedIndex].value + '/' + this.tx.value;">
+    <div class="main-title">EthTx Transaction Decoder</div>
+    <form action="/" method="GET" onsubmit="return onSubmit(this)">
         <div>
             <label for="net">Network</label>
             <select class="input select" id="net">
@@ -153,11 +156,10 @@
             <input class="input" size="66" type="text" id="tx"
                    oninput="handleValueChange(this.value)"
                    onchange="handleValueChange(this.value)">
+            <div class="errorMsg" id="error_hash"></div>
         </div>
         <div>
-            <input onclick="handleSubmit()" id="tx_submit" type="submit"
-                   value="Decode now"
-                   disabled="disabled">
+            <input id="tx_submit" type="submit" value="Decode now" disabled="disabled">
         </div>
     </form>
     <div class="panels">
@@ -202,13 +204,28 @@
         document.getElementById('tx_submit').addEventListener('click', trackDecode)
     });
 
-    function handleSubmit() {
-        document.getElementById('tx_submit').value = "Decoding, please wait"
-
+    function onSubmit(e) {
+        const tx = document.getElementById(`tx`).value;
+        if (checkTxHash(tx) === false) {
+            printError("error_hash", "Please, provide the correct transaction hash.")
+            return false;
+        } else {
+            document.getElementById('tx_submit').value = "Decoding, please wait"
+            e.action = '/' + e.net.options[e.net.selectedIndex].value + '/' + e.tx.value;
+        }
     }
 
     function handleValueChange(value) {
         document.getElementById('tx_submit').disabled = value.trim() === "";
+    }
+
+    function checkTxHash(tx) {
+        const pattern = new RegExp(/^(0x)?([A-Fa-f0-9]{64})$/)
+        return pattern.test(tx);
+    }
+
+    function printError(elemId, hintMsg) {
+        document.getElementById(elemId).innerHTML = hintMsg;
     }
 
 </script>
