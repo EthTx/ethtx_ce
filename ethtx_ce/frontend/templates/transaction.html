@@ -158,18 +158,39 @@
     <script src="/static/jquery.min.js"></script>
     <script src="/static/jquery.fancytree-all-deps.min.js"></script>
     <link href="/static/ethtx.new.css" rel="stylesheet">
+
+    <style>
+        .links-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: end;
+            font-size: 1.2em;
+        }
+
+        img.shadow {
+            filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.2));
+            float: right;
+            padding-right: 10px;
+            width: 80%;
+        }
+    </style>
 </head>
 
 <body>
 
 <div class="analysis">
-
     <div class="with-back-button">
         <h3>Analysis for: <span class="transaction-hash">{{ transaction.tx_hash }} / {{ transaction.chain_id }}</span>
         </h3>
-        <a href="/">
-            <input class="button" type="submit" value="Home"/>
-        </a>
+        <div class="links-container">
+            <a href="/">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <a href="https://tokenflow.live/">
+                <img class="shadow" alt="hosted by Token Flow Insights" src="/static/images/hosted-by-color-dark.svg"/>
+            </a>
+        </div>
     </div>
 
     <div class="transaction-info">
