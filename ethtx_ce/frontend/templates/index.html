@@ -65,8 +65,6 @@
 
         .panels {
             display: grid;
-            margin-top: 30px;
-            margin-bottom: 32px;
             grid-gap: 32px;
         }
 
@@ -142,6 +140,23 @@
         .tos-pp {
             font-size: 14px;
         }
+
+        .tf-img-container {
+            display: -webkit-flex;
+            display: flex;
+            list-style-type: none;
+            padding: 0;
+            justify-content: flex-end;
+            margin: 30px 0 60px;
+        }
+
+        .tf-img-container a {
+            margin-left: auto;
+        }
+
+        .tf-img-container a img {
+            float: right;
+        }
     </style>
 </head>
 
@@ -204,6 +219,11 @@
             </p>
             {%- endif -%}
         </div>
+    </div>
+    <div class="tf-img-container">
+        <a href="https://tokenflow.live/">
+            <img alt="hosted by Token Flow Insights" width="80%" src="../static/images/hosted-by-color-dark.svg"/>
+        </a>
     </div>
     {% include './partials/footer.html' %}
 </div>
