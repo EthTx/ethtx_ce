@@ -373,13 +373,3 @@ body {
         justify-content: space-between;
     }
 }
-
-.tf-color {
-    background-color: #B67CFF;
-    background-image: linear-gradient(128.41deg, #B67CFF 0%, #575EFF 88.55%);
-    background-size: 100%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-background-clip: text;
-    -moz-text-fill-color: transparent;
-}
