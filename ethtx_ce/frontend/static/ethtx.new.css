@@ -13,169 +13,172 @@
  */
 
 body {
-  font-family: monospace;
-  margin: 5px;
-  background-color: whitesmoke;
+    font-family: monospace;
+    margin: 5px;
+    background-color: whitesmoke;
 }
 
 * {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 h3 {
-  margin: 11px;
-  padding-bottom: 8px;
-  padding-top: 10px;
+    margin: 11px;
+    padding-bottom: 8px;
+    padding-top: 10px;
 }
 
 p {
-  padding-bottom: 50px;
+    padding-bottom: 50px;
 }
 
 .my_p {
-  margin: 2px 2px 2px 11px;
-  border: 1px #ccc solid;
-  border-radius: 5px;
-  padding: 2px 5px;
-  white-space: nowrap;
-  display: inline-block;
+    margin: 2px 2px 2px 11px;
+    border: 1px #ccc solid;
+    border-radius: 5px;
+    padding: 2px 5px;
+    white-space: nowrap;
+    display: inline-block;
 }
 
 a:link,
 a:visited {
-  color: black;
-  text-decoration: none;
+    color: black;
+    text-decoration: none;
 }
 
 .delegate a:link,
 .delegate a:visited {
-  color: darkorange;
-  text-decoration: none;
+    color: darkorange;
+    text-decoration: none;
 }
 
 .table {
-  margin-left: 11px;
-  border: solid 1px #bbbbbb;
-  border-collapse: collapse;
-  border-spacing: 0;
+    margin-left: 11px;
+    border: solid 1px #bbbbbb;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
+
 .table thead th {
-  background-color: #ddd;
-  border: solid 1px #bbbbbb;
-  color: #444444;
-  padding: 3px 10px 3px 10px;
-  text-align: left;
-  text-shadow: 1px 1px 1px #fff;
+    background-color: #ddd;
+    border: solid 1px #bbbbbb;
+    color: #444444;
+    padding: 3px 10px 3px 10px;
+    text-align: left;
+    text-shadow: 1px 1px 1px #fff;
 }
+
 .table tbody td {
-  border: solid 1px #bbbbbb;
-  color: #333;
-  padding: 3px 10px 3px 10px;
-  text-shadow: 1px 1px 1px #fff;
-  white-space: nowrap;
+    border: solid 1px #bbbbbb;
+    color: #333;
+    padding: 3px 10px 3px 10px;
+    text-shadow: 1px 1px 1px #fff;
+    white-space: nowrap;
 }
 
 .content {
-  width: 500px;
-  margin: auto;
+    width: 500px;
+    margin: auto;
 }
+
 .transaction-info {
-  margin: 0 0 4px 13px;
+    margin: 0 0 4px 13px;
 }
 
 .transaction-hash {
-  color: darkgreen;
+    color: darkgreen;
 }
 
 .events tbody td {
-  border: 1px #ccc solid;
-  padding: 5px 10px 2px 10px;
+    border: 1px #ccc solid;
+    padding: 5px 10px 2px 10px;
 }
 
 .calls table {
-  border: transparent;
+    border: transparent;
 }
 
 .calls tbody td {
-  border: transparent;
-  padding: 5px 10px 2px 10px;
+    border: transparent;
+    padding: 5px 10px 2px 10px;
 }
 
 .l2txs table {
-  border: transparent;
+    border: transparent;
 }
 
 .l2txs tbody td {
-  border: transparent;
-  padding: 5px 10px 2px 10px;
+    border: transparent;
+    padding: 5px 10px 2px 10px;
 }
 
 #tree .ui-fancytree ul {
-  padding-left: 20px;
+    padding-left: 20px;
 }
 
 #tree .ui-fancytree li {
-  list-style-type: none;
-  margin: 5px;
-  position: relative;
+    list-style-type: none;
+    margin: 5px;
+    position: relative;
 }
 
 #tree .ui-fancytree li::before {
-  content: "";
-  position: absolute;
-  top: -7px;
-  left: 2px;
-  border-left: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-  border-radius: 0 0 0 0;
-  width: 20px;
-  height: 15px;
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: 2px;
+    border-left: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0 0 0 0;
+    width: 20px;
+    height: 15px;
 }
 
 #tree .ui-fancytree li::after {
-  position: absolute;
-  content: "";
-  top: 8px;
-  left: 2px;
-  border-left: 1px solid #ccc;
-  border-top: 1px solid #ccc;
-  border-radius: 0 0 0 0;
-  width: 20px;
-  height: 100%;
+    position: absolute;
+    content: "";
+    top: 8px;
+    left: 2px;
+    border-left: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    border-radius: 0 0 0 0;
+    width: 20px;
+    height: 100%;
 }
 
 #tree .ui-fancytree li:last-child::after {
-  display: none;
+    display: none;
 }
 
 #tree .ui-fancytree li:last-child:before {
-  border-radius: 0 0 0 5px;
+    border-radius: 0 0 0 5px;
 }
 
 #tree ul.ui-fancytree > li:first-child::before {
-  display: none;
+    display: none;
 }
 
 #tree ul.ui-fancytree > li:first-child::after {
-  border-radius: 5px 0 0 0;
+    border-radius: 5px 0 0 0;
 }
 
 #tree .ui-fancytree li p {
-  border: 1px #ccc solid;
-  border-radius: 5px;
-  padding: 2px 5px;
-  white-space: nowrap;
-  display: inline-block;
+    border: 1px #ccc solid;
+    border-radius: 5px;
+    padding: 2px 5px;
+    white-space: nowrap;
+    display: inline-block;
 }
 
 #tree .ui-fancytree li p:hover,
 #tree .ui-fancytree li p:hover + ul li p,
 #tree .ui-fancytree li p:focus,
 #tree .ui-fancytree li p:focus + ul li p {
-  background: #eee;
-  color: #000;
-  border: 1px solid #aaa;
+    background: #eee;
+    color: #000;
+    border: 1px solid #aaa;
 }
 
 #tree .ui-fancytree li p:hover + ul li::after,
@@ -186,104 +189,104 @@ a:visited {
 #tree .ui-fancytree li p:focus + ul::before,
 #tree .ui-fancytree li p:hover + ul ul::before,
 #tree .ui-fancytree li p:focus + ul ul::before {
-  border-color: #999;
+    border-color: #999;
 }
 
 #tree .ui-fancytree .fancytree-icon {
-  display: none;
+    display: none;
 }
 
 #tree .fancytree-plain.fancytree-container.fancytree-treefocus span.fancytree-focused span.fancytree-title {
-  border-color: transparent;
+    border-color: transparent;
 }
 
 #tree .fancytree-plain span.fancytree-node span.fancytree-title {
-  background-color: transparent;
-  border-color: transparent;
+    background-color: transparent;
+    border-color: transparent;
 }
 
 #tree ul.fancytree-container {
-  background-color: transparent;
-  border: none;
-  outline: none;
+    background-color: transparent;
+    border: none;
+    outline: none;
 }
 
 #tree .fancytree-expander {
-  position: relative;
-  z-index: 2;
-  top: -2px;
-  left: -5px;
+    position: relative;
+    z-index: 2;
+    top: -2px;
+    left: -5px;
 }
 
 #tree * {
-  font-family: monospace;
+    font-family: monospace;
 }
 
 #tx_tree .ui-fancytree ul {
-  padding-left: 20px;
+    padding-left: 20px;
 }
 
 #tx_tree .ui-fancytree li {
-  list-style-type: none;
-  margin: 5px;
-  position: relative;
+    list-style-type: none;
+    margin: 5px;
+    position: relative;
 }
 
 #tx_tree .ui-fancytree li::before {
-  content: "";
-  position: absolute;
-  top: -7px;
-  left: 2px;
-  border-left: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-  border-radius: 0 0 0 0;
-  width: 20px;
-  height: 15px;
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: 2px;
+    border-left: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0 0 0 0;
+    width: 20px;
+    height: 15px;
 }
 
 #tx_tree .ui-fancytree li::after {
-  position: absolute;
-  content: "";
-  top: 8px;
-  left: 2px;
-  border-left: 1px solid #ccc;
-  border-top: 1px solid #ccc;
-  border-radius: 0 0 0 0;
-  width: 20px;
-  height: 100%;
+    position: absolute;
+    content: "";
+    top: 8px;
+    left: 2px;
+    border-left: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    border-radius: 0 0 0 0;
+    width: 20px;
+    height: 100%;
 }
 
 #tx_tree .ui-fancytree li:last-child::after {
-  display: none;
+    display: none;
 }
 
 #tx_tree .ui-fancytree li:last-child:before {
-  border-radius: 0 0 0 5px;
+    border-radius: 0 0 0 5px;
 }
 
 #tx_tree ul.ui-fancytree > li:first-child::before {
-  display: none;
+    display: none;
 }
 
 #tx_tree ul.ui-fancytree > li:first-child::after {
-  border-radius: 5px 0 0 0;
+    border-radius: 5px 0 0 0;
 }
 
 #tx_tree .ui-fancytree li p {
-  border: 1px #ccc solid;
-  border-radius: 5px;
-  padding: 2px 5px;
-  white-space: nowrap;
-  display: inline-block;
+    border: 1px #ccc solid;
+    border-radius: 5px;
+    padding: 2px 5px;
+    white-space: nowrap;
+    display: inline-block;
 }
 
 #tx_tree .ui-fancytree li p:hover,
 #tx_tree .ui-fancytree li p:hover + ul li p,
 #tx_tree .ui-fancytree li p:focus,
 #tx_tree .ui-fancytree li p:focus + ul li p {
-  background: #eee;
-  color: #000;
-  border: 1px solid #aaa;
+    background: #eee;
+    color: #000;
+    border: 1px solid #aaa;
 }
 
 #tx_tree .ui-fancytree li p:hover + ul li::after,
@@ -294,79 +297,89 @@ a:visited {
 #tx_tree .ui-fancytree li p:focus + ul::before,
 #tx_tree .ui-fancytree li p:hover + ul ul::before,
 #tx_tree .ui-fancytree li p:focus + ul ul::before {
-  border-color: #999;
+    border-color: #999;
 }
 
 #tx_tree .ui-fancytree .fancytree-icon {
-  display: none;
+    display: none;
 }
 
 #tx_tree
-  .fancytree-plain.fancytree-container.fancytree-treefocus
-  span.fancytree-focused
-  span.fancytree-title {
-  border-color: transparent;
+.fancytree-plain.fancytree-container.fancytree-treefocus
+span.fancytree-focused
+span.fancytree-title {
+    border-color: transparent;
 }
 
 #tx_tree .fancytree-plain span.fancytree-node span.fancytree-title {
-  background-color: transparent;
-  border-color: transparent;
+    background-color: transparent;
+    border-color: transparent;
 }
 
 #tx_tree ul.fancytree-container {
-  background-color: transparent;
-  border: none;
-  outline: none;
+    background-color: transparent;
+    border: none;
+    outline: none;
 }
 
 #tx_tree .fancytree-expander {
-  position: relative;
-  z-index: 2;
-  top: -2px;
-  left: -5px;
+    position: relative;
+    z-index: 2;
+    top: -2px;
+    left: -5px;
 }
 
 #tx_tree * {
-  font-family: monospace;
+    font-family: monospace;
 }
 
 .back-button-container {
-  display: flex;
-  align-items: center;
-  font-size: 16px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
 }
 
 .back-button-container img {
-  margin-left: 20px;
-  margin-right: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .with-back-button {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 20px 11px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px 11px 10px;
 }
 
 .with-back-button h3 {
-  padding-bottom: 0;
-  margin: 0;
+    padding-bottom: 0;
+    margin: 0;
 }
 
 body {
-  width: 100%;
+    width: 100%;
 }
 
 @media screen and (max-width: 1280px) {
-  .with-back-button {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+    .with-back-button {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
-  .back-button-container {
-    order: -1;
-    margin-bottom: 20px;
-    width: 100%;
-    justify-content: space-between;
-  }
+    .back-button-container {
+        order: -1;
+        margin-bottom: 20px;
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+.tf-color {
+    background-color: #B67CFF;
+    background-image: linear-gradient(128.41deg, #B67CFF 0%, #575EFF 88.55%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
 }
