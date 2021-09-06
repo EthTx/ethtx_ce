@@ -210,7 +210,7 @@
     function onSubmit(e) {
         const tx = document.getElementById(`tx`).value;
         if (checkTxHash(tx) === false) {
-            printError("error_hash", "Please, provide the correct transaction hash.")
+            printError("error_hash", "Please, enter a valid transaction hash.")
             return false;
         } else {
             document.getElementById("tx_submit").value = "Decoding..."
