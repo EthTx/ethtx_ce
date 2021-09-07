@@ -170,17 +170,19 @@
         <div class="panel-container">
             <h2>About EthTx</h2>
             <p>EthTx is an open source decoder of blockchain transactions that is made freely available to the Ethereum
-                Community as a Python library in public PyPi index (<a href="https://pypi.org/project/EthTx/"
+                Community as a Python library in public PyPi index (<a id="pypi" href="https://pypi.org/project/EthTx/"
                                                                        target="_blank" rel="noopener noreferrer"
                                                                        class="link">project page</a>).</p>
-            <p>Everybody is invited to contribute to the codebase (<a href="https://github.com/EthTx/ethtx"
+            <p>Everybody is invited to contribute to the codebase (<a id="git-ethtx"
+                                                                      href="https://github.com/EthTx/ethtx"
                                                                       target="_blank" rel="noopener noreferrer"
                                                                       class="link">GitHub</a>) via Pull Request or
                 Issues and anyone can launch their own instances of EthTx.</p>
             {% if ethtx_version %}
             <p id="ethtx_version" class="version">
                 Version:
-                <a class="link" href=https://pypi.org/project/EthTx/{{ ethtx_version }}/ target="_blank"
+                <a class="link" id="pypi-version"
+                   href=https://pypi.org/project/EthTx/{{ ethtx_version }}/ target="_blank"
                    rel="noopener noreferrer">{{ ethtx_version }}</a>
             </p>
             {%- endif -%}
@@ -192,7 +194,8 @@
                 <a href="https://tokenflow.live/" class="link" target="_blank" rel="noopener noreferrer">Token Flow</a>.
             </p>
             <p>The source code of this Community Edition of EthTx is also free and open source
-                (<a href="https://github.com/EthTx/ethtx_ce" class="link" target="_blank" rel="noopener noreferrer">GitHub</a>).
+                (<a href="https://github.com/EthTx/ethtx_ce" id="git-ethtx-ce" class="link" target="_blank"
+                    rel="noopener noreferrer">GitHub</a>).
             </p>
             <p>Use of this implementation is under the <a href="https://tokenflow.live/terms" class="link"
                                                           target="_blank"
@@ -202,7 +205,8 @@
             {% if ethtx_ce_version %}
             <p id="ethtx_ce_version" class="version">
                 Version:
-                <a class="link" href={{ ethtx_ce_version }}target="_blank" rel="noopener noreferrer">ethtx_ce</a>
+                <a class="link" id="git-ethtx-ce-2" href= {{ ethtx_ce_version }}target="_blank"
+                   rel="noopener noreferrer">ethtx_ce</a>
             </p>
             {%- endif -%}
         </div>
@@ -213,15 +217,31 @@
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function () {
         function trackDecode() {
-            // fathom.trackGoal('PR1BHWAQ')
+            fathom.trackGoal("PR1BHWAQ")
         }
 
         document.getElementById("tx_submit").addEventListener("click", trackDecode)
+
+        function trackPyPi() {
+            fathom.trackGoal("AMHPOXYD", 0)
+        }
+
+        document.getElementById("pypi").addEventListener("click", trackPyPi)
+        document.getElementById("pypi-version").addEventListener("click", trackPyPi)
+
+        function trackGitHub() {
+            fathom.trackGoal("SHT6FOG1", 0)
+        }
+
+        document.getElementById("git-ethtx").addEventListener("click", trackGitHub)
+        document.getElementById("git-ethtx-ce").addEventListener("click", trackGitHub)
+        document.getElementById("git-ethtx-ce-2").addEventListener("click", trackGitHub)
+
     });
 
     function onSubmit(e) {
         const tx = document.getElementById(`tx`).value;
-        if (checkTxHash(tx) === false) {
+        if (!tx || checkTxHash(tx) === false) {
             printError("error_hash", "Please, enter a valid transaction hash.")
             return false;
         } else {
@@ -231,7 +251,6 @@
     }
 
     function handleValueChange(value) {
-        document.getElementById("tx_submit").disabled = value.trim() === "";
         hideError("error_hash")
     }
 
