@@ -22,7 +22,7 @@
         font-family: "Hind", sans-serif;
         max-width: 840px;
         margin: 0 auto;
-        padding: 40px 0;
+        padding: 30px 0;
         display: flex;
         gap: 130px;
         align-items: flex-start;
@@ -65,6 +65,22 @@
             gap: 30px;
         }
     }
+
+    .tf-img-container {
+        display: -webkit-flex;
+        display: flex;
+        justify-content: center;
+    }
+
+    .tf-img-container > a {
+        transform: scale(0.6);
+        -webkit-transform: scale(0.6);
+    }
+
+    img.shadow {
+        filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.2));
+    }
+
 </style>
 
 <footer class="footer">
@@ -74,5 +90,10 @@
         <a href="https://pypi.org/project/EthTx/"><i class="fab fa-python"></i> PyPi</a>
         <a href="https://github.com/EthTx/ethtx_ce"> <i class="fab fa-github"></i> GitHub</a>
         <a href="https://twitter.com/eth_tx"><i class="fas fa-hashtag"></i> Twitter</a>
+    </div>
+    <div class="tf-img-container">
+        <a href="https://tokenflow.live/">
+            <img class="shadow" alt="hosted by Token Flow Insights" src="../../static/images/hosted-by-color-dark.svg"/>
+        </a>
     </div>
 </footer>
