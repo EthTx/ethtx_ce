@@ -1,4 +1,5 @@
 import pytest
+
 from ethtx_ce.frontend import create_app
 
 
@@ -15,18 +16,6 @@ class TestFlask:
         assert resp.status_code == 200
         # it's a dump check, but it's something
         assert len(resp.data) > 500
-
-    def test_tod_page(self, client):
-        resp = client.get("/terms")
-        assert resp.status_code == 200
-        # it's a dump check, but it's something
-        assert len(resp.data) > 500
-        assert "Terms of Service" in resp.data.decode()
-
-    def test_privacy_page(self, client):
-        resp = client.get("/privacy")
-        assert resp.status_code == 200
-        assert "Privacy policy" in resp.data.decode()
 
     def test_semantics_is_secured_with_basic_auth(self, client):
         tx_hash = "0xf9baa1792d644bbda985324a0bfdc052a806ca1a4b6a3df3578c73025f7fe544"
