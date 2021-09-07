@@ -33,6 +33,10 @@ p {
     padding-bottom: 50px;
 }
 
+.analysis {
+    margin-bottom: 6.25rem
+}
+
 .my_p {
     margin: 2px 2px 2px 11px;
     border: 1px #ccc solid;

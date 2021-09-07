@@ -157,12 +157,12 @@
         <div>
             <label for="tx">Tx Hash</label>
             <input class="input" size="66" type="text" id="tx"
-                   oninput="handleValueChange(this.value)"
-                   onchange="handleValueChange(this.value)">
+                   oninput="handleValueChange()"
+                   onchange="handleValueChange()">
             <div class="error-msg" id="error_hash"></div>
         </div>
         <div class="tx-submit">
-            <input id="tx_submit" type="submit" value="Decode now" disabled="disabled">
+            <input id="tx_submit" type="submit" value="Decode now">
         </div>
 
     </form>
@@ -170,31 +170,43 @@
         <div class="panel-container">
             <h2>About EthTx</h2>
             <p>EthTx is an open source decoder of blockchain transactions that is made freely available to the Ethereum
-                Community as a Python library in public PyPi index (<a href="https://pypi.org/project/EthTx/"
+                Community as a Python library in public PyPi index (<a id="pypi" href="https://pypi.org/project/EthTx/"
+                                                                       target="_blank" rel="noopener noreferrer"
                                                                        class="link">project page</a>).</p>
-            <p>Everybody is invited to contribute to the codebase (<a href="https://github.com/EthTx/ethtx"
+            <p>Everybody is invited to contribute to the codebase (<a id="git-ethtx"
+                                                                      href="https://github.com/EthTx/ethtx"
+                                                                      target="_blank" rel="noopener noreferrer"
                                                                       class="link">GitHub</a>) via Pull Request or
                 Issues and anyone can launch their own instances of EthTx.</p>
             {% if ethtx_version %}
             <p id="ethtx_version" class="version">
                 Version:
-                <a class="link" href=https://pypi.org/project/EthTx/{{ ethtx_version }}/>{{ ethtx_version }}</a>
+                <a class="link" id="pypi-version"
+                   href=https://pypi.org/project/EthTx/{{ ethtx_version }}/ target="_blank"
+                   rel="noopener noreferrer">{{ ethtx_version }}</a>
             </p>
             {%- endif -%}
         </div>
         <div class="panel-container">
             <h2>About this implementation</h2>
             <p>This instance of EthTx is hosted by Token Flow Insights SA. The team that developed EthTx and the current
-                maintainer of the open source repository. For more information about us, please visit <a
-                        href="https://tokenflow.live/" class="link">TokenFlow</a>.</p>
+                maintainer of the open source repository. For more information about us, please visit
+                <a href="https://tokenflow.live/" class="link" target="_blank" rel="noopener noreferrer">Token Flow</a>.
+            </p>
             <p>The source code of this Community Edition of EthTx is also free and open source
-                (<a href="https://github.com/EthTx/ethtx_ce" class="link">GitHub</a>).</p>
-            <p>Use of this implementation is under the <a href="terms" class="link">Terms of Service</a> and <a
-                    href="privacy" class="link">Privacy Policy</a></p>
+                (<a href="https://github.com/EthTx/ethtx_ce" id="git-ethtx-ce" class="link" target="_blank"
+                    rel="noopener noreferrer">GitHub</a>).
+            </p>
+            <p>Use of this implementation is under the <a href="https://tokenflow.live/terms" class="link"
+                                                          target="_blank"
+                                                          rel="noopener noreferrer">Terms of Service</a> and <a
+                    href="https://tokenflow.live/privacy" class="link" target="_blank" rel="noopener noreferrer">Privacy
+                Policy</a>.</p>
             {% if ethtx_ce_version %}
             <p id="ethtx_ce_version" class="version">
                 Version:
-                <a class="link" href={{ ethtx_ce_version }}> ethtx_ce</a>
+                <a class="link" id="git-ethtx-ce-2" target="_blank" rel="noopener noreferrer"
+                   href={{ ethtx_ce_version }}>ethtx_ce</a>
             </p>
             {%- endif -%}
         </div>
@@ -205,15 +217,31 @@
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function () {
         function trackDecode() {
-            // fathom.trackGoal('PR1BHWAQ')
+            fathom.trackGoal("PR1BHWAQ")
         }
 
         document.getElementById("tx_submit").addEventListener("click", trackDecode)
+
+        function trackPyPi() {
+            fathom.trackGoal("AMHPOXYD", 0)
+        }
+
+        document.getElementById("pypi").addEventListener("click", trackPyPi)
+        document.getElementById("pypi-version").addEventListener("click", trackPyPi)
+
+        function trackGitHub() {
+            fathom.trackGoal("SHT6FOG1", 0)
+        }
+
+        document.getElementById("git-ethtx").addEventListener("click", trackGitHub)
+        document.getElementById("git-ethtx-ce").addEventListener("click", trackGitHub)
+        document.getElementById("git-ethtx-ce-2").addEventListener("click", trackGitHub)
+
     });
 
     function onSubmit(e) {
         const tx = document.getElementById(`tx`).value;
-        if (checkTxHash(tx) === false) {
+        if (!tx || checkTxHash(tx) === false) {
             printError("error_hash", "Please, enter a valid transaction hash.")
             return false;
         } else {
@@ -222,8 +250,7 @@
         }
     }
 
-    function handleValueChange(value) {
-        document.getElementById("tx_submit").disabled = value.trim() === "";
+    function handleValueChange() {
         hideError("error_hash")
     }
 
@@ -237,11 +264,9 @@
     }
 
     function hideError(elemId) {
-        const element = document.getElementById(elemId);
-        if (element) {
-            element.innerHTML = "";
-        }
+        document.getElementById(elemId).innerHTML = "";
     }
+
 
 </script>
 </body>
