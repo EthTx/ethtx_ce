@@ -77,29 +77,24 @@
         -webkit-transform: scale(0.6);
     }
 
-    .footer-logo-container > a > img {
-        filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.2)) grayscale(1);
-        -webkit-filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.2)) grayscale(1);
-    }
-
     .footer-logo-container > a > img:hover {
-        -webkit-filter: grayscale(0);
-        filter: none;
+        filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.2)) brightness(0%);
+        -webkit-filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.2)) brightness(0%);
     }
 
 </style>
 
 <footer class="footer">
+    <div class="footer-logo-container">
+        <a href="https://tokenflow.live/">
+            <img alt="hosted by Token Flow Insights" src="../../static/images/hosted-by-color-dark.svg"/>
+        </a>
+    </div>
     <div class="footer-links-container">
         <a href="/terms"><i class="far fa-file-alt"></i> Terms of Service</a>
         <a href="/privacy"><i class="fas fa-shield-alt"></i> Privacy Policy</a>
         <a href="https://pypi.org/project/EthTx/"><i class="fab fa-python"></i> PyPi</a>
         <a href="https://github.com/EthTx/ethtx_ce"> <i class="fab fa-github"></i> GitHub</a>
         <a href="https://twitter.com/eth_tx"><i class="fas fa-hashtag"></i> Twitter</a>
-    </div>
-    <div class="footer-logo-container">
-        <a href="https://tokenflow.live/">
-            <img alt="hosted by Token Flow Insights" src="../../static/images/hosted-by-color-dark.svg"/>
-        </a>
     </div>
 </footer>
