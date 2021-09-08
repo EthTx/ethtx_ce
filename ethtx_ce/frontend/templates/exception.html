@@ -44,12 +44,30 @@
             align-items: center;
             justify-content: center;
         }
+
+        .pulsate {
+            -webkit-animation: pulsate 3s ease-out;
+            -webkit-animation-iteration-count: infinite;
+            opacity: 0.5;
+        }
+
+        @-webkit-keyframes pulsate {
+            0% {
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 1.0;
+            }
+            100% {
+                opacity: 0.5;
+            }
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="container-sub">
-        <h1>{{ status_code }}</h1>
+        <h1 class="pulsate">{{ status_code }}</h1>
         <div class="container-sub">
             <h2> {{ error }}</h2>
         </div>
