@@ -1,9 +1,78 @@
 <html lang="en">
 <head>
     {% include './partials/headtags.html' %}
-     <title>Ethtx error</title>
+    <title>Ethtx error</title>
+
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            padding-right: 1rem;
+            margin-right: 1rem;
+            border-right: 1px solid var(--border);
+            font-size: 3rem;
+            font-weight: 500;
+            line-height: 1.2;
+            margin-top: 0;
+        }
+
+        h2 {
+            font-weight: 400;
+            font-size: 1rem;
+            margin-top: 0;
+        }
+
+        .container {
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .container-sub {
+            max-width: 600px;
+            word-wrap: break-word;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pulsate {
+            -webkit-animation: pulsate 3s ease-out;
+            -webkit-animation-iteration-count: infinite;
+            opacity: 0.5;
+        }
+
+        @-webkit-keyframes pulsate {
+            0% {
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 1.0;
+            }
+            100% {
+                opacity: 0.5;
+            }
+        }
+    </style>
 </head>
 <body>
-  Error occurred: {{ exception }}
+<div class="container">
+    <div class="container-sub">
+        <h1 class="pulsate">{{ status_code }}</h1>
+        <div class="container-sub">
+            <h2> {{ error }}</h2>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

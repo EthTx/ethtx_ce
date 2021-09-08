@@ -37,7 +37,10 @@ def render_error_page(status: Optional[int] = 500):
             if isinstance(error, HTTPException):
                 error, status_code = error.description, error.code
 
-            return render_template("exception.html", exception=error), status_code
+            return (
+                render_template("exception.html", status_code=status_code, error=error),
+                status_code,
+            )
 
         return wrapper
 
