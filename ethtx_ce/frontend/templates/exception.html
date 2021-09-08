@@ -4,14 +4,46 @@
     <title>Ethtx error</title>
 
     <style>
-        .container {
+        #main {
+            height: 100vh;
+        }
+
+        h1 {
+            padding-right: 1rem;
+            margin-right: 1rem;
+            border-right: 1px solid #dee2e6;
+            font-size: 2.5rem;
+            font-weight: 500;
+            line-height: 1.2;
+            margin-top: 0;
+        }
+
+        h2 {
+            font-weight: 400;
+            font-size: 1.25rem;
+            margin-top: 0;
+        }
+
+        .main {
             width: 100%;
             align-items: center;
             justify-content: center;
         }
 
-        .copy-container {
+        .container {
+            align-items: center;
+            justify-content: center;
+            display: flex;
             text-align: center;
+            margin: 0 auto 0 auto;
+        }
+
+        .container-sub {
+            width: 100%;
+            display: inline-block;
+            vertical-align: middle;
+            max-width: 480px;
+            word-wrap: break-word;
         }
 
         .center-xy {
@@ -21,15 +53,16 @@
             transform: translate(-50%, -50%);
             position: absolute;
         }
+
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="copy-container center-xy">
-        <p>
-            {{ status_code }}, {{ error }}
-        </p>
-        <span class="handle"></span>
+<div class="main">
+    <div class="container center-xy" id="main">
+        <h1>{{ status_code }}</h1>
+        <div class="container-sub">
+            <h2> {{ error }}</h2>
+        </div>
     </div>
 </div>
 
