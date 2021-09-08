@@ -1,9 +1,37 @@
 <html lang="en">
 <head>
     {% include './partials/headtags.html' %}
-     <title>Ethtx error</title>
+    <title>Ethtx error</title>
+
+    <style>
+        .container {
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .copy-container {
+            text-align: center;
+        }
+
+        .center-xy {
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            position: absolute;
+        }
+    </style>
 </head>
 <body>
-  Error occurred: {{ exception }}
+<div class="container">
+    <div class="copy-container center-xy">
+        <p>
+            {{ status_code }}, {{ error }}
+        </p>
+        <span class="handle"></span>
+    </div>
+</div>
+
 </body>
 </html>
