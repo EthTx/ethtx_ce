@@ -11,7 +11,7 @@
         }
 
         body {
-            font-family: "Hind", sans-serif;
+            font-family: Hind, sans-serif;
             font-size: 16px;
             background-color: var(--background);
             margin: 0;
@@ -34,7 +34,7 @@
             margin-bottom: 8px;
         }
 
-        input[type="submit"] {
+        input[type=submit] {
             background-color: var(--background-alt);
             color: #fff;
             border-radius: 3px;
@@ -104,7 +104,7 @@
         }
 
         .tx-submit {
-            margin-top: 0.625rem;
+            margin-top: .625rem;
         }
 
         .tx-submit input {
@@ -133,7 +133,7 @@
         }
 
         .error-msg {
-            color: #cc0000;
+            color: #c00;
             font-size: 12px;
             margin-top: 5px;
             position: absolute;
@@ -179,12 +179,12 @@
                                                                       class="link">GitHub</a>) via Pull Request or
                 Issues and anyone can launch their own instances of EthTx.</p>
             {% if ethtx_version %}
-            <p id="ethtx_version" class="version">
-                Version:
-                <a class="link" id="pypi-version"
-                   href=https://pypi.org/project/EthTx/{{ ethtx_version }}/ target="_blank"
-                   rel="noopener noreferrer">{{ ethtx_version }}</a>
-            </p>
+                <p id="ethtx_version" class="version">
+                    Version:
+                    <a class="link" id="pypi-version"
+                       href=https://pypi.org/project/EthTx/{{ ethtx_version }}/ target="_blank"
+                       rel="noopener noreferrer">{{ ethtx_version }}</a>
+                </p>
             {%- endif -%}
         </div>
         <div class="panel-container">
@@ -203,11 +203,11 @@
                     href="https://tokenflow.live/privacy" class="link" target="_blank" rel="noopener noreferrer">Privacy
                 Policy</a>.</p>
             {% if ethtx_ce_version %}
-            <p id="ethtx_ce_version" class="version">
-                Version:
-                <a class="link" id="git-ethtx-ce-2" target="_blank" rel="noopener noreferrer"
-                   href={{ ethtx_ce_version }}>ethtx_ce</a>
-            </p>
+                <p id="ethtx_ce_version" class="version">
+                    Version:
+                    <a class="link" id="git-ethtx-ce-2" target="_blank" rel="noopener noreferrer"
+                       href={{ ethtx_ce_version }}>ethtx_ce</a>
+                </p>
             {%- endif -%}
         </div>
     </div>
