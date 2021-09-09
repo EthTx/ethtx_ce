@@ -32,9 +32,16 @@
             margin-top: 0;
         }
 
+        h3 {
+            font-weight: 300;
+            font-size: 0.75rem;
+            margin-top: 0;
+        }
+
         .container {
             margin: 0 auto;
             position: relative;
+            box-sizing: border-box;
         }
 
         .container-sub {
@@ -62,6 +69,19 @@
                 opacity: 0.5;
             }
         }
+
+        .container-hash {
+            text-align: center;
+            display: inline-block;
+        }
+
+        .tx_hash {
+            color: #cc0000;
+            word-wrap: anywhere;
+            filter: drop-shadow(0px 0.2px 0.2px #cc0000);
+            -webkit-filter: drop-shadow(0px 0.2px 0.2px #cc0000);
+        }
+
     </style>
 </head>
 <body>
@@ -72,6 +92,11 @@
             <h2> {{ error }}</h2>
         </div>
     </div>
+    {% if tx_hash %}
+        <div class="container-hash">
+            <h3>Tx hash: <span class="tx_hash">{{ tx_hash }}</span></h3>
+        </div>
+    {%- endif -%}
 </div>
 
 </body>
