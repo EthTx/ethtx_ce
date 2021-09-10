@@ -52,6 +52,11 @@
             justify-content: center;
         }
 
+        .container-one-line {
+            word-wrap: anywhere;
+            text-align: left;
+        }
+
         .pulsate {
             -webkit-animation: pulsate 3s ease-out;
             -webkit-animation-iteration-count: infinite;
@@ -88,7 +93,7 @@
 <div class="container">
     <div class="container-sub">
         <h1 class="pulsate">{{ status_code }}</h1>
-        <div class="container-sub">
+        <div class="container-one-line">
             <h2> {{ error }}</h2>
         </div>
     </div>
