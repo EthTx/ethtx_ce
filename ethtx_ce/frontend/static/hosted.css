@@ -21,3 +21,11 @@
     filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.2)) brightness(0);
     -webkit-filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.2)) brightness(0);
 }
+
+@media screen and (max-width: 1280px) {
+    .hosted-by {
+        transform-origin: left;
+        -webkit-transform-origin: left;
+    }
+}
+

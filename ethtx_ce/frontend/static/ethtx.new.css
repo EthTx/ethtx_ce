@@ -347,7 +347,6 @@ span.fancytree-title {
 .with-back-button {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     margin: 10px 11px 10px;
 }
 
