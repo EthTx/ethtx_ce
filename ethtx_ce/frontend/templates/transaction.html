@@ -1,16 +1,24 @@
+<!--
+  ~ Copyright 2021 DAI Foundation
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
 {% macro address_link(address, label, badge="") %}
     {%- if address and address != '0x0000000000000000000000000000000000000000' -%}
-        <a href="https://
-
-
-
-
-                {%- if transaction.chain_id != 'mainnet' -%}{{ transaction.chain_id }}.{% endif %}etherscan.io/address/{{ address }}"
-           target="_blank">
-            {%- if badge -%}
-                <span class="badge badge-info">[{{ badge }}] </span>
-            {%- endif -%}
-            {{- label -}}
+        <a href="https://{%- if transaction.chain_id != 'mainnet' -%}{{ transaction.chain_id }}.{% endif %}etherscan.io/address/{{ address }}" target="_blank">
+           {%- if badge -%}
+              <span class="badge badge-info">[{{ badge }}] </span>
+           {%- endif -%}
+              {{- label -}}
         </a>
     {%- else -%}
         {{- label -}}
@@ -19,13 +27,7 @@
 
 {% macro nft_link(address, label) %}
     {%- if address and address != '0x0000000000000000000000000000000000000000' -%}
-        <a href="https://
-
-
-
-
-                {%- if transaction.chain_id != 'mainnet' -%}{{ transaction.chain_id }}.{% endif %}etherscan.io/token/{{ address }}"
-           target="_blank">
+        <a href="https://{%- if transaction.chain_id != 'mainnet' -%}{{ transaction.chain_id }}.{% endif %}etherscan.io/token/{{ address }}" target="_blank">
             {{- label -}}
         </a>
     {%- else -%}
