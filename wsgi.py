@@ -28,12 +28,14 @@ ethtx_config = EthTxConfig(
         "mainnet": dict(hook=os.getenv("MAINNET_NODE_URL", ""), poa=False),
         "goerli": dict(hook=os.getenv("GOERLI_NODE_URL", ""), poa=True),
         "rinkeby": dict(hook=os.getenv("RINKEBY_NODE_URL", ""), poa=True),
+        "fantom": dict(hook=os.getenv("FANTOM_NODE_URL", ""), poa=True),
     },
     default_chain="mainnet",
     etherscan_urls={
         "mainnet": "https://api.etherscan.io/api",
         "goerli": "https://api-goerli.etherscan.io/api",
         "rinkeby": "https://api-rinkeby.etherscan.io/api",
+        "fantom": "https://api.fmtscan.com/api",
     },
 )
 
