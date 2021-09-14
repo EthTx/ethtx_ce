@@ -28,15 +28,3 @@ def search_page() -> render_template:
         ),
         200,
     )
-
-
-@frontend_route(bp, "/terms")
-def terms_page() -> render_template:
-    """Render terms page - terms."""
-    return render_template("terms.html"), 200
-
-
-@frontend_route(bp, "/privacy")
-def privacy_page() -> render_template:
-    """Render privacy page - privacy."""
-    return render_template("privacy.html"), 200

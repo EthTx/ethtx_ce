@@ -12,10 +12,11 @@
 
 import logging
 import os
-from typing import Tuple, Optional
+import re
+from typing import Tuple
 
 import pkg_resources
-from flask import Flask
+from flask import Flask, request
 from flask_httpauth import HTTPBasicAuth
 from git import Repo
 
@@ -77,3 +78,14 @@ def _clean_up_git_link(git_link: str) -> str:
         git_link = git_link[:-4]
 
     return git_link
+
+
+def extract_tx_hash_from_req() -> str:
+    """Extract tx hash from request url."""
+    hash_match = re.search(r"(0x)?([A-Fa-f0-9]{64})", request.url)
+
+    return (
+        f"{hash_match.group(0) or ''}{hash_match.group(1)}"
+        if hash_match and len(hash_match.groups()) == 2
+        else ""
+    )

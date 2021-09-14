@@ -19,7 +19,8 @@ from flask import Blueprint, render_template
 from web3.exceptions import TransactionNotFound
 from werkzeug.exceptions import HTTPException
 
-from ethtx_ce.exceptions import *
+from .deps import extract_tx_hash_from_req
+from ..exceptions import *
 
 log = logging.getLogger(__name__)
 
@@ -36,8 +37,15 @@ def render_error_page(status: Optional[int] = 500):
             status_code = status
             if isinstance(error, HTTPException):
                 error, status_code = error.description, error.code
-
-            return render_template("exception.html", exception=error), status_code
+            return (
+                render_template(
+                    "exception.html",
+                    status_code=status_code,
+                    error=error,
+                    tx_hash=extract_tx_hash_from_req(),
+                ),
+                status_code,
+            )
 
         return wrapper
 
