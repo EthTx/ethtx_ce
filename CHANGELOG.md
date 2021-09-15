@@ -4,12 +4,12 @@ All notable changes to this project will be documented in this file.
 ## 0.2.0 - 2021-09-14
 ### Added - [#44](https://github.com/EthTx/ethtx_ce/pull/44)
 - Added new error page.
-- Added `Tokenf Flow` logo.
+- Added [Token Flow](https://tokenflow.live) logo.
 - Added input hash validator.
 
 ### Changed - [#44](https://github.com/EthTx/ethtx_ce/pull/44)
 - Changed footer style.
-- Removed **ToS** and **PP** pages and replaced them with `Token Flow pages`.
+- Removed **ToS** and **PP** and replaced them with `Token Flow` pages.
 - Removed old tests.
 - Added **Fathom** analytics tool.
 - Updated links.
