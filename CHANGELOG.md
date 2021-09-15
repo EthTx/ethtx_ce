@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## v0.2.0 - 2021-09-14
+## 0.2.0 - 2021-09-14
 ### Added - [#44](https://github.com/EthTx/ethtx_ce/pull/44)
 - Added new error page.
 - Added `Tokenf Flow` logo.
@@ -18,12 +18,12 @@ All notable changes to this project will be documented in this file.
 - Fixed frontend styles. 
 
 
-## v0.1.10 - 2021-08-20
+## 0.1.10 - 2021-08-20
 ### Added
-- Added `preload` to links.
+- Added *preload* to links.
 
 
-## v0.1.9 - 2021-08-18
+## 0.1.9 - 2021-08-18
 ### Added
 - Added new footer.
 - Added `Rinkeby` support.
@@ -35,7 +35,7 @@ All notable changes to this project will be documented in this file.
 - Etherscan links fixed for testnets. 
 
 
-## v0.1.8 - 2021-08-11
+## 0.1.8 - 2021-08-11
 ### Added
 - Added `Goerli` support.
 
@@ -43,12 +43,12 @@ All notable changes to this project will be documented in this file.
 - Changed [EthTx](https://github.com/EthTx/ethtx) version - >=0.2.0,<0.3.0.
 
 
-## v0.1.7 - 2021-08-05
+## 0.1.7 - 2021-08-05
 ### Added
 - Added link to PyPi.
 
 
-## v0.1.6 - 2021-08-04
+## 0.1.6 - 2021-08-04
 ### Added
 - Added information about the `EthTx` and `EthTx Ce` version to the frontend.
 
@@ -59,12 +59,12 @@ All notable changes to this project will be documented in this file.
 - Fixed application dependencies. 
 
 
-## v0.1.5 - 2021-08-02
+## 0.1.5 - 2021-08-02
 ### Changed
 - Removed the banner that was about the new version of `ethtx_ce`. 
 
 
-## v0.1.4 - 2021-07-29
+## 0.1.4 - 2021-07-29
 ### Changed
 - Changed semantics save functions.
 - Changed [EthTx](https://github.com/EthTx/ethtx) version - 0.1.7.
@@ -96,4 +96,3 @@ All notable changes to this project will be documented in this file.
 ## v0.1.0 - 2021-07-23
 ### Added
 - First version EthTx CE.
-
