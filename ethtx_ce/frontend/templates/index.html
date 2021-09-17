@@ -309,7 +309,9 @@
             printError("error_hash", "Please, enter a valid transaction hash.")
             return false;
         } else {
-            document.getElementById("tx_submit").value = "Decoding..."
+            window.onbeforeunload = function () {
+                document.getElementById("tx_submit").value = "Decoding...";
+            };
             e.action = '/' + e.net.options[e.net.selectedIndex].value + '/' + e.tx.value;
         }
     }
@@ -330,8 +332,6 @@
     function hideError(elemId) {
         document.getElementById(elemId).innerHTML = "";
     }
-
-
 </script>
 </body>
 </html>
