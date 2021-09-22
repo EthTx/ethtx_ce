@@ -16,6 +16,10 @@
     {%- if address and address != '0x0000000000000000000000000000000000000000' -%}
         <a href="https://
 
+
+
+
+
                 {%- if transaction.chain_id != 'mainnet' -%}{{ transaction.chain_id }}.{% endif %}etherscan.io/address/{{ address }}"
            target="_blank">
             {%- if badge -%}
@@ -31,6 +35,10 @@
 {% macro nft_link(address, label) %}
     {%- if address and address != '0x0000000000000000000000000000000000000000' -%}
         <a href="https://
+
+
+
+
 
                 {%- if transaction.chain_id != 'mainnet' -%}{{ transaction.chain_id }}.{% endif %}etherscan.io/token/{{ address }}"
            target="_blank">
@@ -314,8 +322,13 @@
                 {% for event in events %}
                     <tr>
                         <td>
-                            <span style="color: slategray">[{{- event.index -}}] </span>{{ address_link(event.contract.address, event.contract.name, event.contract.badge) }}.<span
-                                style='color: darkgreen'>{{ event.event_name }}</span>({{ print_event_arguments(event.parameters) }})
+                            <span style="color: slategray">[{{- event.index -}}] </span>
+                            {{ address_link(event.contract.address, event.contract.name, event.contract.badge) }}
+                            {%- if not event.event_name.startswith("0x") and event.parameters and not event.parameters[0]["name"] -%}
+                                <span style='color: dodgerblue'>.{{ event.event_name }}</span>
+                            {%- else -%}
+                                <span style='color: darkgreen'>.{{ event.event_name }}</span>
+                            {%- endif -%}({{ print_event_arguments(event.parameters) }})
                         </td>
                     </tr>
                 {% endfor %}
