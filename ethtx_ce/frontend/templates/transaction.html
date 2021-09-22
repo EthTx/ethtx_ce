@@ -15,11 +15,6 @@
 {% macro address_link(address, label, badge="") %}
     {%- if address and address != '0x0000000000000000000000000000000000000000' -%}
         <a href="https://
-
-
-
-
-
                 {%- if transaction.chain_id != 'mainnet' -%}{{ transaction.chain_id }}.{% endif %}etherscan.io/address/{{ address }}"
            target="_blank">
             {%- if badge -%}
@@ -35,11 +30,6 @@
 {% macro nft_link(address, label) %}
     {%- if address and address != '0x0000000000000000000000000000000000000000' -%}
         <a href="https://
-
-
-
-
-
                 {%- if transaction.chain_id != 'mainnet' -%}{{ transaction.chain_id }}.{% endif %}etherscan.io/token/{{ address }}"
            target="_blank">
             {{- label -}}
