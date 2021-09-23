@@ -35,44 +35,37 @@
     {%- endif -%}
 {% endmacro %}
 
-{% macro print_event_arguments(event) %}
-    <span style="color: slategray">[{{- event.index -}}]</span>
-    {{ address_link(event.contract.address, event.contract.name, event.contract.badge) }}
-    {%- if not event.event_name.startswith("0x") and event.parameters and not event.parameters[0]["name"] -%}
-        <span style='color: dodgerblue'>.{{ event.event_name }}</span>
-    {%- else -%}
-        <span style='color: darkgreen'>.{{ event.event_name }}</span>
-    {%- endif -%}
-    ({% for argument in event.parameters %}
-    {% if argument.type != "ignore" %}
-        {% if loop.index > 1 %}, {% endif %}
-        {%- if argument.name == "[no ABI]" -%}
-            <span class="badge badge-danger">no_ABI</span>
-        {%- else -%}
-            {%- if argument.name -%}
-                <span style='color: darkred'>{{ argument.name }}=</span>
-            {%- endif -%}
-            {%- if argument.type == "tuple" -%}
-                ({{- print_event_arguments(argument.value) -}})
-            {%- elif argument.type == "tuple[]" -%}
-                [
-                {%- for sub_arg in argument.value -%}
-                    {{- print_event_arguments(sub_arg) -}}
-                {%- endfor -%}
-                ]
-            {%- elif argument.type == "address" -%}
-                {{- address_link(argument.value.address, argument.value.name, argument.value.badge) -}}
-            {%- elif argument.type == "nft" -%}
-                {{- nft_link(argument.value.address, argument.value.name) -}}
-            {%- elif argument.type == "call" -%}
-                {{- address_link(argument.value.address, argument.value.name, argument.value.badge) -}}.
-                {{- argument.value.function_name -}}({{ print_event_arguments(argument.value.arguments) }})
+{% macro print_event_arguments(arguemnts) %}
+    {% for argument in arguemnts %}
+        {% if argument.type != "ignore" %}
+            {% if loop.index > 1 %}, {% endif %}
+            {%- if argument.name == "[no ABI]" -%}
+                <span class="badge badge-danger">no_ABI</span>
             {%- else -%}
-                {{- argument.value -}}
-            {%- endif -%}
+                {%- if argument.name -%}
+                    <span style='color: darkred'>{{ argument.name }}=</span>
+                {%- endif -%}
+                {%- if argument.type == "tuple" -%}
+                    ({{- print_event_arguments(argument.value) -}})
+                {%- elif argument.type == "tuple[]" -%}
+                    [
+                    {%- for sub_arg in argument.value -%}
+                        {{- print_event_arguments(sub_arg) -}}
+                    {%- endfor -%}
+                    ]
+                {%- elif argument.type == "address" -%}
+                    {{- address_link(argument.value.address, argument.value.name, argument.value.badge) -}}
+                {%- elif argument.type == "nft" -%}
+                    {{- nft_link(argument.value.address, argument.value.name) -}}
+                {%- elif argument.type == "call" -%}
+                    {{- address_link(argument.value.address, argument.value.name, argument.value.badge) -}}.
+                    {{- argument.value.function_name -}}({{ print_event_arguments(argument.value.arguments) }})
+                {%- else -%}
+                    {{- argument.value -}}
+                {%- endif -%}
+            {% endif %}
         {% endif %}
-    {% endif %}
-{% endfor %})
+    {% endfor %}
 {% endmacro %}
 
 {% macro print_call_arguments(arguments) %}
@@ -315,7 +308,14 @@
                 {% for event in events %}
                     <tr>
                         <td>
-                            {{ print_event_arguments(event) }}
+                            <span style="color: slategray">[{{- event.index -}}]</span>
+                            {{ address_link(event.contract.address, event.contract.name, event.contract.badge) }}
+                            {%- if not event.event_name.startswith("0x") and event.parameters and not event.parameters[0]["name"] -%}
+                                <span style='color: dodgerblue'>.{{ event.event_name }}</span>
+                            {%- else -%}
+                                <span style='color: darkgreen'>.{{ event.event_name }}</span>
+                            {%- endif -%}
+                            ({{ print_event_arguments(event.parameters) }})
                         </td>
                     </tr>
                 {% endfor %}
