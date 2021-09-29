@@ -70,6 +70,13 @@ Here is a list of steps to recreate local environment on <b>Ubuntu</b> distribut
 4. Run `pipenv run python3 wsgi.py` for `make run-local`. This will setup new server on host 0.0.0.0 port 5000.
 5. Now `ethtx_ce` should be accessible thorugh link [http://localhost:5000](http://localhost:5000) 
 
+
+Use can also provided `docker-compose` for running this locally:
+```shell
+docker-compose up
+```
+Note, this also need proper `.env` file to function properly.
+
 # .env file
 
 For proper functioning, `.env` file is required containing all database and 3rd party providers configuration.
