@@ -195,7 +195,7 @@
                     [<span
                         class='delegate'>{{- address_link(call.to_address.address, call.to_address.name, call.to_address.badge) -}}</span>
                 {%- endif -%}
-                {%- if call.function_name != "0x" and call.arguments and "arg" in call.arguments[0]["name"] -%}
+                {%- if call.function_name != "0x" and call.arguments and ("arg" in call.arguments[0]["name"] or (call.arguments[0]["name"] == "params" and "arg" in call.arguments[0]["value"][0]["name"])) -%}
                     <span style='color: dodgerblue'>.{{- call.function_name -}}</span>
                 {%- elif call.function_name != "0x" -%}
                     <span style='color: darkgreen'>.{{- call.function_name -}}</span>
@@ -307,7 +307,7 @@
             <table class="table table-striped">
                 {% for event in events %}
                     <tr>
-                       <td>
+                        <td>
                             <span style="color: slategray">[{{- event.index -}}]</span>
                             {{ address_link(event.contract.address, event.contract.name, event.contract.badge) }}
                             {%- if not event.event_name.startswith("0x") and event.parameters and not event.parameters[0]["name"] -%}
