@@ -16,6 +16,7 @@ body {
     font-family: monospace;
     margin: 5px;
     background-color: whitesmoke;
+    width: 100%;
 }
 
 * {
@@ -25,8 +26,6 @@ body {
 
 h3 {
     margin: 11px;
-    padding-bottom: 8px;
-    padding-top: 10px;
 }
 
 p {
@@ -84,7 +83,7 @@ a:visited {
 }
 
 .transaction-info {
-    margin: 0 0 4px 13px;
+    margin: 5px 0 4px 13px;
 }
 
 .transaction-hash {
@@ -355,8 +354,29 @@ span.fancytree-title {
     margin: 0;
 }
 
-body {
-    width: 100%;
+.container-top {
+    display: inline-block;
+}
+
+.container-info-logo {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 1281px) {
+    .hosted-by {
+        order: 1;
+        margin: 0 0 0 13px;
+    }
+
+    .container-info-logo {
+        flex-flow: column;
+    }
+
+    .transaction-info {
+        order: 2;
+    }
+
 }
 
 @media screen and (max-width: 1280px) {
