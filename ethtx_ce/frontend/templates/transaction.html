@@ -195,7 +195,7 @@
                     [<span
                         class='delegate'>{{- address_link(call.to_address.address, call.to_address.name, call.to_address.badge) -}}</span>
                 {%- endif -%}
-                {%- if call.function_name != "0x" and call.arguments and "arg" in call.arguments[0]["name"] -%}
+                {%- if call.function_name != "0x" and call.arguments and ("arg" in call.arguments[0]["name"] or (call.arguments[0]["name"] == "params" and "arg" in call.arguments[0]["value"][0]["name"])) -%}
                     <span style='color: dodgerblue'>.{{- call.function_name -}}</span>
                 {%- elif call.function_name != "0x" -%}
                     <span style='color: darkgreen'>.{{- call.function_name -}}</span>
@@ -303,9 +303,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 {% if events %}
     <div class="events">
