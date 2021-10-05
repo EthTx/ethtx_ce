@@ -29,7 +29,6 @@ class Config:
         "LOGGING_CONFIG", os.path.join(BASE_DIR, "../tmp")
     )
 
-    SECRET_KEY = os.getenv("SECRET_KEY", secrets.token_hex(16))
     API_KEY = os.getenv("API_KEY", "")
     MAX_CONTENT_LENGTH = 10 * 1024 * 1024
 
@@ -41,24 +40,25 @@ class ProductionConfig(Config):
     """Production Config."""
 
     ENV = "production"
-    DEBUG = False
+    FLASK_DEBUG = False
     TESTING = False
     PROPAGATE_EXCEPTIONS = True
+
 
 
 class StagingConfig(Config):
     """Staging Config."""
 
     ENV = "staging"
-    DEBUG = True
+    FLASK_DEBUG = True
     TESTING = False
     PROPAGATE_EXCEPTIONS = True
-
 
 class DevelopmentConfig(Config):
     """Development Config."""
 
     ENV = "development"
-    DEBUG = True
+    FLASK_DEBUG = True
     TESTING = True
     PROPAGATE_EXCEPTIONS = True
+
