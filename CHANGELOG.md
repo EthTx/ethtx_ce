@@ -6,6 +6,9 @@ All notable changes to this project will be documented in this file.
 - Changed [EthTx](https://github.com/EthTx/ethtx) version - >=0.3.0,<0.4.0 [#62](https://github.com/EthTx/ethtx_ce/pull/62)
 - Deleted usage of mongodb variable [#61](https://github.com/EthTx/ethtx_ce/pull/61)
 
+### Fixed
+- Fixed colored guessed events with tuple arg [#65](https://github.com/EthTx/ethtx_ce/pull/65)
+
 
 ## 0.2.6 - 2021-10-01
 ### Changed
