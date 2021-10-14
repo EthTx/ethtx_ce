@@ -20,7 +20,7 @@ pre-commit = "*"
 mongoengine = "*"
 mongomock = "*"
 flask-httpauth = "*"
-ethtx = ">=0.2.0,<0.3.0"
+ethtx = ">=0.3.0,<0.4.0"
 gitpython = "*"
 
 [dev-packages]

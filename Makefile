@@ -13,7 +13,7 @@ run-database:  ## Run only a local database required for local development
 	docker-compose up -d mongo mongo-express
 
 run-local:
-	FLASK_APP=run.py FLASK_DEBUG=1 pipenv run flask run --host=0.0.0.0 --port 5000
+	FLASK_APP=wsgi.py FLASK_DEBUG=1 pipenv run flask run --host=0.0.0.0 --port 5000
 
 run-prod:
 	fuser -k 5000/tcp || true

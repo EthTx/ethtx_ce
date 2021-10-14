@@ -6,9 +6,12 @@ services:
     ports:
       - "5000:5000"
     env_file:
-      - .docker_env
+      - .env
     depends_on:
       - mongo
+    environment:
+      - MONGO_CONNECTION_STRING=mongodb://mongo
+      - MONGODB_DB=ethtx
   mongo:
     image: mongo
     environment:
