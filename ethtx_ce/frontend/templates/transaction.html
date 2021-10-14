@@ -313,7 +313,7 @@
                     <td>
                         <span style="color: slategray">[{{- event.index -}}]</span>
                         {{ address_link(event.contract.address, event.contract.name, event.contract.badge) }}
-                        {%- if not event.event_name.startswith("0x") and event.parameters and not event.parameters[0]["name"] -%}
+                        {%- if not event.event_name.startswith("0x") and event.parameters and not event.parameters[0]["name"] and event.parameters[0]["type"] != "tuple" -%}
                             <span style='color: dodgerblue'>.{{ event.event_name }}</span>
                         {%- else -%}
                             <span style='color: darkgreen'>.{{ event.event_name }}</span>
