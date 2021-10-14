@@ -1,6 +1,49 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 0.2.7 - 2021-10-14
+### Changed
+- Changed [EthTx](https://github.com/EthTx/ethtx) version - >=0.3.0,<0.4.0 [#62](https://github.com/EthTx/ethtx_ce/pull/62)
+- Deleted usage of mongodb variable [#61](https://github.com/EthTx/ethtx_ce/pull/61)
+
+
+## 0.2.6 - 2021-10-01
+### Changed
+- Changed the position of the logo [#59](https://github.com/EthTx/ethtx_ce/pull/59)
+
+
+## 0.2.5 - 2021-09-30
+### Fixed
+- Fixed colored guessed functions with nested args [#58](https://github.com/EthTx/ethtx_ce/pull/58)
+
+
+## 0.2.4 - 2021-09-29
+### Added 
+- Added `.env_sample` file with example environment variables [#57](https://github.com/EthTx/ethtx_ce/pull/57)
+
+### Fixed
+- Fixed `make run-local` [#57](https://github.com/EthTx/ethtx_ce/pull/57)
+
+### Changed
+- Changed the docker configuration to make it easier to start [#57](https://github.com/EthTx/ethtx_ce/pull/57)
+- Updated **README** [#57](https://github.com/EthTx/ethtx_ce/pull/57)
+
+
+## 0.2.3 - 2021-09-23
+### Added 
+- Color guessed functions and events [#56](https://github.com/EthTx/ethtx_ce/pull/56)
+
+
+## 0.2.2 - 2021-09-20
+### Fixed
+- Fixed `tx hash` regexp extracting from request [#53](https://github.com/EthTx/ethtx_ce/pull/53)
+
+
+## 0.2.1 - 2021-09-17
+### Fixed
+- Fixed `Decode now` button state [#50](https://github.com/EthTx/ethtx_ce/pull/50)
+
+
 ## 0.2.0 - 2021-09-14
 ### Added - [#44](https://github.com/EthTx/ethtx_ce/pull/44)
 - Added new error page.
