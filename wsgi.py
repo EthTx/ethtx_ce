@@ -22,7 +22,6 @@ app = Flask(__name__)
 
 ethtx_config = EthTxConfig(
     mongo_connection_string=os.getenv("MONGO_CONNECTION_STRING"),
-    mongo_database=os.getenv("MONGODB_DB"),
     etherscan_api_key=os.getenv("ETHERSCAN_KEY"),
     web3nodes={
         "mainnet": dict(hook=os.getenv("MAINNET_NODE_URL", ""), poa=False),
