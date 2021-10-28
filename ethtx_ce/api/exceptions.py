@@ -57,9 +57,9 @@ def handle_all_http_exceptions(error: HTTPException) -> BaseErrorType:
     return BaseRequestException(error.code, error.description, request.path), error.code
 
 
-@exceptions_bp.app_errorhandler(ethtx_exceptions.Web3ConnectionException)
-def web3_connection_error(error) -> BaseErrorType:
-    """EthTx - Web3 connection problem."""
+@exceptions_bp.app_errorhandler(ethtx_exceptions.NodeConnectionException)
+def node_connection_error(error) -> BaseErrorType:
+    """EthTx - Node connection error."""
     return BaseRequestException(500, error, request.path), 500
 
 

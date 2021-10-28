@@ -103,63 +103,6 @@
     {% endif %}
 {% endmacro %}
 
-
-{%- macro print_call_line(call) -%}
-    <li id="{{ call.id }}"
-        class="indent-{{ call.indent }} {% if call.indent < 6 %}expanded{% endif %}">
-        <p>
-            <span style="color: slategray">[{{- call.gas_used if call.gas_used != None else "N/A" -}}]: </span>
-            {% if call.error %}
-                <span style='color: red'>({{ call.error }})</span>
-            {% endif %}
-            {% if call.call_type == "delegatecall" %}
-                <span style='color: darkorange'>(delegate)</span>
-            {% endif %}
-            {% if call.value and call.call_type != "selfdestruct" %}
-                <span style='color: blue'>ETH {{ call.value -}}</span>
-            {% endif %}
-            {%- if call.call_type == "selfdestruct" -%}
-                {{- address_link(call.from_address.address, call.from_address.name, call.from_address.badge) -}}
-                <span style='color: darkgreen'>.{{ call.call_type }}({% if call.value > 0 %}
-                    <span style='color: blue'>ETH {{ call.value }}</span> =>
-                    {{ address_link(call.to_address.address, call.to_address.name, call.to_address.badge) -}}{% endif %}
-                    )</span>
-            {%- elif call.call_type == "create" -%}
-                {{- address_link(call.to_address.address, call.to_address.name, call.to_address.badge) -}}.
-                <span style='color: darkgreen'>New()</span>
-            {%- else -%}
-
-                {%- if call.call_type == "delegatecall" -%}
-                    {{- address_link(call.from_address.address, call.from_address.name, call.from_address.badge) -}}
-                {%- else -%}
-                    {{- address_link(call.to_address.address, call.to_address.name, call.to_address.badge) -}}
-                {%- endif -%}
-
-                {%- if call.call_type == "delegatecall" -%}
-                    [
-                    <span class='delegate'>{{- address_link(call.to_address.address, call.to_address.name, call.to_address.badge) -}}</span>
-                {%- endif -%}
-                {%- if call.function_name != "0x" -%}
-                    <span style='color: darkgreen'>.{{- call.function_name -}}</span>
-                {%- else -%}
-                    <span style='color: darkgreen'>.fallback</span>
-                {%- endif -%}
-                {%- if call.call_type == "delegatecall" -%}
-                    ]
-                {%- endif -%}
-
-                <span>({{- print_call_arguments(call.arguments) -}}) => ({{- print_call_arguments(call.outputs) -}})</span>
-            {%- endif -%}
-        </p>
-        <ul>
-            {% for sub_call in call.subcalls %}
-                {{- print_call_line(sub_call) -}}
-            {% endfor %}
-        </ul>
-    </li>
-{%- endmacro -%}
-
-
 {%- macro print_call_line(call) -%}
     <li id="{{ call.id }}"
         class="indent-{{ call.indent }} {% if call.indent < 6 %}expanded{% endif %}">
@@ -195,7 +138,7 @@
                     [<span
                         class='delegate'>{{- address_link(call.to_address.address, call.to_address.name, call.to_address.badge) -}}</span>
                 {%- endif -%}
-                {%- if call.function_name != "0x" and call.arguments and ("arg" in call.arguments[0]["name"] or (call.arguments[0]["name"] == "params" and "arg" in call.arguments[0]["value"][0]["name"])) -%}
+                {%- if call.guessed -%}
                     <span style='color: dodgerblue'>.{{- call.function_name -}}</span>
                 {%- elif call.function_name != "0x" -%}
                     <span style='color: darkgreen'>.{{- call.function_name -}}</span>
@@ -313,7 +256,7 @@
                     <td>
                         <span style="color: slategray">[{{- event.index -}}]</span>
                         {{ address_link(event.contract.address, event.contract.name, event.contract.badge) }}
-                        {%- if not event.event_name.startswith("0x") and event.parameters and not event.parameters[0]["name"] and event.parameters[0]["type"] != "tuple" -%}
+                        {%- if event.guessed -%}
                             <span style='color: dodgerblue'>.{{ event.event_name }}</span>
                         {%- else -%}
                             <span style='color: darkgreen'>.{{ event.event_name }}</span>
