@@ -1,9 +1,19 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 0.2.8 - 2021-10-29
+### Changed
+- Updated **README** and **.env_sample** [#67](https://github.com/EthTx/ethtx_ce/pull/67)
+- `Web3ConnectionException` is not supported anymore. From now on, a general exception `NodeConnectionException`
+  is caught for node connection errors  [#67](https://github.com/EthTx/ethtx_ce/pull/67)
+- Guessed functions and events are detected using the guessed variable in the
+  model [#67](https://github.com/EthTx/ethtx_ce/pull/67)
+
+
 ## 0.2.7 - 2021-10-14
 ### Changed
-- Changed [EthTx](https://github.com/EthTx/ethtx) version - >=0.3.0,<0.4.0 [#62](https://github.com/EthTx/ethtx_ce/pull/62)
+- Changed [EthTx](https://github.com/EthTx/ethtx) version - >=0.3.0,<
+  0.4.0 [#62](https://github.com/EthTx/ethtx_ce/pull/62)
 - Deleted usage of mongodb variable [#61](https://github.com/EthTx/ethtx_ce/pull/61)
 
 ### Fixed
@@ -21,7 +31,7 @@ All notable changes to this project will be documented in this file.
 
 
 ## 0.2.4 - 2021-09-29
-### Added 
+### Added
 - Added `.env_sample` file with example environment variables [#57](https://github.com/EthTx/ethtx_ce/pull/57)
 
 ### Fixed
@@ -33,7 +43,7 @@ All notable changes to this project will be documented in this file.
 
 
 ## 0.2.3 - 2021-09-23
-### Added 
+### Added
 - Color guessed functions and events [#56](https://github.com/EthTx/ethtx_ce/pull/56)
 
 
@@ -61,7 +71,7 @@ All notable changes to this project will be documented in this file.
 - Updated links.
 
 ### Fixed - [#44](https://github.com/EthTx/ethtx_ce/pull/44)
-- Fixed frontend styles. 
+- Fixed frontend styles.
 
 
 ## 0.1.10 - 2021-08-20
@@ -78,7 +88,7 @@ All notable changes to this project will be documented in this file.
 - Changed [EthTx](https://github.com/EthTx/ethtx) version - >=0.2.0,<0.3.0.
 
 ### Fixed
-- Etherscan links fixed for testnets. 
+- Etherscan links fixed for testnets.
 
 
 ## 0.1.8 - 2021-08-11
@@ -87,7 +97,6 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - Changed [EthTx](https://github.com/EthTx/ethtx) version - >=0.2.0,<0.3.0.
-
 
 ## 0.1.7 - 2021-08-05
 ### Added
@@ -102,12 +111,12 @@ All notable changes to this project will be documented in this file.
 - Removed `Pipfile.lock`
 
 ### Fixed
-- Fixed application dependencies. 
+- Fixed application dependencies.
 
 
 ## 0.1.5 - 2021-08-02
 ### Changed
-- Removed the banner that was about the new version of `ethtx_ce`. 
+- Removed the banner that was about the new version of `ethtx_ce`.
 
 
 ## 0.1.4 - 2021-07-29
@@ -138,7 +147,6 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Added configuration: AWS, Pipfile, pre-commit.
 
-
-## v0.1.0 - 2021-07-23
+## 0.1.0 - 2021-07-23
 ### Added
 - First version EthTx CE.
