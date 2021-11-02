@@ -138,7 +138,7 @@
                     [<span
                         class='delegate'>{{- address_link(call.to_address.address, call.to_address.name, call.to_address.badge) -}}</span>
                 {%- endif -%}
-                {%- if call.guessed -%}
+                {%- if call.function_guessed -%}
                     <span style='color: dodgerblue'>.{{- call.function_name -}}</span>
                 {%- elif call.function_name != "0x" -%}
                     <span style='color: darkgreen'>.{{- call.function_name -}}</span>
@@ -256,7 +256,7 @@
                     <td>
                         <span style="color: slategray">[{{- event.index -}}]</span>
                         {{ address_link(event.contract.address, event.contract.name, event.contract.badge) }}
-                        {%- if event.guessed -%}
+                        {%- if event.event_guessed -%}
                             <span style='color: dodgerblue'>.{{ event.event_name }}</span>
                         {%- else -%}
                             <span style='color: darkgreen'>.{{ event.event_name }}</span>
