@@ -37,7 +37,7 @@ Here is a list of steps to recreate local environment on <b>Ubuntu</b> distribut
       ```shell
     apt install docker-compose python3-pip pipenv make 
       ```
-2. Run `pipenv install`. This will create new venv with all required packages installed, including `ethtx` library
+2. Run `pipenv install`. This will create new `venv` with all required packages installed, including `ethtx` library
 3. Copy `.env_sample` to `.env` and fill required field according to description
 ```
   # Proper nodes are required to run ethtx, provide connection strings for chains which will be used.
