@@ -37,13 +37,17 @@ Here is a list of steps to recreate local environment on <b>Ubuntu</b> distribut
       ```shell
     apt install docker-compose python3-pip pipenv make 
       ```
-2. Run `pipenv install`. This will create new venv with all required packages installed, including `ethtx` library
+2. Run `pipenv install`. This will create new `venv` with all required packages installed, including `ethtx` library
 3. Copy `.env_sample` to `.env` and fill required field according to description
 ```
   # Proper nodes are required to run ethtx, provide connection strings for chains which will be used.
   MAINNET_NODE_URL=https://geth-erigon-node:8545
   # KOVAN_NODE_URL=
   # RINKEBY_NODE_URL=
+  
+  # EthTx supports multiple nodes, if one is unavailable, it will use others. You only need to specify them with a comma
+  # Example: MAINNET_NODE_URL=https://geth-erigon-node:8545,https://geth1-erigon-node:8545
+  
   
   # Etherscan API is used to get contract source code, required for decoding process
   # You can get free key here https://etherscan.io/apis

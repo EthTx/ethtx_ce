@@ -59,10 +59,10 @@ def handle_all_http_exceptions(error: HTTPException) -> HTTPException:
     return error
 
 
-@exceptions_bp.app_errorhandler(ethtx_exceptions.Web3ConnectionException)
+@exceptions_bp.app_errorhandler(ethtx_exceptions.NodeConnectionException)
 @render_error_page(500)
-def web3_connection_error(error) -> str:
-    """EthTx - Web3 connection problem."""
+def node_connection_error(error) -> str:
+    """EthTx - Node connection error."""
     return error
 
 
