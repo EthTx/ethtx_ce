@@ -4,28 +4,22 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-web3 = "*"
-pymongo = {extras = ["srv"],version = "*"}
-python-dotenv = "*"
-pytest = "*"
-flask = "*"
-gunicorn = "*"
-werkzeug = "*"
-requests = "*"
-marshmallow = "*"
-jsonpickle = "*"
-hexbytes = "*"
-ethereum = "*"
-pre-commit = "*"
-mongoengine = "*"
-mongomock = "*"
-flask-httpauth = "*"
 ethtx = ">=0.3.0,<0.4.0"
-gitpython = "*"
+web3 = ">=5.25.0"
+python-dotenv = "*"
+flask = ">=2.0.2"
+werkzeug = ">=2.0.2"
+gunicorn = ">=20.1.0"
+flask-httpauth = ">=4.5.0"
+gitpython = ">=3.1.24"
+jsonpickle = ">=2.0.0"
 
 [dev-packages]
-black = "==19.3b0"
-coverage = "*"
+black = "==21.12b0"
+pytest = ">=6.2.5"
+pytest-cov ="==3.0.0"
+pytest-mock ="==3.6.1"
+pre-commit = "*"
 
 [requires]
 python_version = "3.8"
