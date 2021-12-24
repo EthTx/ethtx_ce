@@ -5,6 +5,9 @@ name = "pypi"
 
 [packages]
 ethtx = ">=0.3.0,<0.4.0"
+pymongo = {extras = ["srv"],version = "*"}
+mongoengine = "*"
+mongomock = "*"
 web3 = ">=5.25.0"
 python-dotenv = "*"
 flask = ">=2.0.2"
