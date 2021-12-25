@@ -12,9 +12,17 @@
   ~ limitations under the License.
   -->
 
+{% macro block_explorer_link(chain_id) %}
+    {%- if chain_id.startswith("fantom") -%}
+        https://{%- if chain_id == 'fantom_testnet' -%}testnet.{% endif %}ftmscan.io/
+    {% else %}
+        https://{%- if chain_id != 'mainnet' -%}{{ chain_id }}.{% endif %}etherscan.io/
+    {% endif %}
+{% endmacro %}
+
 {% macro address_link(address, label, badge="") %}
     {%- if address and address != '0x0000000000000000000000000000000000000000' -%}
-        <a href="https://{%- if transaction.chain_id != 'mainnet' -%}{{ transaction.chain_id }}.{% endif %}etherscan.io/address/{{ address }}" target="_blank">
+        <a href="{{ block_explorer_link(transaction.chain_id) }}address/{{ address }}" target="_blank">
            {%- if badge -%}
               <span class="badge badge-info">[{{ badge }}] </span>
            {%- endif -%}
@@ -27,7 +35,7 @@
 
 {% macro nft_link(address, label) %}
     {%- if address and address != '0x0000000000000000000000000000000000000000' -%}
-        <a href="https://{%- if transaction.chain_id != 'mainnet' -%}{{ transaction.chain_id }}.{% endif %}etherscan.io/token/{{ address }}" target="_blank">
+        <a href="{{ block_explorer_link(transaction.chain_id) }}token/{{ address }}" target="_blank">
             {{- label -}}
         </a>
     {%- else -%}
