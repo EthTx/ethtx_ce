@@ -33,7 +33,7 @@ def read_decoded_transaction(tx_hash: str, chain_id: Optional[str] = None):
     decoded_transaction = current_app.ethtx.decoders.decode_transaction(
         chain_id=chain_id, tx_hash=tx_hash
     )
-    decoded_transaction.metadata.timestamp = decoded_transaction.metadata.timestamp.strftime(
-        "%Y-%m-%d %H:%M:%S"
+    decoded_transaction.metadata.timestamp = (
+        decoded_transaction.metadata.timestamp.strftime("%Y-%m-%d %H:%M:%S")
     )
-    return decoded_transaction
+    return decoded_transaction.dict()

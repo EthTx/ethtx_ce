@@ -83,7 +83,7 @@ class ResourceLockedError(RequestError):
 
 
 class EmptyResponseError(RequestError):
-    """ Response is empty."""
+    """Response is empty."""
 
     def __init__(self, msg: str):
         super().__init__(msg)
