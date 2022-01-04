@@ -27,4 +27,4 @@ def read_raw_semantic(address: str, chain_id: Optional[str] = None):
     raw_semantics = current_app.ethtx.semantics.get_raw_semantics(
         chain_id=chain_id, address=address
     )
-    return raw_semantics
+    return raw_semantics.dict()
