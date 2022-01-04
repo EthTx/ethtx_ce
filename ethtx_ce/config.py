@@ -45,7 +45,6 @@ class ProductionConfig(Config):
     PROPAGATE_EXCEPTIONS = True
 
 
-
 class StagingConfig(Config):
     """Staging Config."""
 
@@ -54,6 +53,7 @@ class StagingConfig(Config):
     TESTING = False
     PROPAGATE_EXCEPTIONS = True
 
+
 class DevelopmentConfig(Config):
     """Development Config."""
 
@@ -61,4 +61,3 @@ class DevelopmentConfig(Config):
     FLASK_DEBUG = True
     TESTING = True
     PROPAGATE_EXCEPTIONS = True
-
