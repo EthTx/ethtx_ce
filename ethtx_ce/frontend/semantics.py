@@ -67,14 +67,16 @@ def poke_abi():
 def show_semantics_page(data: AddressSemantics) -> render_template:
     if data:
 
+        data_dict = data.dict()
+
         address = data.address
         chain_id = data.chain_id
         name = data.name or address
 
         if data.is_contract:
-            events = data.contract.events or {}
-            functions = data.contract.functions or {}
-            transformations = data.contract.transformations or {}
+            events = data_dict["contract"]["events"] or {}
+            functions = data_dict["contract"]["functions"] or {}
+            transformations = data_dict["contract"]["transformations"] or {}
             code_hash = data.contract.code_hash
             contract_name = data.contract.name
         else:
@@ -88,7 +90,7 @@ def show_semantics_page(data: AddressSemantics) -> render_template:
         # ToDo: make it more universal
 
         if standard == "ERC20":
-            standard_info = data.erc20 or {}
+            standard_info = data_dict["erc20"] or {}
         elif standard == "ERC721":
             standard_info = {}
         else:
