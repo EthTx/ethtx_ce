@@ -12,9 +12,8 @@
 
 from __future__ import annotations
 
-import logging
 import json
-from web3 import Web3
+import logging
 from typing import Optional, List, Dict
 
 from ethtx.models.semantics_model import (
@@ -29,6 +28,7 @@ from ethtx.models.semantics_model import (
     ParameterSemantics,
 )
 from flask import Blueprint, render_template, current_app, request, jsonify
+from web3 import Web3
 
 from . import frontend_route
 from .deps import auth
@@ -67,16 +67,14 @@ def poke_abi():
 def show_semantics_page(data: AddressSemantics) -> render_template:
     if data:
 
-        data_dict = data.json()
-
         address = data.address
         chain_id = data.chain_id
         name = data.name or address
 
         if data.is_contract:
-            events = data_dict["contract"]["events"] or {}
-            functions = data_dict["contract"]["functions"] or {}
-            transformations = data_dict["contract"]["transformations"] or {}
+            events = data.contract.events or {}
+            functions = data.contract.functions or {}
+            transformations = data.contract.transformations or {}
             code_hash = data.contract.code_hash
             contract_name = data.contract.name
         else:
@@ -90,7 +88,7 @@ def show_semantics_page(data: AddressSemantics) -> render_template:
         # ToDo: make it more universal
 
         if standard == "ERC20":
-            standard_info = data_dict["erc20"] or {}
+            standard_info = data.erc20 or {}
         elif standard == "ERC721":
             standard_info = {}
         else:
