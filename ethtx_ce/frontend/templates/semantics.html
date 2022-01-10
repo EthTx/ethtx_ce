@@ -35,6 +35,7 @@
             padding: 5px 10px 5px 10px;
         }
 
+
         label,
         input,
         select {
@@ -64,9 +65,6 @@
             margin-top: 25px;
         }
 
-        .ui-dialog {
-            padding: .3em;
-        }
     </style>
 
     <script>
@@ -101,7 +99,14 @@
                 valid = valid && abi.val().length > 0 && isJsonString(abi.val());
 
                 if (valid) {
-                    const poke = { address: address.val(), network: network.val(), name: name.val(), abi: abi.val(),  chash: chash, standard: standard };
+                    const poke = {
+                        address: address.val(),
+                        network: network.val(),
+                        name: name.val(),
+                        abi: abi.val(),
+                        chash: chash,
+                        standard: standard
+                    };
                     $.ajax({
                         url: "/poke",
                         dataType: 'json',
@@ -160,7 +165,7 @@
 
 <body>
 
-<h3>Semantics for: {{address}} / {{ metadata.chain }}</h3>
+<h3>Semantics for: {{ address }} / {{ metadata.chain }}</h3>
 <div id="metadataJSONeditor" style="float: left; width: 55%; height: 320px; margin: 5px;"></div>
 <div id="transformationsJSONeditor" style="float: left; width: 43%; height: 320px; margin: 5px;"></div>
 <div id="eventsJSONeditor" style="float: left; width: 55%; height: 320px; margin: 5px;"></div>
@@ -169,6 +174,7 @@
 <form>
     <button id="save-semantics">Save semantics</button>
     <button id="poke-abi">Poke ABI</button>
+    <button id="reload-semantics" style="background-color: #c0392b; color: #fff;">Reload semantics</button>
 </form>
 
 <div id="dialog-form" title="Poke ABI">
@@ -181,7 +187,8 @@
             <select name="network" id="network">
                 <option {% if metadata.chain == 'mainnet' %} selected {% endif %} value="mainnet">ETH mainnet</option>
                 <option {% if metadata.chain == 'goerli' %} selected {% endif %} value="goerli">Goerli testnet</option>
-                <option {% if metadata.chain == 'rinkeby' %} selected {% endif %} value="rinkeby">Rinkeby testnet</option>
+                <option {% if metadata.chain == 'rinkeby' %} selected {% endif %} value="rinkeby">Rinkeby testnet
+                </option>
             </select>
             <label for="name">Contract name</label>
             <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all">
@@ -207,14 +214,25 @@
         statusBar: false
     };
 
-    const metadata_editor = new JSONEditor(metadataContainer, { ...options, name: 'Metadata' }, {{ metadata | tojson }});
-    const transformations_editor = new JSONEditor(transformationsContainer, { ...options, name: 'Transformations' }, {{ transformations | tojson }});
-    const events_editor = new JSONEditor(eventsContainer, { ...options, name: 'Events' }, {{ events | tojson }});
-    const functions_editor = new JSONEditor(functionsContainer, { ...options, name: 'Functions' }, {{ functions | tojson }})
+    const metadata_editor = new JSONEditor(metadataContainer, {...options, name: 'Metadata'}, {{ metadata | tojson }});
+    const transformations_editor = new JSONEditor(transformationsContainer, {
+        ...options,
+        name: 'Transformations'
+    }, {{ transformations | tojson }});
+    const events_editor = new JSONEditor(eventsContainer, {...options, name: 'Events'}, {{ events | tojson }});
+    const functions_editor = new JSONEditor(functionsContainer, {
+        ...options,
+        name: 'Functions'
+    }, {{ functions | tojson }})
 
     $("#save-semantics").button().on("click", function () {
         saveSemantics();
         {{ name }};
+        return false;
+    });
+
+    $("#reload-semantics").button().on("click", function () {
+        reloadSemantics();
         return false;
     });
 
@@ -231,7 +249,7 @@
             url: "/save",
             dataType: 'json',
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(   semantics),
+            data: JSON.stringify(semantics),
             type: 'POST',
             success: function (response) {
                 console.log(response);
@@ -241,8 +259,31 @@
                 console.log(error);
                 location.reload();
             }
-        });
+        })
+    }
 
+    //reload semantics
+    function reloadSemantics() {
+        const data = {
+            address: '{{ address }}',
+            chain: '{{ metadata.chain }}'
+        };
+
+        $.ajax({
+            url: "/reload",
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(data),
+            type: 'POST',
+            success: function (response) {
+                console.log(response);
+                location.reload();
+            },
+            error: function (error) {
+                console.log(error);
+                location.reload();
+            }
+        })
     }
 </script>
 
