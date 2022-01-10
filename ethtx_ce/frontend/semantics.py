@@ -16,6 +16,7 @@ import json
 import logging
 from typing import Optional, List, Dict
 
+from ethtx import EthTx
 from ethtx.models.semantics_model import (
     AddressSemantics,
     ContractSemantics,
@@ -48,6 +49,23 @@ def semantics(address: str, chain_id: Optional[str] = None) -> show_semantics_pa
     )
 
     return show_semantics_page(raw_semantics)
+
+
+@frontend_route(bp, "/reload", methods=["POST"])
+@auth.login_required
+def reload_semantics():
+    """Reload raw semantic."""
+    data = json.loads(request.data)
+
+    ethtx: EthTx = current_app.ethtx
+    ethtx.semantics.database._addresses.remove({"address": data["address"]})
+    ethtx.semantics.get_semantics.cache_clear()
+    ethtx.semantics.get_semantics(
+        data["chain_id"] if data.get("chain_id") else current_app.ethtx._default_chain,
+        data["address"],
+    )
+
+    return "ok"
 
 
 @frontend_route(bp, "/save", methods=["POST"])
