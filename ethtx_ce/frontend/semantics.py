@@ -53,7 +53,7 @@ def semantics(address: str, chain_id: Optional[str] = None) -> show_semantics_pa
 
 @frontend_route(bp, "/reload", methods=["POST"])
 @auth.login_required
-def delete_semantics():
+def reload_semantics():
     """Reload raw semantic."""
     data = json.loads(request.data)
 
