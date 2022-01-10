@@ -58,7 +58,7 @@ def delete_semantics():
     data = json.loads(request.data)
 
     ethtx: EthTx = current_app.ethtx
-    ethtx.semantics.database._contracts.remove({"_id": data["address"]})
+    ethtx.semantics.database._addresses.remove({"address": data["address"]})
     ethtx.semantics.get_semantics.cache_clear()
     ethtx.semantics.get_semantics(
         data["chain_id"] if data.get("chain_id") else current_app.ethtx._default_chain,
