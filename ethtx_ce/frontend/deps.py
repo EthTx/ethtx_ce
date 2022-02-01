@@ -9,13 +9,15 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-
+import json
 import logging
 import os
 import re
-from typing import Tuple
+from secrets import compare_digest
+from typing import Tuple, Optional
 
 import pkg_resources
+import requests
 from flask import Flask, request
 from flask_httpauth import HTTPBasicAuth
 from git import Repo
@@ -30,10 +32,17 @@ auth = HTTPBasicAuth()
 @auth.verify_password
 def verify_password(username: str, password: str) -> bool:
     """Verify user, return bool."""
-    return (
-        username == Config.ETHTX_ADMIN_USERNAME
-        and password == Config.ETHTX_ADMIN_PASSWORD
+    return username == Config.ETHTX_ADMIN_USERNAME and compare_digest(
+        password, Config.ETHTX_ADMIN_PASSWORD
     )
+
+
+def get_eth_price() -> Optional[float]:
+    response = requests.get("https://api.coinbase.com/v2/prices/ETH-USD/buy")
+
+    if response.status_code == 200:
+        eth_price = float(json.loads(response.content)["data"]["amount"])
+        return eth_price
 
 
 def read_ethtx_versions(app: Flask) -> None:
