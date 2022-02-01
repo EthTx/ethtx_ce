@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-ethtx = ">=0.3.0,<0.4.0"
+ethtx = "0.3.8"
 pymongo = {extras = ["srv"],version = "*"}
 mongoengine = "*"
 mongomock = "*"
@@ -25,4 +25,4 @@ pytest-mock ="==3.6.1"
 pre-commit = "*"
 
 [requires]
-python_version = "3.8"
+python_version = "3.9"
