@@ -50,9 +50,9 @@ def get_eth_price() -> Optional[float]:
 
     current_time = time.time()
     if (
-            eth_price is None
-            or eth_price_update is None
-            or (current_time - eth_price_update) > 60
+        eth_price is None
+        or eth_price_update is None
+        or (current_time - eth_price_update) > 60
     ):
         response = requests.get("https://api.coinbase.com/v2/prices/ETH-USD/buy")
         if response.status_code == 200:
