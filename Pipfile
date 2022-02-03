@@ -15,7 +15,7 @@ gitpython = ">=3.1.24"
 jsonpickle = ">=2.0.0"
 
 [dev-packages]
-black = "*"
+black = "==21.12b0"
 pytest = ">=6.2.5"
 pytest-cov =">=3.0.0"
 pytest-mock =">=3.6.1"
