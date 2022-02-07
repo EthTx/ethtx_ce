@@ -1,6 +1,29 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+### 0.2.9 - 2022-02-07
+### Fixed
+- Typo in `README.md` [#75](https://github.com/EthTx/ethtx_ce/pull/75)
+- API serialization [#75](https://github.com/EthTx/ethtx_ce/pull/75)
+- Fixed semantics editor [#75](https://github.com/EthTx/ethtx_ce/pull/75)
+- Fixed `.env_sample` mongo connection string [#83](https://github.com/EthTx/ethtx_ce/pull/83)
+
+### Added
+- Added new route `reload`
+- Added `Reolad semantics` button, which allows to reload the semantics (removes from the database and downloads
+  again) [#79](https://github.com/EthTx/ethtx_ce/pull/79)
+- Added `get_eth_price`. Transaction page displays current **ETH** price taken from *coinbase*
+  API [#88](https://github.com/EthTx/ethtx_ce/pull/88)
+
+### Changed
+- Removed duplicated environment variables from `docker-compose.yml` [#83](https://github.com/EthTx/ethtx_ce/pull/83)
+- Bumped python to `3.9` [#87](https://github.com/EthTx/ethtx_ce/pull/87)
+- From now on, `EthTx` will be used with a static version (due to dynamic
+  development) [#87](https://github.com/EthTx/ethtx_ce/pull/87)
+- Updated requirements [#88](https://github.com/EthTx/ethtx_ce/pull/88)
+- Install dev dependencies [#89](https://github.com/EthTx/ethtx_ce/pull/89)
+
+
 ## 0.2.8 - 2021-10-29
 ### Changed
 - Updated **README** and **.env_sample** [#67](https://github.com/EthTx/ethtx_ce/pull/67)
