@@ -15,7 +15,7 @@ from typing import Optional
 from ethtx.models.decoded_model import DecodedTransaction
 from flask import Blueprint, render_template, current_app
 
-from . import frontend_route
+from . import frontend_route, deps
 
 log = logging.getLogger(__name__)
 
@@ -45,6 +45,7 @@ def show_transaction_page(data: DecodedTransaction) -> render_template:
     return (
         render_template(
             "transaction.html",
+            eth_price=deps.get_eth_price(),
             transaction=data.metadata,
             events=data.events,
             call=data.calls,

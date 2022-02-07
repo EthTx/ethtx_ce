@@ -16,7 +16,7 @@ ENV GIT_SHA=$GIT_SHA
 ARG CI=1
 RUN pip install --upgrade pip && \
     pip install pipenv && \
-    pipenv install #--dev --system --deploy --ignore-pipfile
+    pipenv install --dev --deploy
 
 EXPOSE 5000
 

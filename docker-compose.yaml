@@ -9,9 +9,6 @@ services:
       - .env
     depends_on:
       - mongo
-    environment:
-      - MONGO_CONNECTION_STRING=mongodb://mongo
-      - MONGODB_DB=ethtx
   mongo:
     image: mongo
     environment:
