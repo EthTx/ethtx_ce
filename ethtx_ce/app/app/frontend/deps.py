@@ -23,7 +23,7 @@ from flask import Flask, request
 from flask_httpauth import HTTPBasicAuth
 from git import Repo
 
-from ethtx_ce.config import Config
+from ..config import Config
 
 log = logging.getLogger(__name__)
 

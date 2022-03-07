@@ -16,7 +16,7 @@ from ethtx import EthTx, EthTxConfig
 from flask import Flask
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
 
-from ethtx_ce import frontend, api
+from app import frontend, api
 
 app = Flask(__name__)
 

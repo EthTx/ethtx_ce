@@ -4,9 +4,9 @@ services:
     ports:
     - "5000:5000"
     volumes:
-    - ./ethtx_ce:/app
+    - ./ethtx_ce/app:/app
     build:
-      context: .
+      context: ./ethtx_ce
       dockerfile: Dockerfile
     # start with reload: /start-reload.sh
     command: /start.sh

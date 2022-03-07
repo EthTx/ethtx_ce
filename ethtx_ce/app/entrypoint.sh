@@ -7,8 +7,6 @@ if [ -f /app/app/wsgi.py ]; then
     DEFAULT_MODULE_NAME=app.wsgi
 elif [ -f /app/wsgi.py ]; then
     DEFAULT_MODULE_NAME=wsgi
-else
-    DEFAULT_MODULE_NAME=app.wsgi
 fi
 MODULE_NAME=${MODULE_NAME:-$DEFAULT_MODULE_NAME}
 VARIABLE_NAME=${VARIABLE_NAME:-app}

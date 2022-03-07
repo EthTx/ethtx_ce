@@ -79,7 +79,7 @@ class ResourceLockedError(RequestError):
     """Resource is locked."""
 
     def __init__(self):
-        super().__init__(f"The resource that is being accessed is locked.")
+        super().__init__("The resource that is being accessed is locked.")
 
 
 class EmptyResponseError(RequestError):
@@ -94,5 +94,5 @@ class InternalError(RequestError):
 
     def __init__(self):
         super().__init__(
-            f"The request was well-formed but server could not properly decode transaction."
+            "The request was well-formed but server could not properly decode transaction."
         )

@@ -17,7 +17,7 @@ from ethtx import EthTx
 from flask import Blueprint
 from flask import Flask
 
-from ethtx_ce import factory
+from .. import factory
 from .decorators import auth_required
 
 

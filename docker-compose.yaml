@@ -5,12 +5,10 @@ services:
     image: 'ethtx_ce:${TAG-latest}'
     env_file:
       - .env
-    volumes:
-      - ./ethtx_ce:/app
     depends_on:
       - mongo
     build:
-      context: .
+      context: ./ethtx_ce
       dockerfile: Dockerfile
 
   mongo:

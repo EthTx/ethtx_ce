@@ -3,4 +3,4 @@ max-line-length = 130
 exclude = .git,__pycache__,__init__.py,.mypy_cache,.pytest_cache
 extend-ignore =
     # See https://github.com/PyCQA/pycodestyle/issues/373
-    E203,
+    E203, F401, F403, F405

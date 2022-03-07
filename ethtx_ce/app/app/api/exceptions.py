@@ -21,9 +21,8 @@ from flask import Blueprint, request
 from web3.exceptions import TransactionNotFound
 from werkzeug.exceptions import HTTPException
 
-from ethtx_ce.api.utils import as_dict
-from ethtx_ce.exceptions import *
-
+from .utils import as_dict
+from ..exceptions import *
 
 log = logging.getLogger(__name__)
 
