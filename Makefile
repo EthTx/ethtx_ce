@@ -2,7 +2,7 @@ help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 build-image:  ## Build all docker images
-	docker build -t ethtx_ce .
+	docker build -t ethtx_ce ./ethtx_ce
 
 get-git-version: ## Get git version
 	./scripts/git_version_for_docker.sh
@@ -21,9 +21,6 @@ run-docker:
 	fuser -k 5000/tcp || true
 	docker-compose up -d
 
-run-test-docker:
-	docker run -it ethtx_ce make test
-
 test:
 	PYTHONPATH=./ethtx_ce/app pipenv run python -m pytest ethtx_ce/app/app/tests/
 
@@ -31,5 +28,6 @@ test-all:
 	PYTHONPATH=./ethtx_ce/app pipenv run python -m pytest .
 
 setup:
+	export PIPENV_PIPFILE=./ethtx_ce/app/Pipfile
 	pipenv install --dev
 	pipenv run pre-commit install
