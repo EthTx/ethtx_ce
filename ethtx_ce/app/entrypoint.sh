@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 set -e
 
-echo "Starting..."
+echo "ethtx_ce entrypoint.sh"
 
 if [ -f /app/app/wsgi.py ]; then
     DEFAULT_MODULE_NAME=app.wsgi
@@ -20,9 +20,5 @@ else
     DEFAULT_GUNICORN_CONF=/gunicorn_conf.py
 fi
 export GUNICORN_CONF=${GUNICORN_CONF:-$DEFAULT_GUNICORN_CONF}
-
-echo "Starting Gunicorn..."
-echo $DEFAULT_MODULE_NAME
-echo $DEFAULT_GUNICORN_CONF
 
 exec "$@"
