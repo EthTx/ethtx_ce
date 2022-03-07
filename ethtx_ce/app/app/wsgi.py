@@ -43,5 +43,6 @@ app.wsgi_app = DispatcherMiddleware(
     {"/api": api.create_app(engine=ethtx, settings_override=EthTxConfig)},
 )
 
+# ethtx_ce/app as Source Root
 if __name__ == "__main__":
     app.run()
