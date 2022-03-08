@@ -14,7 +14,7 @@ repos:
         language_version: python3.9
         name: EthTx_ce:flake8
         alias: ethtx_ce-flake8
-        args: [ --config=ethtx_ce/app/.flake8 ]
+        args: [ --config=ethtx_ce/.flake8 ]
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.0.1
@@ -27,7 +27,7 @@ repos:
   - repo: local
     hooks:
       - id: pytest
-        files: ./ethtx_ce/app/app/tests/
+        files: ./ethtx_ce/tests/
         name: pytest
         language: system
         entry: make test

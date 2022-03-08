@@ -3,12 +3,10 @@ services:
   ethtx_ce:
     ports:
     - "5000:5000"
-    volumes:
-    - ./ethtx_ce/app:/app
     build:
-      context: ./ethtx_ce
+      context: .
       dockerfile: Dockerfile
-    # start with reload: /start-reload.sh
+
     command: /start.sh
 
   mongo:

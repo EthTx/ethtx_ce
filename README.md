@@ -42,7 +42,6 @@ Here is a list of steps to recreate local environment on <b>Ubuntu</b> distribut
 2. Run:
 
     ```shell
-    export PIPENV_PIPFILE=./ethtx_ce/app/Pipfile
     pipenv install
     ```
 
@@ -83,7 +82,7 @@ Here is a list of steps to recreate local environment on <b>Ubuntu</b> distribut
 
 4. Run
     ```shell
-    PYTHONPATH=./ethtx_ce/app FLASK_APP=ethtx_ce/app/app/wsgi.py pipenv run flask run --host=0.0.0.0 --port 5000
+    PYTHONPATH=./ethtx_ce FLASK_APP=ethtx_ce/app/wsgi.py pipenv run flask run --host=0.0.0.0 --port 5000
     ```
    or
     ```shell

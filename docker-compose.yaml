@@ -8,7 +8,7 @@ services:
     depends_on:
       - mongo
     build:
-      context: ./ethtx_ce
+      context: .
       dockerfile: Dockerfile
 
   mongo:
