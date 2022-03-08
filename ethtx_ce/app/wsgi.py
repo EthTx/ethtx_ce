@@ -16,7 +16,7 @@ from ethtx import EthTx, EthTxConfig
 from flask import Flask
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
 
-from app import frontend, api
+from . import frontend, api
 
 app = Flask(__name__)
 
@@ -43,6 +43,6 @@ app.wsgi_app = DispatcherMiddleware(
     {"/api": api.create_app(engine=ethtx, settings_override=EthTxConfig)},
 )
 
-# ethtx_ce/app as Source Root
+# ethtx_ce/ as Source Root
 if __name__ == "__main__":
     app.run()

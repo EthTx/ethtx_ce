@@ -27,7 +27,6 @@ jobs:
 
     - name: Install dependencies with pipenv
       run: |
-        export PIPENV_PIPFILE=./ethtx_ce/app/Pipfile
         pip install pipenv
         pipenv install --deploy --dev
 
@@ -65,7 +64,6 @@ jobs:
         echo "-----------------------"
         echo "Build step 1/3: Building docker image"
         echo "-----------------------"
-        cd ethtx_ce && \
         docker build --build-arg GIT_SHA=$SHA_TAG \
                      --build-arg GIT_URL=$(git config --get remote.origin.url) \
                      -t $ECR_REGISTRY/$ECR_REPO_NAME:$SHA_TAG \
