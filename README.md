@@ -83,7 +83,7 @@ Here is a list of steps to recreate local environment on <b>Ubuntu</b> distribut
 
 4. Run
     ```shell
-    PYTHONPATH=./ethtx_ce/app FLASK_APP=ethtx_ce/app/app/wsgi.py FLASK_DEBUG=1 pipenv run flask run --host=0.0.0.0 --port 5000
+    PYTHONPATH=./ethtx_ce/app FLASK_APP=ethtx_ce/app/app/wsgi.py pipenv run flask run --host=0.0.0.0 --port 5000
     ```
    or
     ```shell
