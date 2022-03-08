@@ -17,7 +17,7 @@ from typing import Callable, Optional
 import jsonpickle
 from flask import request, current_app, jsonify
 
-from ethtx_ce.exceptions import (
+from ..exceptions import (
     AuthorizationError,
     PayloadTooLarge,
     UnexpectedError,

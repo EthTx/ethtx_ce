@@ -1,6 +1,6 @@
 import pytest
 
-from ethtx_ce.frontend import create_app
+from app.frontend import create_app
 
 
 class TestFlask:

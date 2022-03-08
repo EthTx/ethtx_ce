@@ -1,9 +1,8 @@
 from typing import Dict
 
+from ethtx.models.w3_model import W3Transaction, W3Block, W3Receipt, W3Log
+from ethtx.utils.attr_dict import AttrDict
 from hexbytes import HexBytes
-
-from ethtx_ce.engine.models.w3_model import W3Log, W3Transaction, W3Receipt, W3Block
-from ethtx_ce.helpers import AttrDict
 
 
 class MockWeb3Provider:

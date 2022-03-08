@@ -15,12 +15,12 @@ from typing import Optional, Dict
 
 from flask import Flask
 
-from ethtx_ce.config import Config
+from .config import Config
 from .helpers import class_import, register_blueprints
 from .logger import setup_logging
 
 env = os.getenv("ENV", "development").capitalize()
-config_class = f"ethtx_ce.config.{env}Config"
+config_class = f"app.config.{env}Config"
 config: Config = class_import(config_class)
 
 

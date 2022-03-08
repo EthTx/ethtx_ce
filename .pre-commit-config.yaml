@@ -3,9 +3,18 @@ repos:
     rev: 21.12b0
     hooks:
       - id: black
-        language_version: python3.8
-        name: Backend:black
-        alias: backend-black
+        language_version: python3.9
+        name: EthTx_ce:black
+        alias: ethtx_ce-black
+
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 4.0.1
+    hooks:
+      - id: flake8
+        language_version: python3.9
+        name: EthTx_ce:flake8
+        alias: ethtx_ce-flake8
+        args: [ --config=ethtx_ce/app/.flake8 ]
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.0.1
@@ -18,17 +27,9 @@ repos:
   - repo: local
     hooks:
       - id: pytest
+        files: ./ethtx_ce/app/app/tests/
         name: pytest
         language: system
         entry: make test
         pass_filenames: false
         always_run: true
-
-#  - repo: https://gitlab.com/pycqa/flake8
-#    rev: 3.9.2
-#    hooks:
-#      - id: flake8
-#        language_version: python3.8
-#        name: Backend:flake8
-#        alias: backend-flake8
-#        args: [--config=.flake8]
