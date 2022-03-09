@@ -73,7 +73,7 @@ jobs:
         echo "-----------------------"
         echo "Build step 2/3: Testing builded image"
         echo "-----------------------"
-        docker run  $ECR_REGISTRY/$ECR_REPO_NAME:$SHA_TAG make test
+        docker run  $ECR_REGISTRY/$ECR_REPO_NAME:$SHA_TAG pipenv run python -m pytest .
         echo "-----------------------"
         echo "Build step 3/3: Pushing builded image to $ECR_REPO_NAME"
         echo "-----------------------"

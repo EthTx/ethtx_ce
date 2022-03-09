@@ -11,12 +11,11 @@
 #  limitations under the License.
 
 import os
-import secrets
 
 from dotenv import load_dotenv, find_dotenv
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-load_dotenv(find_dotenv(filename="../.env"))
+load_dotenv(find_dotenv(filename="../../.env"))
 
 
 class Config:
@@ -26,7 +25,7 @@ class Config:
         "LOGGING_CONFIG", os.path.join(BASE_DIR, "../log_cfg.json")
     )
     LOGGING_LOG_PATH = os.environ.get(
-        "LOGGING_CONFIG", os.path.join(BASE_DIR, "../tmp")
+        "LOGGING_CONFIG", os.path.join(BASE_DIR, "../../tmp")
     )
 
     API_KEY = os.getenv("API_KEY", "")

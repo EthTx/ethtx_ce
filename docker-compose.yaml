@@ -1,20 +1,21 @@
-version: "3"
+version: "3.6"
 
 services:
   ethtx_ce:
-    image: ethtx_ce
-    ports:
-      - "5000:5000"
+    image: 'ethtx_ce:${TAG-latest}'
     env_file:
       - .env
     depends_on:
       - mongo
+    build:
+      context: .
+      dockerfile: Dockerfile
+
   mongo:
     image: mongo
     environment:
       - MONGO_INITDB_DATABASE=${MONGODB_DB}
-    ports:
-      - "27017:27017"
+
   mongo-express:
     image: mongo-express
     environment:
@@ -26,5 +27,3 @@ services:
       - ME_CONFIG_BASICAUTH_PASSWORD=${MONGOEXPRESS_PASSWORD}
     depends_on:
       - mongo
-    ports:
-      - "8081:8081"

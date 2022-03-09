@@ -1,0 +1,19 @@
+version: "3.6"
+services:
+  ethtx_ce:
+    ports:
+    - "5000:5000"
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    command: /start.sh
+
+  mongo:
+    ports:
+      - "27017:27017"
+  mongo-express:
+    depends_on:
+      - mongo
+    ports:
+      - "8081:8081"
