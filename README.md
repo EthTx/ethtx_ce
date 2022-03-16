@@ -64,9 +64,7 @@ Here is a list of steps to recreate local environment on <b>Ubuntu</b> distribut
       # Optional. Those represent data required for connecting to mongoDB. It's used for caching semantics
       # used in decoding process. But, it's not neccessary for running, If you don't want to use permanent
       # db or setup mongo, leave those values, mongomock package is used to simulate in-memory mongo.
-      MONGO_CONNECTION_STRING=mongomock://localhost
-      MONGODB_DB=ethtx
-
+      MONGO_CONNECTION_STRING=mongomock://localhost/ethtx
 
       # Optional. Credentials for accessing semantics editor page, available under '/semantics/<str:address>'
       ETHTX_ADMIN_USERNAME=admin
