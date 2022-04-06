@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-ethtx = "==0.3.13"
+ethtx = "==0.3.14"
 web3 = "==5.26.0"
 python-dotenv = "*"
 flask = ">=2.0.2"
