@@ -15,7 +15,7 @@ run-local:
 
 run-prod:
 	fuser -k 5000/tcp || true
-	PYTHONPATH=./ethtx_ce pipenv run gunicorn --workers 4 --max-requests 4000 --timeout 600 --bind :5000 app.wsgi:app
+	PYTHONPATH=./ethtx_ce pipenv run gunicorn -k gthread --workers 4 --max-requests 4000 --timeout 600 --bind :5000 app.wsgi:app
 
 run-docker:
 	fuser -k 5000/tcp || true

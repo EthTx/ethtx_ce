@@ -9,11 +9,10 @@ web3 = "==5.26.0"
 python-dotenv = "*"
 flask = ">=2.0.2"
 werkzeug = ">=2.0.2"
-gunicorn = ">=20.1.0"
+gunicorn = {version = ">=20.1.0", extras = ["gthread"]}
 flask-httpauth = ">=4.5.0"
 gitpython = ">=3.1.24"
 jsonpickle = ">=2.0.0"
-meinheld = ">=1.0.2"
 
 [dev-packages]
 black = "==21.12b0"
