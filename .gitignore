@@ -145,3 +145,4 @@ dmypy.json
 .docker_env
 
 tmp/
+*.sqlite
