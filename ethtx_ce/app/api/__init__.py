@@ -19,6 +19,7 @@ from flask import Flask
 
 from .. import factory
 from .decorators import auth_required
+from ..helpers import read_ethtx_versions
 
 
 def create_app(
@@ -27,7 +28,10 @@ def create_app(
     """Returns API application instance."""
 
     app = factory.create_app(__name__, __path__, settings_override)
+    app.name = "ethtx_ce/api"
+
     app.ethtx = engine  # init ethtx engine
+    read_ethtx_versions(app)
 
     return app
 

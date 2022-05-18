@@ -152,3 +152,24 @@ support `GET` requests.
       curl --location --request GET 'http://0.0.0.0:5000/api/semantics/dsad/asd' \
       --header 'x-api-key: 05a2212d-9985-48d2-b54f-0fbc5ba28766'
       ```
+
+* **Info**
+
+  Returns information about the `EthTx`
+
+    * **URL**
+      ```shell
+      /api/info
+      ```
+    * **Method**
+      `GET`
+    * **Authorization**
+      * Required:
+        header: `x-api-key=[string]` **OR** query parameter: `api_key=[string]`
+    * **URL Params**
+        * None
+    * **Example**
+      ```shell
+      curl --location --request GET 'http://api/info' \
+      --header 'x-api-key: 05a2212d-9985-48d2-b54f-0fbc5ba28766'
+      ```
