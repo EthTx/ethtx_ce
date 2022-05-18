@@ -16,8 +16,9 @@ from typing import Callable, Dict, Optional, Union, Type
 from ethtx import EthTx
 from flask import Blueprint, Flask
 
-from .deps import read_ethtx_versions
+
 from .. import factory
+from ..helpers import read_ethtx_versions
 
 
 def create_app(
@@ -31,6 +32,7 @@ def create_app(
         template_folder="frontend/templates",
         static_folder="frontend/static",
     )
+    app.name = "ethtx_ce/frontend"
 
     app.jinja_env.trim_blocks = True
     app.jinja_env.lstrip_blocks = True

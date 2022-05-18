@@ -10,5 +10,6 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
+from .info import info_bp
 from .semantics import semantics_bp
 from .transactions import transactions_bp
