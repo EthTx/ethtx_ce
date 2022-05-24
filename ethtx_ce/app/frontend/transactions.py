@@ -10,10 +10,11 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 import logging
+import os
 from typing import Optional
 
 from ethtx.models.decoded_model import DecodedTransaction
-from flask import Blueprint, render_template, current_app
+from flask import Blueprint, render_template, current_app, request
 
 from . import frontend_route, deps
 
@@ -29,9 +30,19 @@ def read_decoded_transaction(
 ) -> "show_transaction_page":
     tx_hash = tx_hash if tx_hash.startswith("0x") else "0x" + tx_hash
 
+    refresh_semantics = 'refresh' in request.args
+
+    if refresh_semantics:
+        refresh_secure_key = request.args['refresh']
+        if refresh_secure_key != os.environ['SEMANTIC_REFRESH_KEY']:
+            return "Invalid semantics refresh key"
+
+        log.info(f"Decoding tx {tx_hash} with semantics refresh")
+
+
     chain_id = chain_id or current_app.ethtx.default_chain
     decoded_transaction = current_app.ethtx.decoders.decode_transaction(
-        chain_id=chain_id, tx_hash=tx_hash
+        chain_id=chain_id, tx_hash=tx_hash, recreate_semantics=refresh_semantics
     )
     decoded_transaction.metadata.timestamp = (
         decoded_transaction.metadata.timestamp.strftime("%Y-%m-%d %H:%M:%S")
