@@ -332,7 +332,7 @@
                         <td>{{- address_link(transfer.token_address, transfer.token_symbol) -}}</td>
                     {% endif %}
                     <td style="text-align: right">
-                        {{- transfer.value -}}
+                        {{- "{:,.4f}".format(transfer.value) -}}
                     </td>
                     <td>{{- address_link(transfer.to_address.address, transfer.to_address.name, transfer.to_address.badge) -}}</td>
                 </tr>
