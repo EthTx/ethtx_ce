@@ -24,7 +24,7 @@ semantics_bp = Blueprint("api_semantics", __name__)
 @response(200)
 def read_raw_semantic(address: str, chain_id: Optional[str] = None):
     """Get raw semantic."""
-    raw_semantics = current_app.ethtx.semantics.get_raw_semantics(
+    raw_semantics = current_app.ethtx.semantics.get_semantics(
         chain_id=chain_id, address=address
     )
     return raw_semantics.dict()
