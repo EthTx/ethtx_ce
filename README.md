@@ -170,6 +170,6 @@ support `GET` requests.
         * None
     * **Example**
       ```shell
-      curl --location --request GET 'http://api/info' \
+      curl --location --request GET 'http://0.0.0.0:5000/api/info' \
       --header 'x-api-key: 05a2212d-9985-48d2-b54f-0fbc5ba28766'
       ```
