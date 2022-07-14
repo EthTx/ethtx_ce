@@ -166,10 +166,16 @@
 <head>
     {% include './partials/headtags.html' %}
     <title>Ethtx.info Analysis {{ transaction.tx_hash }}</title>
-
-    <link href="//cdn.jsdelivr.net/npm/jquery.fancytree@2.27/dist/skin-win8/ui.fancytree.min.css" rel="stylesheet">
-    <script src="/static/jquery.min.js"></script>
-    <script src="/static/jquery.fancytree-all-deps.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/jquery.fancytree/2.38.2/skin-awesome/ui.fancytree.min.css"
+          integrity="sha512-O1oWy5HGgOl2BbI9dNuChC191wD5n8mVfinrtfXj2FfpxKuPR8QwCIE7Y9c6SR9TNTIUyQ3vitRE+ri6dD4ArA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.fancytree/2.38.2/jquery.fancytree-all-deps.min.js"
+            integrity="sha512-8Fstaj+d8Fha0qzgW/bGQpyG4NcVSYcmflfYOzhV1z/4/SYwf96rqrANH+lUmO7ZSq9WgRDYgASFiiq20bgK7g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link href="/static/ethtx.new.css" rel="stylesheet">
 </head>
 
@@ -266,7 +272,6 @@
                     </td>
                     {% if loop.index > 1 %}</tr>{% endif %}
                     {% endfor %}
-                </tr>
             {% endfor %}
             </tbody>
         </table>
@@ -326,7 +331,6 @@
     <h3>Trace decoding error...</h3>
 {% endif %}
 
-</div>
 <script>
     $(document).ready(() => {
         $("#tree").fancytree({
