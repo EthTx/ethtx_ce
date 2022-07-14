@@ -1,7 +1,60 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-### 0.2.9 - 2022-02-07
+## 0.2.15 - 2022-07-06
+### Added
+- Added redecode semantics functionality
+- Bumped `EthTx` to `0.3.16` [#116](https://github.com/EthTx/ethtx_ce/pull/116)
+- From now on the value of `transfer.value` is formatted on the frontend [#116](https://github.com/EthTx/ethtx_ce/pull/116)
+
+### Fixed
+- Fixed wrong function name (`get_semantics`) [#118](https://github.com/EthTx/ethtx_ce/pull/118)
+
+
+## 0.2.14 - 2022-05-18
+### Added
+- Added `info` endpoint with ethtx/ethtx_ce version [#113](https://github.com/EthTx/ethtx_ce/pull/113)
+- added `get_latest_ethtx_version` function (get version from Pypi) [#113](https://github.com/EthTx/ethtx_ce/pull/113)
+
+### Changed
+- Refactored `deps` [#113](https://github.com/EthTx/ethtx_ce/pull/113)
+- Updated `README.md` [#113](https://github.com/EthTx/ethtx_ce/pull/113)
+- Updated `black` version [#113](https://github.com/EthTx/ethtx_ce/pull/113)
+- Changed the application name for each component [#113](https://github.com/EthTx/ethtx_ce/pull/113)
+
+
+## 0.2.13 - 2022-04-22
+### Changed
+- Extended *.gitignore* [#110](https://github.com/EthTx/ethtx_ce/pull/110)
+- Updated `black` pre-commit version [#110](https://github.com/EthTx/ethtx_ce/pull/110)
+
+### Fixed
+- Fixed mongodb semantics remove [#110](https://github.com/EthTx/ethtx_ce/pull/110)
+
+
+## 0.2.12 - 2022-04-06
+### Changed
+- Bumped `EthTx` to `0.3.14` [#105](https://github.com/EthTx/ethtx_ce/pull/105)
+
+
+## 0.2.11 - 2022-03-16
+### Changed
+- New project structure [#97](https://github.com/EthTx/ethtx_ce/pull/97)
+- Updated docker, docker-compose [#97](https://github.com/EthTx/ethtx_ce/pull/97)
+- Removed logs, useless text [#99](https://github.com/EthTx/ethtx_ce/pull/99)
+- Changed space between *tx_hash* and *chain_id* (transaction page) [#99](https://github.com/EthTx/ethtx_ce/pull/99)
+
+### Added
+- Added gunicorn configuration [#97](https://github.com/EthTx/ethtx_ce/pull/97)
+- Added `entrypoint.sh` and other scripts [#97](https://github.com/EthTx/ethtx_ce/pull/97)
+
+
+## 0.2.10 - 2022-03-03
+### Changed
+- Bumped `EthTx` to `0.3.10` [#93](https://github.com/EthTx/ethtx_ce/pull/93)
+
+
+## 0.2.9 - 2022-02-07
 ### Fixed
 - Typo in `README.md` [#75](https://github.com/EthTx/ethtx_ce/pull/75)
 - API serialization [#75](https://github.com/EthTx/ethtx_ce/pull/75)
@@ -11,7 +64,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Added new route `reload`
 - Added `Reolad semantics` button, which allows to reload the semantics (removes from the database and downloads
-  again) [#79](https://github.com/EthTx/ethtx_ce/pull/79)
+  again) [#80](https://github.com/EthTx/ethtx_ce/pull/80)
 - Added `get_eth_price`. Transaction page displays current **ETH** price taken from *coinbase*
   API [#88](https://github.com/EthTx/ethtx_ce/pull/88)
 
