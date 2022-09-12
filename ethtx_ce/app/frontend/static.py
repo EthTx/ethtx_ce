@@ -27,6 +27,9 @@ def search_page() -> render_template:
     return (
         render_template(
             "index.html",
+            chains=current_app.ethtx.providers.web3provider.nodes.keys()
+            if current_app.ethtx
+            else [],
             ethtx_version=current_app.config["ethtx_version"],
             ethtx_ce_version=current_app.config["ethtx_ce_version"],
         ),

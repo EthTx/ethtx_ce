@@ -147,9 +147,13 @@
         <div>
             <label for="net">Network</label>
             <select class="input select" id="net">
-                <option value="mainnet">ETH mainnet</option>
-                <option value="goerli">Goerli testnet</option>
-                <option value="rinkeby">Rinkeby testnet</option>
+                {% for chain in chains %}
+                    {% if chain == 'mainnet' %}
+                    <option value="mainnet">ETH mainnet</option>
+                    {% else %}
+                    <option value="{{ chain }}">{{ chain|title + ' testnet' }}</option>
+                    {% endif %}
+                {% endfor %}
             </select>
         </div>
         <div>
