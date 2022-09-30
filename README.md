@@ -37,7 +37,8 @@ Here is a list of steps to recreate local environment on <b>Ubuntu</b> distribut
 1. Install needed packages using `apt`:
 
     ```shell
-    apt install docker-compose python3-pip pipenv make
+    apt install docker-compose python3-pip python3-dev pipenv make
+    apt install libxml2-dev libxslt1-dev gcc
     ```
 2. Run:
 
@@ -164,8 +165,8 @@ support `GET` requests.
     * **Method**
       `GET`
     * **Authorization**
-      * Required:
-        header: `x-api-key=[string]` **OR** query parameter: `api_key=[string]`
+        * Required:
+          header: `x-api-key=[string]` **OR** query parameter: `api_key=[string]`
     * **URL Params**
         * None
     * **Example**
