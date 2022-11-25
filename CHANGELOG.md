@@ -1,6 +1,20 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+
+## 0.2.16 - 2022-11-25
+### Changed
+- Removed `.js` files from the sources and pulling them instead from `cdnjs` [#123](https://github.com/EthTx/ethtx_ce/pull/123)
+- Removed `static` ressources from the frontend of the app [#129](https://github.com/EthTx/ethtx_ce/pull/129)
+- Removed `gthread` for better stability [#135](https://github.com/EthTx/ethtx_ce/pull/135)
+- Removed support of `Rinkeby` [#139](https://github.com/EthTx/ethtx_ce/pull/139)
+- Changed the `README.md` to include the `development` dependencies [#140](https://github.com/EthTx/ethtx_ce/pull/140)
+
+### Added
+- Added flexible chains rendering [#139](https://github.com/EthTx/ethtx_ce/pull/139)
+- Bumped `EthTx` to `0.3.20` and the `web3` depencency to `5.28.0` [#143](https://github.com/EthTx/ethtx_ce/pull/143)
+
+
 ## 0.2.15 - 2022-07-06
 ### Changed
 - Removed `Tokne Flow` branding
