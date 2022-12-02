@@ -61,7 +61,7 @@ def response(status: Optional[int] = 200):
                 data = jsonify(
                     delete_bstrings(
                         jsonpickle.decode(
-                            jsonpickle.encode(func, make_refs=False, unpicklable=False)
+                            jsonpickle.encode(func, make_refs=False, unpicklable=False, use_decimal=True)
                         )
                     )
                 )
