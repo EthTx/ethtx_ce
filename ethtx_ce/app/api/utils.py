@@ -17,6 +17,7 @@
 from dataclasses import asdict
 from functools import wraps
 from typing import Dict
+from decimal import Decimal
 
 
 def enable_direct(decorator):
@@ -44,7 +45,7 @@ def as_dict(cls):
 
 
 def delete_bstrings(obj):
-    primitive = (int, str, bool, float, type(None))
+    primitive = (int, str, bool, float, Decimal, type(None))
 
     if isinstance(obj, primitive):
         return obj
