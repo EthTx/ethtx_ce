@@ -12,7 +12,8 @@ werkzeug = ">=2.0.2"
 gunicorn = {version = ">=20.1.0"}
 flask-httpauth = ">=4.5.0"
 gitpython = ">=3.1.24"
-jsonpickle = ">=2.0.0"
+jsonpickle = ">=3.0.0"
+simplejson = "*"
 
 [dev-packages]
 black = "==22.3.0"
