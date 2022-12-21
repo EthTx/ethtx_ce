@@ -31,6 +31,8 @@ from .utils import enable_direct, delete_bstrings
 
 log = logging.getLogger(__name__)
 
+jsonpickle.set_decoder_options('simplejson', use_decimal=True)
+
 
 def auth_required(func: Callable):
     """api key  verification."""
