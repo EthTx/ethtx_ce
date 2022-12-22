@@ -45,10 +45,17 @@ def as_dict(cls):
 
 
 def delete_bstrings(obj):
-    primitive = (int, str, bool, float, Decimal, type(None))
+    primitive = (str, bool, float, type(None))
 
     if isinstance(obj, primitive):
         return obj
+    elif isinstance(obj, int):
+        return str(obj)
+    elif isinstance(obj, Decimal):
+        if obj == obj.to_integral_value():
+            return str(obj)
+        else:
+            obj
     elif type(obj) == bytes:
         return obj.decode()
     elif type(obj) == list:
