@@ -63,7 +63,7 @@ def reload_semantics():
 
     ethtx: EthTx = current_app.ethtx
     ethtx.semantics.database._addresses.delete_one({"address": data["address"]})
-    ethtx.semantics.get_semantics.cache_clear()
+
     ethtx.semantics.get_semantics(
         data["chain_id"] if data.get("chain_id") else current_app.ethtx._default_chain,
         data["address"],
@@ -242,14 +242,6 @@ def _semantics_save(data):
         )
 
         current_app.ethtx.semantics.update_semantics(semantics=address_semantics)
-        current_app.ethtx.semantics.get_semantics.cache_clear()
-        current_app.ethtx.semantics.get_event_abi.cache_clear()
-        current_app.ethtx.semantics.get_anonymous_event_abi.cache_clear()
-        current_app.ethtx.semantics.get_transformations.cache_clear()
-        current_app.ethtx.semantics.get_function_abi.cache_clear()
-        current_app.ethtx.semantics.get_constructor_abi.cache_clear()
-        current_app.ethtx.semantics.check_is_contract.cache_clear()
-        current_app.ethtx.semantics.get_standard.cache_clear()
 
         result = "ok"
 
@@ -424,14 +416,6 @@ def _poke_abi(data):
         )
 
         current_app.ethtx.semantics.update_semantics(semantics=address_semantics)
-        current_app.ethtx.semantics.get_semantics.cache_clear()
-        current_app.ethtx.semantics.get_event_abi.cache_clear()
-        current_app.ethtx.semantics.get_anonymous_event_abi.cache_clear()
-        current_app.ethtx.semantics.get_transformations.cache_clear()
-        current_app.ethtx.semantics.get_function_abi.cache_clear()
-        current_app.ethtx.semantics.get_constructor_abi.cache_clear()
-        current_app.ethtx.semantics.check_is_contract.cache_clear()
-        current_app.ethtx.semantics.get_standard.cache_clear()
 
         logging.info(f"ABI for {address} decoded.")
 
