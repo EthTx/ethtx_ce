@@ -13,6 +13,7 @@ flask-httpauth = ">=4.5.0"
 gitpython = ">=3.1.24"
 jsonpickle = ">=3.0.0"
 simplejson = "*"
+pydantic = "<2.0.0"
 
 [dev-packages]
 black = "*"
